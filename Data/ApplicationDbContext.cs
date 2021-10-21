@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using smartmat.Models;
 namespace smartmat.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -12,5 +12,7 @@ namespace smartmat.Data
             : base(options)
         {
         }
+        
+        public DbSet<Recipe> Recipes { get; set; }
     }
 }
