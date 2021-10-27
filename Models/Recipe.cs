@@ -1,6 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using smartmat.Data;
 
 namespace smartmat.Models
 {
@@ -44,6 +47,11 @@ namespace smartmat.Models
         [StringLength(1000)] 
         [DisplayName("Nutrients")]
         public string Nutrients { get; set; }
+        
+        // Foreign key for Users based on name
+        public string UserId { get; set; } 
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
        
         
     }
