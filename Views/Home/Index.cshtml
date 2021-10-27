@@ -2,7 +2,102 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /*   SEARCH BOX    */
+    #title {
+      font-weight: 700;
+    }
+    #background {
+      position: absolute;
+      right: 0;
+      height: 70vh;
+      z-index: -100;
+      filter: blur(1px) brightness(107%);
+    }
+    #flex-container {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    #search-container{
+      max-width: 30em;
+      flex: 0 0;
+    }
+    #searchbox {
+      background-color: white;
+      border-radius: 2em;
+      padding: 0.5em;
+      box-shadow: 2px 2px 4px 1px #00000030;
+    }
+    #searchbox input {
+      border: none;
+      border-radius: 2em;
+    }
+    #searchbox button {
+      border: none;
+      border-radius: 2em;
+      padding: 0.4em 2em !important;
+      margin: 0;
+    }
+    
+    h3 {
+        font-weight: 600;
+    }
+</style>
+
+<img src="~/siteimages/background.jpg" alt="bakgrunnsbilde av mat" id="background">
+<div id="flex-container">
+    <div class="fillerdiv"></div>
+    <div class="text-left" id="search-container">
+        <h1 class="display-6" id="title">Oppdag og del oppskrifter basert på det du har i kjøleskapet</h1>
+        <p>Bli inspirert til å spise opp matrester.</p>
+
+        <div id="searchbox" class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Finn oppskrifter basert på matvarer"/>
+            <button class="btn btn-primary">Søk</button>
+        </div>
+    </div>
+    <div class="fillerdiv"></div>
+</div>
+
+
+<div id="popular-recipes">
+    <h3>Populære oppskrifter</h3>
+    <div class="horizontal-scroll">
+        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
+            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
+            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
+            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
+            <div class="card-author-box"><img src="~/userimages/1.png">
+                <p>Av Trine, 21 Oktober 2021</p>
+            </div>
+        </a>
+        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
+            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
+            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
+            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
+            <div class="card-author-box"><img src="~/userimages/1.png">
+                <p>Av Trine, 21 Oktober 2021</p>
+            </div>
+        </a>
+        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
+            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
+            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
+            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
+            <div class="card-author-box"><img src="~/userimages/1.png">
+                <p>Av Trine, 21 Oktober 2021</p>
+            </div>
+        </a>
+        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
+            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
+            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
+            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
+            <div class="card-author-box"><img src="~/userimages/1.png">
+                <p>Av Trine, 21 Oktober 2021</p>
+            </div>
+        </a>
+        
+    </div>
 </div>
