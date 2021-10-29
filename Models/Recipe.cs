@@ -14,7 +14,7 @@ namespace smartmat.Models
         {
         }
 
-        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string visibility)
+        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string visibility, string image)
         {
             Title = title;
             Introduction = introduction;
@@ -22,6 +22,7 @@ namespace smartmat.Models
             Instructions = instructions;
             Nutrients = nutrients;
             Visibility = visibility;
+            Image = image;
         }
 
         public int Id { get; set; }
@@ -49,6 +50,7 @@ namespace smartmat.Models
         [StringLength(1000)] 
         [DisplayName("Næringsstoffer")]
         public string Nutrients { get; set; }
+        public string Image { get; set; }
         
         [Required]
         [StringLength(100)]
