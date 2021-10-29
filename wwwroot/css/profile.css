@@ -1,0 +1,43 @@
+﻿.profile-head {
+    transform: translateY(4.2rem)
+}
+
+.cover {
+    background-color: dimgray;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+img{
+    position: center;
+    width: 300px;
+    height: 300px;
+}
+
+.navBar ul{
+    background-color: lightgray;
+    margin-top: 3px;
+}
+
+.navBar ul li a{
+    color: black;
+    text-align: center;
+}
+
+.navBar li a:hover{
+    color: darkslategray;
+    border-bottom: 1px solid black;
+}
+
+#info{
+    transform: translateY(-10rem);
+    color: white;
+}
+
+.reviews{
+    color: white;
+    transform: translateY(-10rem);
+    flex-direction: row;
+    margin-right: 40px;
+}

@@ -1,0 +1,48 @@
+﻿@model smartmat.Data.ApplicationUser
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <form asp-action="Index" method="post">
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                        <img src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="..." class="rounded mb-2 img-thumbnail">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block">Bytt profilbilde</a>                    
+                    </div>
+                    <div class="col-md-6" id="info">
+                        <h5 style="font-size: 50px; padding-bottom: 10px;"><strong>UIA Bruker</strong></h5>
+                        <p>Epost: user@uia.no</p>
+                        <p>Telefonnr: 123 45 123</p>
+                    </div>
+                    <div class="row">
+                        <h4 class="reviews">Vurderinger: <span>8/10</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="navBar">
+                <ul class="p-4 d-flex nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Om</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Favoritter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mine oppskrifter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ny oppskrift</a>
+                    </li>                
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Instillinger</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    </div>
