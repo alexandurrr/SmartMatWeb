@@ -1,5 +1,51 @@
-﻿.navbar{
-    background-color: black;
+﻿#mealNav{
+    display: inline-flex;
+    width: 100%;
+}
+
+#mealNav li a{
     color: white;
-    display: flex;
+    text-space: 8px;
+    padding-inline: 27px;
+}
+
+#mealNav li a:hover{
+    color: orange;
+}
+
+#profileNav li a{
+    color: #1d2124;
+    font-weight: bold;
+}
+
+#profileNav li a:hover{
+    border-bottom: 2px solid sandybrown;
+}
+
+#imgUpload
+{
+    display: none;
+}
+
+#profileImg
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#profile-container img {
+    width: 250px;
+    height: 250px;
+}
+
+.profileHead{
+    font-weight: bold;
+    margin-top: -200px;
+    margin-left: -150px;
+    margin-bottom: 100%;
 }
