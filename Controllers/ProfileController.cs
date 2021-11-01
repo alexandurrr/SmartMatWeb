@@ -1,26 +1,24 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using smartmat.Data;
 
 namespace smartmat.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-            public ProfileController(ILogger<HomeController> logger)
-            {
-                _logger = logger;
-            }
-
+        public ProfileController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
+        
         // GET
         public IActionResult Index()
         {
             return View();
         }
-        
-        
-        
     }
 }

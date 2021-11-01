@@ -1,48 +1,100 @@
-﻿@model smartmat.Data.ApplicationUser
-
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<div class="container">
+<div class="container-fluid">
     <form asp-action="Index" method="post">
-        <div class="bg-white shadow rounded overflow-hidden">
+        <div class="navBar bg-dark rounded" id="mealNav">
+            <ul class="d-flex p-3 nav justify-content-md-between">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MEST POPULÆRT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">SPIS SUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">RASK MAT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FROKOST</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">LUNSJ</a>
+                </li>                    
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MIDDAG</a>
+                </li>                    
+                <li class="nav-item">
+                    <a class="nav-link" href="#">KVELDSMAT</a>
+                </li>                    
+                <li class="nav-item">
+                    <a class="nav-link" href="#">GLUTENFRI</a>
+                </li>
+            </ul> 
+        </div>
+        
+        <div class="navBar" id="profileNav">
+            <ul class="p-md-4 d-flex nav justify-content-md-start overflow-hidden">
+                <li class="nav-item">
+                    <a class="nav-link active" style="">Min profil</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mine oppskrifter</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tilbakemeldinger</a>
+                </li>                
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ny oppskrift</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="container bg-light shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
-                <div class="media align-items-end profile-head">
-                    <div class="profile mr-3">
-                        <img src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="..." class="rounded mb-2 img-thumbnail">
-                        <a href="#" class="btn btn-outline-dark btn-sm btn-block">Bytt profilbilde</a>                    
-                    </div>
-                    <div class="col-md-6" id="info">
-                        <h5 style="font-size: 50px; padding-bottom: 10px;"><strong>UIA Bruker</strong></h5>
-                        <p>Epost: user@uia.no</p>
-                        <p>Telefonnr: 123 45 123</p>
-                    </div>
-                    <div class="row">
-                        <h4 class="reviews">Vurderinger: <span>8/10</span></h4>
-                    </div>
+                <div id="profile-container" class="card-img-overlay-top">
+                    <img id="profileImg" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="" class="rounded-circle img-thumbnail"/>
                 </div>
-            </div>
-            <div class="navBar">
-                <ul class="p-4 d-flex nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Om</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Favoritter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mine oppskrifter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ny oppskrift</a>
-                    </li>                
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Instillinger</a>
-                    </li>
-                </ul>
+                <input id="imgUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture="user">
+            
+                <div class="profileHead text-lg-left">
+                    <h1>Hei, Marah!</h1>
+                    <p class="text-brown" style="color: saddlebrown;">Din matscore</p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                    <div class="text-justify mt-5" id="personal-data">
+                        <p>Personlige opplysninger</p>
+                    </div>
+                    <form>
+                        <div id="inputForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="FirstName">Fornavn</label>
+                                    <input type="text" class="form-control" id="FirstName" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="LastName">Etternavn</label>
+                                    <input type="text" class="form-control" id="LastName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Epost</label>
+                                <input type="email" class="form-control" id="Email" placeholder="">
+                            </div>
+                            <div class="form-text">
+                                <label for="userInfo">Litt om deg</label>
+                                <input type="text" class="form-control" id="userInfo" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Lagre</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </form>
-    </div>
+</div>

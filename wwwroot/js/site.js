@@ -1,4 +1,25 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$("#navbar-brand").mouseenter( flipGlasses );
+function flipGlasses() {
+    $("#logo_glasses").css("animationName", "");
+    $("#logo_glasses_container").css("animationName","");
+    setTimeout(function(){
+        $("#logo_glasses").css("animationName", "flip");
+        $("#logo_glasses_container").css("animationName","bounce");
+    }, 50)
+}
 
-// Write your JavaScript code.
+
+$("#profileImg").click(function(e) {
+    $("#imgUpload").click();
+});
+
+function fasterPreview( uploader ) {
+    if ( uploader.files && uploader.files[0] ){
+        $('#profileImg').attr('src',
+            window.URL.createObjectURL(uploader.files[0]) );
+    }
+}
+
+$("#imgUpload").change(function(){
+    fasterPreview( this );
+});
