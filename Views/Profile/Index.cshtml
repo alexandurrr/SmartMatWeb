@@ -35,9 +35,9 @@
         </div>
         
         <div class="navBar" id="profileNav">
-            <ul class="p-md-4 d-flex nav justify-content-md-start">
+            <ul class="p-md-4 d-flex nav justify-content-md-start overflow-hidden">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Min profil</a>
+                    <a class="nav-link active" style="">Min profil</a>
                 </li>                
                 <li class="nav-item">
                     <a class="nav-link" href="#">Mine oppskrifter</a>
@@ -53,19 +53,47 @@
         
         <div class="container bg-light shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
-                <div id="profile-container">
+                <div id="profile-container" class="card-img-overlay-top">
                     <img id="profileImg" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="" class="rounded-circle img-thumbnail"/>
                 </div>
                 <input id="imgUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture="user">
-            </div>
-            <div class="profileHead text-lg-center">
-                <h1>Hei Marah!</h1>
-                <p class="text-brown" style="color: saddlebrown;">Din matscore</p>
+            
+                <div class="profileHead text-lg-left">
+                    <h1>Hei, Marah!</h1>
+                    <p class="text-brown" style="color: saddlebrown;">Din matscore</p>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
+
+                    <div class="text-justify mt-5" id="personal-data">
+                        <p>Personlige opplysninger</p>
+                    </div>
+                    <form>
+                        <div id="inputForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="FirstName">Fornavn</label>
+                                    <input type="text" class="form-control" id="FirstName" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="LastName">Etternavn</label>
+                                    <input type="text" class="form-control" id="LastName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email">Epost</label>
+                                <input type="email" class="form-control" id="Email" placeholder="">
+                            </div>
+                            <div class="form-text">
+                                <label for="userInfo">Litt om deg</label>
+                                <input type="text" class="form-control" id="userInfo" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Lagre</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </form>

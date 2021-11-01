@@ -46,6 +46,27 @@
 .profileHead{
     font-weight: bold;
     margin-top: -200px;
-    margin-left: -150px;
     margin-bottom: 100%;
+    margin-left: 30%;
+}
+
+#personal-data{
+    border-bottom: 2px solid lightgray;
+}
+
+#inputForm{
+    font-weight: normal;
+    color: dimgray;
+    margin-top: 20px;
+}
+
+#userInfo{
+    flex-wrap: wrap;
+    padding-bottom: 160px;
+    height: 200px;
+}
+
+#inputForm button{
+    transform: translateX(39em);
+    margin: 8px;
 }
