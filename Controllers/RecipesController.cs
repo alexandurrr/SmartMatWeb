@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -47,6 +48,7 @@ namespace smartmat.Controllers
         }
 
         // GET: Recipes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -57,7 +59,8 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients")] Recipe recipe)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Nutrients,Instructions")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -73,6 +76,7 @@ namespace smartmat.Controllers
         }
 
         // GET: Recipes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +97,7 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients")] Recipe recipe)
         {
             if (id != recipe.Id)
@@ -124,6 +129,7 @@ namespace smartmat.Controllers
         }
 
         // GET: Recipes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +150,7 @@ namespace smartmat.Controllers
         // POST: Recipes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var recipe = await _context.Recipes.FindAsync(id);

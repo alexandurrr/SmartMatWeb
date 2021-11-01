@@ -34,24 +34,9 @@
             </ul> 
         </div>
         
-        <div class="navBar" id="profileNav">
-            <ul class="p-md-4 d-flex nav justify-content-md-start overflow-hidden">
-                <li class="nav-item">
-                    <a class="nav-link active" style="">Min profil</a>
-                </li>                
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mine oppskrifter</a>
-                </li>                
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tilbakemeldinger</a>
-                </li>                
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Ny oppskrift</a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="container bg-light shadow rounded overflow-hidden">
+        <partial name="_ProfilePartial" />
+
+        <div class="container-fluid bg-light shadow rounded">
             <div class="px-4 pt-0 pb-4 cover">
                 <div id="profile-container" class="card-img-overlay-top">
                     <img id="profileImg" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="" class="rounded-circle img-thumbnail"/>

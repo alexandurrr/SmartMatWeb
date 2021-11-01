@@ -16,6 +16,7 @@
 #profileNav li a{
     color: #1d2124;
     font-weight: bold;
+    border-bottom: 2px solid transparent;
 }
 
 #profileNav li a:hover{
@@ -69,4 +70,8 @@
 #inputForm button{
     transform: translateX(39em);
     margin: 8px;
+}
+
+#standaloneHeader {
+    margin: 1em;
 }

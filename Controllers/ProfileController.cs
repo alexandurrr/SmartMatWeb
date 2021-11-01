@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using smartmat.Data;
 
@@ -16,6 +17,7 @@ namespace smartmat.Controllers
         }
         
         // GET
+        [Authorize]
         public IActionResult Index()
         {
             return View();
