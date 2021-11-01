@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using smartmat.Models;
@@ -9,7 +10,6 @@ namespace smartmat.Data
     {
         public static void Initialize(ApplicationDbContext db, UserManager<ApplicationUser> um, RoleManager<IdentityRole> rm)
         {
-            // Delete and create the database
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             
@@ -33,6 +33,20 @@ namespace smartmat.Data
                     });
                 }
             }
+            
+            for (int i = 1; i < 3; i++)
+            {
+                db.Add(new Review
+                {
+                    RecipeId = i,
+                    ApplicationUserId = user.Id,
+                    Stars = i+2,
+                    Title = $"Test tittel {i}",
+                    Description = $"Test beskrivelse {i}"
+                });
+            }
+            
+            
             db.SaveChanges();
         }
     }

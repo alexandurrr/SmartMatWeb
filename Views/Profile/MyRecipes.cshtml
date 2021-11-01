@@ -4,13 +4,14 @@
     ViewBag.Title = "Mine Oppskrifter";
     Layout = "_Layout";
 }
+<style>td {cursor: pointer;}</style>
 
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
-<div class="container-fluid bg-light shadow rounded">
+<div class="mainDiv container-fluid bg-light shadow rounded">
     <h1 id="standaloneHeader" class="font-weight-bold">Mine Oppskrifter</h1>
     
-    <table class="table">
+    <table class="table table-hover">
         <tbody>
         <tr>
             <th>
@@ -27,11 +28,9 @@
         }
         @foreach (var recipe in Model)
         {
-            <a asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
-                <tr>
+            <tr onclick="window.location.href='/Recipes/details/@recipe.Id'">
                     <td>@recipe.Title</td><td>@recipe.Introduction</td>
-                </tr>
-            </a>
+            </tr>   
         }
         </tbody>
     </table>
