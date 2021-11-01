@@ -14,5 +14,6 @@ namespace smartmat.Data
         }
         
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }
