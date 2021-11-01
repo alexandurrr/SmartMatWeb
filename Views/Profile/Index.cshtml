@@ -53,32 +53,60 @@
                     <span class="fa fa-star"></span>
 
                     <div class="text-justify mt-5" id="personal-data">
-                        <p>Personlige opplysninger</p>
+                        <h6>Personlige opplysninger</h6>
                     </div>
-                    <form>
-                        <div id="inputForm">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="FirstName">Fornavn</label>
-                                    <input type="text" class="form-control" id="FirstName" placeholder="">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="LastName">Etternavn</label>
-                                    <input type="text" class="form-control" id="LastName" placeholder="">
-                                </div>
+                    <div id="inputForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="FirstName">Fornavn</label>
+                                <input type="text" class="form-control" id="FirstName" placeholder="">
                             </div>
-                            <div class="form-group">
-                                <label for="Email">Epost</label>
-                                <input type="email" class="form-control" id="Email" placeholder="">
+                            <div class="form-group col-md-6">
+                                <label for="LastName">Etternavn</label>
+                                <input type="text" class="form-control" id="LastName" placeholder="">
                             </div>
-                            <div class="form-text">
-                                <label for="userInfo">Litt om deg</label>
-                                <input type="text" class="form-control" id="userInfo" placeholder="">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Lagre</button>
                         </div>
-                    </form>
-                </div>
+                        <div class="form-group">
+                            <label for="Email">Epost</label>
+                            <input type="email" class="form-control" id="Email" placeholder="">
+                        </div>
+                        <div class="form-text">
+                            <label for="userInfo">Litt om deg</label>
+                            <textarea type="text" class="form-control" id="userInfo" placeholder="" style="height: 100%; letter-spacing: 1px; white-space: pre-wrap;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lagre</button>
+                    </div>
+                
+                    <div class="text-justify mt-5" id="password-change">
+                        <h6>Bytt passord</h6>
+                    </div>
+                    <div id="inputForm">
+                        <div class="form-group">
+                            <label for="CurrentPassword">Nåværende passord</label>
+                            <input type="password" class="form-control" id="CurrentPassword" placeholder="">
+                        </div>                    
+                        <div class="form-group">
+                            <label for="NewPassword">Ny passord</label>
+                            <input type="password" class="form-control" id="NewPassword" placeholder="">
+                        </div>                    
+                        <div class="form-group">
+                            <label for="RePassword">Gjenta passord</label>
+                            <input type="password" class="form-control" id="RePassword" placeholder="">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lagre</button>
+                    </div>
+                
+                    <div class="text-justify mt-5" id="activity-reminder">
+                        <h6>Akrivitets påminnelser</h6>
+                    </div>
+                    <div id="inputForm">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="activityReminder">
+                          <label class="custom-control-label" for="activityReminder">Check this custom checkbox</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lagre</button>
+                    </div>
+                    </div>
             </div>
         </div>
     </form>
