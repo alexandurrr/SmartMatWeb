@@ -8,6 +8,6 @@ namespace smartmat.Data
     {
         // Configuring relation (1 to many)
         // user-recipes
-        public List<Recipe> Recipes { get; set; }
+        public ICollection<Recipe> Recipes { get; set; }
     }
 }

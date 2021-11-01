@@ -26,26 +26,26 @@ namespace smartmat.Models
         
         [Required] 
         [StringLength(200)] 
-        [DisplayName("Title")]
+        [DisplayName("Tittel")]
         public string Title { get; set; }
         [Required]
         [StringLength(1000)]
-        [DisplayName("Introduction")]
+        [DisplayName("Introduksjon")]
         public string Introduction { get; set; }
 
         [Required]
         [StringLength(1000)]
-        [DisplayName("Ingredients")]
+        [DisplayName("Ingredienser")]
         public string Ingredients { get; set; }
 
         [Required] 
         [StringLength(1000)] 
-        [DisplayName("Instructions")]
+        [DisplayName("Fremgangsmåte")]
         public string Instructions { get; set; }
             
         [Required] 
         [StringLength(1000)] 
-        [DisplayName("Nutrients")]
+        [DisplayName("Næringsstoffer")]
         public string Nutrients { get; set; }
         
         // Foreign key for Users based on name

@@ -24,11 +24,11 @@ namespace smartmat.Data
                 {
                     u.Recipes.Add(new Recipe
                     {
-                        Title = $"{i}",
-                        Introduction =  $"{i}",
-                        Ingredients =  $"{i}",
-                        Instructions =  $"{i}", 
-                        Nutrients =  $"{i}"
+                        Title = $"Tittel {i}",
+                        Introduction =  $"Introduksjon {i}",
+                        Ingredients =  $"Ingredienser {i}",
+                        Instructions =  $"Fremgangsmåte {i}", 
+                        Nutrients =  $"Næringsstoffer {i}"
                         
                     });
                 }
