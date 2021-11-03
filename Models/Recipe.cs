@@ -20,7 +20,7 @@ namespace smartmat.Models
             Ingredients = ingredients;
             Instructions = instructions;
             Nutrients = nutrients;
-            Image = Image;
+            Image = image;
         }
 
         public int Id { get; set; }
