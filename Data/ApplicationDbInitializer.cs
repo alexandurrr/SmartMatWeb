@@ -17,11 +17,11 @@ namespace smartmat.Data
             //testdata
             var recipes = new[]
             {
-                new Recipe("Eggerøre", "intro1", "Egg, Melk, Ost, Paprika, Salt, Pepper",
+                new Recipe("Eggerøre", "intro1", "1 Egg, 2dl Melk, 400g Ost, 1stk Paprika, Salt, Pepper",
                     "Bland alt i en bolle og hiv det i panna.", "20g protein, 50g karbohydrat, 10g fett", "https://images.matprat.no/fmg25b4e53-jumbotron/large"),
-                new Recipe("Grønnsakssuppe", "intro2", "Brokkoli, Blomkål, Potet, Sellerirot, Gulrot, Salt, Pepper",
+                new Recipe("Grønnsakssuppe", "intro2", "1stk Brokkoli, 1/2 Blomkål, 4 Potet, 1 Sellerirot, 2 Gulrot, Salt, Pepper",
                     "Kutt opp grønnsakene og kok i 20min. Smak til med salt og pepper.", "10g protein, 50g karbohydrat, 5g fett", "https://images.matprat.no/fmg25b4e53-jumbotron/large"),
-                new Recipe("Stekt laks med grønnsaker", "intro3", "Laks, Brokkoli, Potet, Gulrot, Smør, Salt, Pepper",
+                new Recipe("Stekt laks med grønnsaker", "intro3", "400g Laks, 1 Brokkoli, 5 Potet, 3 Gulrot, 100g Smør, Salt, Pepper",
                     "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     "30g protein, 50g karbohydrat, 10g fett", "https://images.matprat.no/fmg25b4e53-jumbotron/large")
                 
