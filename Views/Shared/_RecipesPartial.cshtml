@@ -6,9 +6,9 @@
     
     @foreach (var r in Model)
     {
-        <li>@r.Title <br>
-        @r.Image <img src = "@r.Image" alt="Matbilde"><br>
-            @r.ApplicationUser</li>  // kan liste title med bilde og user her etterhvert? Med link til full oppskrift?
+        <li><a href="https://localhost:5001/Recipes/Details/@r.Id">@r.Title</a> <br>
+        @r.Image <img src =@r.Image alt="Matbilde"><br>
+            @r.ApplicationUser</li>  
     }
     
 </ul>
