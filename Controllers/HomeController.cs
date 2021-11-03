@@ -50,7 +50,12 @@ namespace smartmat.Controllers
         
         public IActionResult Recipes(string search)
         {
-            string[] ingredients = search.Split(", ");  //for å kunne søke på flere ingredienser
+            if (search == null)
+            {
+                return NotFound();
+            }
+            
+            string[] ingredients = search.Split(", ");
             var recipes = _db.Recipes.ToList();
             
             foreach (var i in ingredients)
