@@ -18,7 +18,7 @@ namespace smartmat.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<ApplicationUser> userManager)
+        public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
@@ -50,21 +50,32 @@ namespace smartmat.Controllers
         
         public IActionResult Recipes(string search)
         {
+
             if (search == null)
             {
                 return NotFound();
             }
             
-            string[] ingredients = search.Split(", ");
+            string[] ingredients = search.Split(", ");  //for å kunne søke på flere ingredienser
+
+            // Grabbing all recipes from database
             var recipes = _db.Recipes.ToList();
-            
+
+            // Filtering out recipes based on ingredients
             foreach (var i in ingredients)
             {
-               var list = searchfor(recipes, i);
-               recipes = list;
+                var list = searchfor(recipes, i);
+                recipes = list;
             }
             
-            return PartialView("_RecipesPartial", recipes.ToList());
+            // Creating a UserRecipe, with filtered recipe
+            var ur = new UserRecipes
+            {
+                Recipes = recipes,
+                ApplicationUsers = _userManager.Users.ToList()
+            };
+
+            return PartialView("_RecipesPartial", ur);
         }
 
         private List<Recipe> searchfor(List<Recipe> list, string i)
