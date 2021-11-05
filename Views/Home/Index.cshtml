@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RecipeUserViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -66,38 +67,37 @@
 <div id="popular-recipes">
     <h3>Populære oppskrifter</h3>
     <div class="horizontal-scroll">
-        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
-            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
-            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
-            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
-            <div class="card-author-box"><img src="~/userimages/1.png">
-                <p>Av Trine, 21 Oktober 2021</p>
-            </div>
-        </a>
-        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
-            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
-            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
-            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
-            <div class="card-author-box"><img src="~/userimages/1.png">
-                <p>Av Trine, 21 Oktober 2021</p>
-            </div>
-        </a>
-        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
-            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
-            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
-            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
-            <div class="card-author-box"><img src="~/userimages/1.png">
-                <p>Av Trine, 21 Oktober 2021</p>
-            </div>
-        </a>
-        <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="1">
-            <h5 class="card-title">Sunn vegetarburger med spicy salat</h5>
-            <div class="imgcontainer card-img-middle"><img src="~/recipeimages/1.jpg"></div>
-            <p class="cardIntrotext">Dette er en veldig enkel, sunn, og god oppskrift på en vegetarburger.</p>
-            <div class="card-author-box"><img src="~/userimages/1.png">
-                <p>Av Trine, 21 Oktober 2021</p>
-            </div>
-        </a>
-        
+        @foreach (var recipe in Model.Recipes)
+        {
+            <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
+                <h5 class="card-title">@recipe.Title</h5>
+                <div class="imgcontainer card-img-middle"><img src="~/recipeimages/@(recipe.Id).jpg"></div>
+                <p class="cardIntrotext">@recipe.Introduction</p>
+                @if (recipe.Reviews != null)
+                {
+                    var avg = Math.Round(recipe.Reviews.Average(r => r.Stars)/0.5)*0.5;
+                    var rest = avg % 1;
+                    var half = rest > 0;
+                    @for (var i = 0; i < avg-rest; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                    @if (half)
+                    {
+                        <span class="fa fa-star-half-o"></span>
+                    }
+                    @for (var i = Math.Round(avg); i < 5; i++)
+                    {
+                        <span class="fa fa-star-o"></span>
+                    }
+                }
+                @if (recipe.ApplicationUser != null)
+                {
+                    <div class="card-author-box"><img src="~/userimages/@(recipe.UserId).png">
+                        <p>Av @recipe.ApplicationUser.UserName</p>
+                    </div>
+                }
+            </a>    
+        }
     </div>
 </div>

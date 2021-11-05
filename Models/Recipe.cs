@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -54,12 +55,11 @@ namespace smartmat.Models
         [DisplayName("Visibility")]
         public string Visibility { get; set; }
         
-        // Foreign key for Users based on name
+        // Foreign keys
         public string UserId { get; set; } 
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-       
-        
+        public List<Review> Reviews { get; set; }
     }
     
 }

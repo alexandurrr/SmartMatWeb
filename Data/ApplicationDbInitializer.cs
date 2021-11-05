@@ -29,7 +29,7 @@ namespace smartmat.Data
                         Ingredients =  $"Ingredienser {i}",
                         Instructions =  $"Fremgangsmåte {i}", 
                         Nutrients =  $"Næringsstoffer {i}",
-                        Visibility = $"Visibility {i}"
+                        Visibility = "Public"
                     });
                 }
             }
@@ -44,6 +44,17 @@ namespace smartmat.Data
                     Title = $"Test tittel {i}",
                     Description = $"Test beskrivelse {i}"
                 });
+                if (i % 2 == 0)
+                {
+                    db.Add(new Review
+                    {
+                        RecipeId = i,
+                        ApplicationUserId = user.Id,
+                        Stars = i+1,
+                        Title = $"Test tittel {i}",
+                        Description = $"Test beskrivelse {i}"
+                    });
+                }
             }
             
             
