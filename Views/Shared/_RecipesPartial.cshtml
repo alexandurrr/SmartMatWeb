@@ -7,15 +7,15 @@
     {
 
         <li><a href="https://localhost:5001/Recipes/Details/@r.Id">@r.Title</a> <br>
-        @r.Image <img src =@r.Image alt="Matbilde"><br>
-            @r.ApplicationUser  
+        <img src =@r.Image alt="Matbilde"><br>
+        
         
          @if (r.UserId == r.ApplicationUser.Id)
                       {
                           // This will add pre-existing fields in the Applications users table that relates to recipe
                           // Can maybe decide to add a nickname field in app.users, and include that instead of email
                           @r.ApplicationUser.Email
-                      }</li>  // kan liste title med bilde og user her etterhvert? Med link til full oppskrift?
+                      }</li> 
 
     }
 
