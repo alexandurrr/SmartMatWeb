@@ -24,15 +24,40 @@ namespace smartmat.Data
                 {
                     u.Recipes.Add(new Recipe
                     {
-                        Title = $"{i}",
-                        Introduction =  $"{i}",
-                        Ingredients =  $"{i}",
-                        Instructions =  $"{i}", 
-                        Nutrients =  $"{i}"
+                        Title = $"Tittel {i}",
+                        Introduction =  $"Introduksjon {i}",
+                        Ingredients =  $"Ingredienser {i}",
+                        Instructions =  $"Instruksjoner {i}", 
+                        Nutrients =  $"Næringsstoffer {i}"
                         
                     });
                 }
             }
+            
+            for (int i = 1; i < 3; i++)
+            {
+                db.Add(new Review
+                {
+                    RecipeId = i,
+                    ApplicationUserId = user.Id,
+                    Stars = i+2,
+                    Title = $"Test tittel {i}",
+                    Description = $"Test beskrivelse {i}"
+                });
+                if (i % 2 == 0)
+                {
+                    db.Add(new Review
+                    {
+                        RecipeId = i,
+                        ApplicationUserId = user.Id,
+                        Stars = i+1,
+                        Title = $"Test tittel {i}",
+                        Description = $"Test beskrivelse {i}"
+                    });
+                }
+            }
+            
+            
             db.SaveChanges();
         }
     }
