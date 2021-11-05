@@ -52,6 +52,17 @@ namespace smartmat.Data
                     Title = $"Test tittel {i}",
                     Description = $"Test beskrivelse {i}"
                 });
+                if (i % 2 == 0)
+                {
+                    db.Add(new Review
+                    {
+                        RecipeId = i,
+                        ApplicationUserId = user.Id,
+                        Stars = i+1,
+                        Title = $"Test tittel {i}",
+                        Description = $"Test beskrivelse {i}"
+                    });
+                }
             }
             
             
