@@ -60,7 +60,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Nutrients,Instructions")] Recipe recipe)
+        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
         {
             if (id != recipe.Id)
             {
