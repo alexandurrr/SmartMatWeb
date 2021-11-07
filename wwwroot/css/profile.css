@@ -3,14 +3,14 @@
 }
 
 #mealNav{
-    display: inline-flex;
+    display: flex;
     width: 100%;
+    margin-top: -1em;
 }
 
 #mealNav li a{
     color: white;
-    text-space: 8px;
-    padding-inline: 27px;
+    padding-inline: 4em;
 }
 
 #mealNav li a:hover{

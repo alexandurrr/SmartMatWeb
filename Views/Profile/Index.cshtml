@@ -1,39 +1,12 @@
+@model smartmat.Data.ApplicationUser
+
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
 <div class="container-fluid">
-    <form asp-action="Index" method="post">
-        <div class="navBar bg-dark rounded" id="mealNav">
-            <ul class="d-flex p-3 nav justify-content-md-between">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">MEST POPULÆRT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">SPIS SUNT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">RASK MAT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">FROKOST</a>
-                </li>                
-                <li class="nav-item">
-                    <a class="nav-link" href="#">LUNSJ</a>
-                </li>                    
-                <li class="nav-item">
-                    <a class="nav-link" href="#">MIDDAG</a>
-                </li>                    
-                <li class="nav-item">
-                    <a class="nav-link" href="#">KVELDSMAT</a>
-                </li>                    
-                <li class="nav-item">
-                    <a class="nav-link" href="#">GLUTENFRI</a>
-                </li>
-            </ul> 
-        </div>
-        
+
         <partial name="_ProfilePartial" />
         
         <div class="mainDiv container bg-light shadow rounded overflow-hidden">
@@ -44,7 +17,12 @@
                 <input id="imgUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture="user">
             
                 <div class="profileHead text-lg-left">
-                    <h1>Hei, Marah!</h1>
+                    <h1>Hei,
+                        @if (User.Identity != null)
+                        {
+                            @User.Identity.Name
+                        }
+                    </h1>
                     <p class="text-brown" style="color: saddlebrown;">Din matscore</p>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -55,27 +33,33 @@
                     <div class="text-justify mt-5" id="personal-data">
                         <h6>Personlige opplysninger</h6>
                     </div>
+                    
+                    <form asp-action="Index" method="post">
+
                     <div id="inputForm">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="FirstName">Fornavn</label>
-                                <input type="text" class="form-control" id="FirstName" placeholder="">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <label asp-for="Firstname">Fornavn</label>
+                                <input asp-for="Firstname" type="text" class="form-control" id="FirstName" placeholder="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="LastName">Etternavn</label>
-                                <input type="text" class="form-control" id="LastName" placeholder="">
+                                <label asp-for="Lastname">Etternavn</label>
+                                <input asp-for="Lastname" type="text" class="form-control" id="LastName" placeholder="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Email">Epost</label>
-                            <input type="email" class="form-control" id="Email" placeholder="">
+                            <label asp-for="Email">Epost</label>
+                            <input asp-for="Email" type="email" class="form-control" id="Email" placeholder="">
                         </div>
                         <div class="form-text">
-                            <label for="userInfo">Litt om deg</label>
-                            <textarea type="text" class="form-control" id="userInfo" placeholder="" style="height: 100%; letter-spacing: 1px; white-space: pre-wrap;"></textarea>
+                            <label asp-for="Bio">Litt om deg</label>
+                            <textarea asp-for="Bio" type="text" class="form-control" id="Bio" placeholder="" style="height: 100%; letter-spacing: 1px; white-space: pre-wrap;"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Lagre</button>
                     </div>
+                        </form>
+
                 
                     <div class="text-justify mt-5" id="password-change">
                         <h6>Bytt passord</h6>
@@ -109,5 +93,4 @@
                     </div>
             </div>
         </div>
-    </form>
 </div>

@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using smartmat.Areas.Identity.Pages.Account.Manage;
 using smartmat.Data;
 using smartmat.Models;
+using static Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal.IndexModel;
 
 namespace smartmat.Controllers
 {
@@ -21,12 +23,40 @@ namespace smartmat.Controllers
             _userManager = userManager;
         }
         
-        // GET
+        [HttpGet]
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+
+            return View(user);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(ApplicationUser userdetails)
+        {
+            IdentityResult x = await _userManager.UpdateAsync(userdetails);
+
+            if (x.Succeeded && ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Profile");
+            }
+
+            return View(userdetails);
+        }
+        
+        /*[HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userManager.UpdateAsync(user);
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }*/
         
         // GET
         [Authorize]
