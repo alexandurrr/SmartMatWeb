@@ -53,12 +53,32 @@
     <div class="text-left" id="search-container">
         <h1 class="display-6" id="title">Oppdag og del oppskrifter basert på det du har i kjøleskapet</h1>
         <p>Bli inspirert til å spise opp matrester.</p>
-
-        <div id="searchbox" class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Finn oppskrifter basert på matvarer"/>
-            <button class="btn btn-primary">Søk</button>
-        </div>
+        
+        <form id = "search-form">
+            <div id="searchbox" class="input-group mb-3">
+                <input type="search" id = "search-text" class="form-control" placeholder="eks. brokkoli, egg, melk, potet"/>
+                <input type = "submit" class="btn btn-primary" value = "Søk">
+            </div>
+        </form>
+        
     </div>
+
+    <div id="recipe-results"></div>
+    
+    @section Scripts
+    {
+        <script>
+            document.getElementById('search-form').onsubmit = async function (event)
+            {      
+                event.preventDefault();
+                
+                let search = document.getElementById("search-text").value;
+                let result = await fetch("/Home/Recipes?search=" + search);
+                const recipes = await result.text();
+                document.getElementById("recipe-results").innerHTML = recipes;
+            }
+        </script>
+    }
     <div class="fillerdiv"></div>
 </div>
 

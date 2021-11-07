@@ -57,7 +57,7 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients")] Recipe recipe)
+        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
         {
             if (id != recipe.Id)
             {
