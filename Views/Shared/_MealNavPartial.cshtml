@@ -1,19 +1,36 @@
-﻿<div class="navBar bg-dark" id="mealNav">
-    <ul class="d-flex p-3 mx-md-auto h5 font-weight-normal nav justify-content-md-between">
+﻿<style>
+    #mealNav{
+        display: flex;
+        width: 100%;
+        margin-top: -1em;
+    }
+    
+    #mealNav li a{
+        color: white;
+        padding-inline: 4em;
+    }
+    
+    #mealNav li a:hover{
+        color: orange;
+    }
+</style>
+
+<div class="navBar bg-dark rounded" id="mealNav">
+    <ul class="d-flex p-3 mx-md-auto h6 font-weight-normal nav justify-content-md-between">
         <li class="nav-item">
-            <a class="nav-link" href="#">RASK MAT</a>
+            <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="FastFood">RASK MAT</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">FROKOST</a>
+            <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="Breakfast">FROKOST</a>
         </li>                
         <li class="nav-item">
-            <a class="nav-link" href="#">LUNSJ</a>
+            <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="Lunch">LUNSJ</a>
         </li>                    
         <li class="nav-item">
-            <a class="nav-link" href="#">MIDDAG</a>
+            <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="Dinner">MIDDAG</a>
         </li>                    
         <li class="nav-item">
-            <a class="nav-link" href="#">DESSERT</a>
+            <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="Dessert">DESSERT</a>
         </li>
     </ul> 
 </div>

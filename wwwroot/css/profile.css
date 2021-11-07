@@ -2,21 +2,6 @@
     padding: 2em 1em;
 }
 
-#mealNav{
-    display: flex;
-    width: 100%;
-    margin-top: -1em;
-}
-
-#mealNav li a{
-    color: white;
-    padding-inline: 4em;
-}
-
-#mealNav li a:hover{
-    color: orange;
-}
-
 #profileNav li a{
     color: #1d2124;
     font-weight: bold;
