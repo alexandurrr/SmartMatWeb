@@ -1,0 +1,22 @@
+﻿@model smartmat.Models.UserRecipes
+
+<h2>Søketreff:</h2>
+<ul>
+    
+    @foreach (var r in Model.Recipes)
+    {
+
+        <li><a href="https://localhost:5001/Recipes/Details/@r.Id">@r.Title</a> <br>
+        <img src =@r.Image  alt="Matbilde" width="200" height="100"><br>
+        
+        
+         @if (r.UserId == r.ApplicationUser.Id)
+                      {
+                          // This will add pre-existing fields in the Applications users table that relates to recipe
+                          // Can maybe decide to add a nickname field in app.users, and include that instead of email
+                          @r.ApplicationUser.Email
+                      }</li> 
+
+    }
+
+</ul>
