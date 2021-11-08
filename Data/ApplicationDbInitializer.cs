@@ -53,23 +53,32 @@ namespace smartmat.Data
                     Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });
-
-                /*
-                 // For test values with just numbers
-                for (int i = 1; i < 3; i++)
-                {
-                    u.Recipes.Add(new Recipe
-                    {
-                        Title = $"{i}",
-                        Introduction =  $"{i}",
-                        Ingredients =  $"{i}",
-                        Instructions =  $"{i}", 
-                        Nutrients =  $"{i}",
-                        Image = $"{i}"
-                        
-                    });
-                }*/
             }
+            
+            for (int i = 1; i < 3; i++)
+            {
+                db.Add(new Review
+                {
+                    RecipeId = i,
+                    ApplicationUserId = user.Id,
+                    Stars = i+2,
+                    Title = $"Test tittel {i}",
+                    Description = $"Test beskrivelse {i}"
+                });
+                if (i % 2 == 0)
+                {
+                    db.Add(new Review
+                    {
+                        RecipeId = i,
+                        ApplicationUserId = user.Id,
+                        Stars = i+1,
+                        Title = $"Test tittel {i}",
+                        Description = $"Test beskrivelse {i}"
+                    });
+                }
+            }
+            
+            
             db.SaveChanges();
         }
     }

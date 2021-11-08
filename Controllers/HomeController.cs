@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using smartmat.Data;
 using smartmat.Models;
+using SQLitePCL;
 
 namespace smartmat.Controllers
 {
     public class HomeController : Controller
     {
-        
         private readonly ApplicationDbContext _db; 
         private readonly UserManager<ApplicationUser> _userManager;
         
@@ -25,7 +25,14 @@ namespace smartmat.Controllers
         
         public IActionResult Index()
         {
-            return View();
+            //var reviews = _context.Reviews.ToList();
+            var vm = new RecipeUserViewModel();
+            vm.Users = _userManager.Users.ToList();
+            vm.Recipes = _db.Recipes
+                .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
+                .ToList();
+            vm.Reviews = _db.Reviews.ToList();
+            return View(vm);
         }
 
         public IActionResult Privacy()
