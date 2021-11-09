@@ -28,8 +28,8 @@ namespace smartmat.Data
                         Introduction =  $"Introduksjon {i}",
                         Ingredients =  $"Ingredienser {i}",
                         Instructions =  $"Fremgangsmåte {i}", 
-                        Nutrients =  $"Næringsstoffer {i}"
-                        
+                        Nutrients =  $"Næringsstoffer {i}",
+                        Visibility = $"Visibility {i}"
                     });
                 }
             }

@@ -13,13 +13,14 @@ namespace smartmat.Models
         {
         }
 
-        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients)
+        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string visibility)
         {
             Title = title;
             Introduction = introduction;
             Ingredients = ingredients;
             Instructions = instructions;
             Nutrients = nutrients;
+            Visibility = visibility;
         }
 
         public int Id { get; set; }
@@ -47,6 +48,11 @@ namespace smartmat.Models
         [StringLength(1000)] 
         [DisplayName("Næringsstoffer")]
         public string Nutrients { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        [DisplayName("Visibility")]
+        public string Visibility { get; set; }
         
         // Foreign key for Users based on name
         public string UserId { get; set; } 

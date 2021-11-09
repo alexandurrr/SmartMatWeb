@@ -2377,6 +2377,7 @@ textarea.form-control {
 
 .btn {
   display: inline-block;
+  display: inline
   font-weight: 400;
   color: #212529;
   text-align: center;
@@ -2446,6 +2447,7 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #0062cc;
   border-color: #005cbf;
+  display: inline
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -3033,10 +3035,12 @@ input[type="button"].btn-block {
 .dropdown,
 .dropleft {
   position: relative;
+  transform: translateX(5em);
 }
 
 .dropdown-toggle {
   white-space: nowrap;
+  transform: translateX(5em);
 }
 
 .dropdown-toggle::after {
@@ -3055,6 +3059,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-menu {
+  transform: translateX(5em);
   position: absolute;
   top: 100%;
   left: 0;

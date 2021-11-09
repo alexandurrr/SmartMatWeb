@@ -20,6 +20,13 @@ function fasterPreview( uploader ) {
     }
 }
 
+
+$(".dropdown-item").click(function() 
+{
+    $('#visibility').html($(this).text());
+    $('#visibility').val($(this).data('value'));
+});
+
 $("#imgUpload").change(function(){
     fasterPreview( this );
 });
