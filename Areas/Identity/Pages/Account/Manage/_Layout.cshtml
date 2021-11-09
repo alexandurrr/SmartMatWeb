@@ -1,0 +1,18 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "Manage/_Layout";
+    }
+}
+
+<div>
+    @RenderBody()
+</div>
+
+@section Scripts {
+    @RenderSectionAsync("Scripts", required: false)
+}

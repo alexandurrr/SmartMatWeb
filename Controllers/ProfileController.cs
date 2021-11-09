@@ -22,43 +22,15 @@ namespace smartmat.Controllers
             _context = context;
             _userManager = userManager;
         }
-        
+        // Get Index
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
-
-            return View(user);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Index(ApplicationUser userdetails)
-        {
-            IdentityResult x = await _userManager.UpdateAsync(userdetails);
-
-            if (x.Succeeded && ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Profile");
-            }
-
-            return View(userdetails);
+            return RedirectToPage("Identity/Pages/Account/Manage/Index");
         }
         
-        /*[HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Edit(ApplicationUser user)
-        {
-            if (ModelState.IsValid)
-            {
-                await _userManager.UpdateAsync(user);
-            }
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
-        }*/
-        
-        // GET
+        // GET Recipes
         [Authorize]
         public async Task<IActionResult> MyRecipes()
         {
@@ -73,7 +45,7 @@ namespace smartmat.Controllers
             return View(recipes);
         }
         
-        // GET
+        // GET Reviews
         [Authorize]
         public async Task<IActionResult> MyReviews()
         {

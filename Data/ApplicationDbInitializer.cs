@@ -20,6 +20,7 @@ namespace smartmat.Data
                 Firstname = "Nicky", 
                 Lastname = "Hansen",
                 Bio = "",
+                ActivityReminder = true,
                 EmailConfirmed = true
             };
             um.CreateAsync(user, "Password1.").Wait();

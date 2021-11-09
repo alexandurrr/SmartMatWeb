@@ -46,8 +46,8 @@
 }
 
 #inputForm button{
-    transform: translateX(39em);
-    margin: 30px 0 0 0;
+    margin: 30px 0 0 auto;
+    display: block;
 }
 
 #standaloneHeader {

@@ -20,5 +20,7 @@ namespace smartmat.Data
         
         [MaxLength(400)]
         public string Bio { get; set; }
+        
+        public bool ActivityReminder { get; set; }
     }
 }
