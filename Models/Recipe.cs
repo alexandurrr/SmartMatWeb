@@ -54,7 +54,7 @@ namespace smartmat.Models
         
         [Required]
         [StringLength(100)]
-        [DisplayName("Visibility")]
+        [DisplayName("Offentlig")]
         public string Visibility { get; set; }
         
         // Foreign keys
