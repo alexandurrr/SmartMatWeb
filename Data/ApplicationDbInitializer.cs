@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using smartmat.Models;
 
 namespace smartmat.Data
@@ -15,7 +14,8 @@ namespace smartmat.Data
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             
-
+            
+            // User Test data
             var user = new ApplicationUser
             {
                 UserName = "user@uia.no", 
@@ -29,7 +29,8 @@ namespace smartmat.Data
             um.CreateAsync(user, "Password1.").Wait();
             db.SaveChanges();
             
-            // Test data, while also adding a USER relation
+            
+            // Recipe test data (while also adding a USER relation)
             foreach (var u in db.Users.Include(b => b.Recipes) )
             {
                 u.Recipes.Add(new Recipe
@@ -62,23 +63,10 @@ namespace smartmat.Data
                     Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });
-
-                /*
-                 // For test values with just numbers
-                for (int i = 1; i < 3; i++)
-                {
-                    u.Recipes.Add(new Recipe
-                    {
-                        Title = $"Tittel {i}",
-                        Introduction =  $"Introduksjon {i}",
-                        Ingredients =  $"Ingredienser {i}",
-                        Instructions =  $"Fremgangsmåte {i}", 
-                        Nutrients =  $"Næringsstoffer {i}",
-                        Image = $"{i}"
-                    });
-                }*/
             }
             
+            
+            // Review Test Data
             for (int i = 1; i < 3; i++)
             {
                 db.Add(new Review

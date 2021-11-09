@@ -16,12 +16,13 @@ namespace smartmat.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
+        
         public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
         }
-
+        
         public IActionResult Index()
         {
             //var reviews = _context.Reviews.ToList();
