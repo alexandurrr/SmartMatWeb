@@ -17,12 +17,10 @@ namespace smartmat.Controllers
         private readonly ApplicationDbContext _db;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
         public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
-            _db = db;
         }
         
         public async Task<IActionResult> Index()

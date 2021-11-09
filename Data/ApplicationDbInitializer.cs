@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Net.Mime;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using smartmat.Models;
@@ -30,8 +31,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "20g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/6pmvkb4usd-jumbotron/large",
-                    ApplicationUser = u
+                    Image = "https://images.matprat.no/6pmvkb4usd-jumbotron/large"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -42,8 +42,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og kok i 20min. Smak til med salt og pepper.",
                     Nutrients = "10g protein, 50g karbohydrat, 5g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/fmg25b4e53-jumbotron/large",
-                    ApplicationUser = u
+                    Image = "https://images.matprat.no/fmg25b4e53-jumbotron/large"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -54,26 +53,9 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large",
-                    ApplicationUser = u
+                    Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });
-
-                /*
-                 // For test values with just numbers
-                for (int i = 1; i < 3; i++)
-                {
-                    u.Recipes.Add(new Recipe
-                    {
-                        Title = $"Tittel {i}",
-                        Introduction =  $"Introduksjon {i}",
-                        Ingredients =  $"Ingredienser {i}",
-                        Instructions =  $"Fremgangsmåte {i}", 
-                        Nutrients =  $"Næringsstoffer {i}",
-                        Visibility = "Public",
-                        Image = $"{i}"
-                    });
-                }*/
             }
             
             for (int i = 1; i < 3; i++)
