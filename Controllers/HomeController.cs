@@ -15,7 +15,6 @@ namespace smartmat.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {

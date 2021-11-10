@@ -1,0 +1,38 @@
+﻿@model IEnumerable<smartmat.Models.Recipe>
+
+@{
+    ViewBag.Title = "Mine Oppskrifter";
+    Layout = "_Layout";
+}
+<style>td {cursor: pointer;}</style>
+
+<partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
+
+<div class="mainDiv container-fluid bg-light shadow rounded">
+    <h1 id="standaloneHeader" class="font-weight-bold">Mine Oppskrifter</h1>
+    
+    <table class="table table-hover">
+        <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Introduction)
+            </th>
+        </tr>
+        @if (!Model.Any())
+        {
+            <p>Du har ingen oppskrifter enda.</p><br>
+            <a asp-area="" asp-controller="Recipes" asp-action="Create">Lag din første oppskrift</a>
+        }
+        @foreach (var recipe in Model)
+        {
+            <tr onclick="window.location.href='/Recipes/details/@recipe.Id'">
+                    <td>@recipe.Title</td><td>@recipe.Introduction</td>
+            </tr>   
+        }
+        </tbody>
+    </table>
+
+</div>

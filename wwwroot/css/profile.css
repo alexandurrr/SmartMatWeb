@@ -1,0 +1,69 @@
+.mainDiv {
+    padding: 2em 1em;
+}
+
+#profileNav li a{
+    color: #1d2124;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+}
+
+#profileNav li a:hover{
+    border-bottom: 2px solid sandybrown;
+}
+
+#imgUpload
+{
+    display: none;
+}
+
+#profileImg
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#profile-container img {
+    width: 250px;
+    height: 250px;
+}
+
+.profileHead{
+    font-weight: bold;
+    margin-top: -200px;
+    margin-left: 30%;
+}
+
+#inputForm{
+    font-weight: normal;
+    color: dimgray;
+    margin-top: 20px;
+}
+
+#inputForm button{
+    margin: 30px 0 0 auto;
+    display: block;
+}
+
+#standaloneHeader {
+    margin: 1em;
+}
+
+h6{
+    padding-bottom: 10px;
+    border-bottom: 2px solid lightgray;
+}
+
+#activityReminder{
+    margin: 30px 0 10px 30%;
+}
+
+#activityReminder button{
+    transform: translateX(25em);
+    margin: 30px 0 0 0;
+}

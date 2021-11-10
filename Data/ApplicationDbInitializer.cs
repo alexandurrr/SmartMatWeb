@@ -1,8 +1,5 @@
-﻿using System;
-using System.Reflection;
-using System.Net.Mime;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using smartmat.Models;
 
 namespace smartmat.Data
@@ -14,13 +11,23 @@ namespace smartmat.Data
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
             
-
+            
+            // User Test data
             var user = new ApplicationUser
-                { UserName = "user@uia.no", Email = "user@uia.no", EmailConfirmed = true };
+            {
+                UserName = "user@uia.no", 
+                Email = "user@uia.no", 
+                Firstname = "Nicky", 
+                Lastname = "Hansen",
+                Bio = "",
+                ActivityReminder = true,
+                EmailConfirmed = true
+            };
             um.CreateAsync(user, "Password1.").Wait();
             db.SaveChanges();
             
-            // Test data, while also adding a USER relation
+            
+            // Recipe test data (while also adding a USER relation)
             foreach (var u in db.Users.Include(b => b.Recipes) )
             {
                 u.Recipes.Add(new Recipe
@@ -58,6 +65,8 @@ namespace smartmat.Data
                 });
             }
             
+            
+            // Review Test Data
             for (int i = 1; i < 3; i++)
             {
                 db.Add(new Review
