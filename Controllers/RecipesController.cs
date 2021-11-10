@@ -66,7 +66,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
+        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Category,Vegetarian,Glutenfree,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Category,Vegetarian,Glutenfree,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
         {
             var user = await _userManager.GetUserAsync(User);
             var recipeInDb = _context.Recipes

@@ -31,10 +31,24 @@ namespace smartmat.Models
         [StringLength(200)] 
         [DisplayName("Tittel")]
         public string Title { get; set; }
+        
         [Required]
         [StringLength(1000)]
         [DisplayName("Introduksjon")]
         public string Introduction { get; set; }
+        
+        [Required]
+        [StringLength(1000)]
+        [DisplayName("Kategori")]
+        public string Category { get; set; }
+        
+        [Required]
+        [DisplayName("Glutenfri")]
+        public bool Glutenfree { get; set; }
+        
+        [Required]
+        [DisplayName("Vegetar")]
+        public bool Vegetarian { get; set; }
 
         [Required]
         [StringLength(1000)]
@@ -54,7 +68,7 @@ namespace smartmat.Models
         
         [Required]
         [StringLength(100)]
-        [DisplayName("Offentlig")]
+        [DisplayName("Synlighet")]
         public string Visibility { get; set; }
         
         // Foreign keys

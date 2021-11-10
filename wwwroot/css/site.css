@@ -19,6 +19,10 @@ body {
   flex: 1 1;
 }
 
+.form-check-input {
+  margin: 1em 0.6em !important;
+}
+
 
 /*    NAV-BAR     */
 #logo_glasses {
