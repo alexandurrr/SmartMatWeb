@@ -30,7 +30,7 @@ namespace smartmat.Models
         [Required]
         [Range(1,5)]
         public int Stars { get; set; }
-
+        
         [Required]
         [StringLength(200)]
         public string Title { get; set; }

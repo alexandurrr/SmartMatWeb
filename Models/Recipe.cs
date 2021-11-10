@@ -14,13 +14,14 @@ namespace smartmat.Models
         {
         }
 
-        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string image)
+        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string visibility, string image)
         {
             Title = title;
             Introduction = introduction;
             Ingredients = ingredients;
             Instructions = instructions;
             Nutrients = nutrients;
+            Visibility = visibility;
             Image = image;
         }
 
@@ -28,34 +29,38 @@ namespace smartmat.Models
         
         [Required] 
         [StringLength(200)] 
-        [DisplayName("Title")]
+        [DisplayName("Tittel")]
         public string Title { get; set; }
         [Required]
         [StringLength(1000)]
-        [DisplayName("Introduction")]
+        [DisplayName("Introduksjon")]
         public string Introduction { get; set; }
 
         [Required]
         [StringLength(1000)]
-        [DisplayName("Ingredients")]
+        [DisplayName("Ingredienser")]
         public string Ingredients { get; set; }
 
         [Required] 
         [StringLength(1000)] 
-        [DisplayName("Instructions")]
+        [DisplayName("Fremgangsmåte")]
         public string Instructions { get; set; }
             
         [Required] 
         [StringLength(1000)] 
-        [DisplayName("Nutrients")]
+        [DisplayName("Næringsstoffer")]
         public string Nutrients { get; set; }
         public string Image { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        [DisplayName("Offentlig")]
+        public string Visibility { get; set; }
         
         // Foreign keys
         public string UserId { get; set; } 
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-
         public List<Review> Reviews { get; set; }
     }
     

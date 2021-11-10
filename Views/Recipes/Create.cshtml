@@ -4,47 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Recipe</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+
+<div class="mainDiv container-fluid bg-light shadow rounded">
+    <h1 id="standaloneHeader" class="font-weight-bold">Ny Oppskrift</h1>
+    <hr />
+    <form asp-action="Create">
+        <div class="px-4 pt-0 pb-4 cover" id="inputForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Introduction" class="control-label"></label>
-                <input asp-for="Introduction" class="form-control" />
+                <input asp-for="Introduction" class="form-control"/>
                 <span asp-validation-for="Introduction" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ingredients" class="control-label"></label>
-                <input asp-for="Ingredients" class="form-control" />
+                <textarea asp-for="Ingredients" class="form-control"></textarea>
                 <span asp-validation-for="Ingredients" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Instructions" class="control-label"></label>
-                <input asp-for="Instructions" class="form-control" />
-                <span asp-validation-for="Instructions" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Nutrients" class="control-label"></label>
-                <input asp-for="Nutrients" class="form-control" />
+                <input asp-for="Nutrients" class="form-control"/>
                 <span asp-validation-for="Nutrients" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Instructions" class="control-label"></label>
+                <textarea asp-for="Instructions" class="form-control"></textarea>
+                <span asp-validation-for="Instructions" class="text-danger"></span>
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <select asp-for="Visibility" name="visibility" id="visibility">
+                    <option value="public" selected>Public</option>
+                    <option value="private">Private</option>
+                </select>
+                <span asp-validation-for="Visibility" class="text-danger"></span>
+                <br><br>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

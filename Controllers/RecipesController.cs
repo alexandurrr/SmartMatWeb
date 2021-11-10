@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,7 +26,11 @@ namespace smartmat.Controllers
         // GET: Recipes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Recipes.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+            var recipes = _context.Recipes
+                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
+                .ToList(); 
+            return View(recipes);
         }
 
         // GET: Recipes/Details/5
@@ -36,7 +41,9 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
+            var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
+                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recipe == null)
             {
@@ -47,6 +54,7 @@ namespace smartmat.Controllers
         }
 
         // GET: Recipes/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -57,7 +65,8 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -73,17 +82,22 @@ namespace smartmat.Controllers
         }
 
         // GET: Recipes/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 return NotFound();
+            }
+            if (recipe.ApplicationUser != user)
+            {
+                return RedirectToAction(nameof(NotAllowed));
             }
             return View(recipe);
         }
@@ -93,45 +107,55 @@ namespace smartmat.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Image")] Recipe recipe)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
         {
-            if (id != recipe.Id)
+            var user = await _userManager.GetUserAsync(User);
+            var recipeInDb = _context.Recipes
+                .Any(r => r.ApplicationUser == user && r.Id == id);
+            if (id != recipe.Id || !recipeInDb)
             {
-                return NotFound();
+                return RedirectToAction(nameof(NotAllowed));
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(recipe);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RecipeExists(recipe.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return View(recipe);
             }
-            return View(recipe);
+            
+            try
+            {
+                recipe.ApplicationUser = user;
+                _context.Update(recipe);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RecipeExists(recipe.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: Recipes/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
+            
+            var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
+                .Where(recipe => recipe.ApplicationUser == user)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recipe == null)
             {
@@ -144,9 +168,16 @@ namespace smartmat.Controllers
         // POST: Recipes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var recipe = await _context.Recipes.FindAsync(id);
+            var user = await _userManager.GetUserAsync(User);
+            var recipe = await _context.Recipes
+                .FindAsync(id);
+            if (recipe.ApplicationUser != user)
+            {
+                return RedirectToAction(nameof(NotAllowed));
+            }
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -155,6 +186,13 @@ namespace smartmat.Controllers
         private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.Id == id);
+        }
+        
+        // Not Allowed
+        [HttpGet]
+        public IActionResult NotAllowed()
+        {
+            return View();
         }
     }
 }
