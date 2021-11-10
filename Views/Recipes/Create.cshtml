@@ -5,10 +5,10 @@
 }
 
 
-<partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
 <div class="mainDiv container-fluid bg-light shadow rounded">
     <h1 id="standaloneHeader" class="font-weight-bold">Ny Oppskrift</h1>
+    <hr />
     <form asp-action="Create">
         <div class="px-4 pt-0 pb-4 cover" id="inputForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,6 +36,14 @@
                 <label asp-for="Instructions" class="control-label"></label>
                 <textarea asp-for="Instructions" class="form-control"></textarea>
                 <span asp-validation-for="Instructions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="Visibility" name="visibility" id="visibility">
+                    <option value="public" selected>Public</option>
+                    <option value="private">Private</option>
+                </select>
+                <span asp-validation-for="Visibility" class="text-danger"></span>
+                <br><br>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary"/>

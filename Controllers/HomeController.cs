@@ -16,22 +16,24 @@ namespace smartmat.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        
         public HomeController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
         }
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //var reviews = _context.Reviews.ToList();
-            var vm = new RecipeUserViewModel();
-            vm.Users = _userManager.Users.ToList();
-            vm.Recipes = _db.Recipes
-                .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                .ToList();
-            vm.Reviews = _db.Reviews.ToList();
+            var user = await _userManager.GetUserAsync(User);
+            var vm = new RecipeUserViewModel
+            {
+                Users = _userManager.Users.ToList(),
+                Recipes = _db.Recipes
+                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
+                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
+                    .ToList(),
+                Reviews = _db.Reviews.ToList()
+            };
             return View(vm);
         }
 
@@ -46,7 +48,7 @@ namespace smartmat.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
         
-        public IActionResult Recipes(string search)
+        public async Task<IActionResult> Recipes(string search)
         {
 
             if (search == null)
@@ -56,8 +58,11 @@ namespace smartmat.Controllers
             
             string[] ingredients = search.Split(", ");  //for å kunne søke på flere ingredienser
 
-            // Grabbing all recipes from database
-            var recipes = _db.Recipes.ToList();
+            // Grabbing all public recipes from database
+            var user = await _userManager.GetUserAsync(User);
+            var recipes = _db.Recipes
+                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
+                .ToList();
 
             // Filtering out recipes based on ingredients
             foreach (var i in ingredients)

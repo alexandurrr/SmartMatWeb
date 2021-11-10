@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Net.Mime;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using smartmat.Models;
 
@@ -40,6 +37,7 @@ namespace smartmat.Data
                     Ingredients = "1 Egg, 2dl Melk, 400g Ost, 1stk Paprika, Salt, Pepper",
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "20g protein, 50g karbohydrat, 10g fett",
+                    Visibility = "Public",
                     Image = "https://images.matprat.no/6pmvkb4usd-jumbotron/large"
                     
                 });
@@ -50,6 +48,7 @@ namespace smartmat.Data
                     Ingredients = "1stk Brokkoli, 1/2 Blomkål, 4 Potet, 1 Sellerirot, 2 Gulrot, Salt, Pepper",
                     Instructions = "Kutt opp grønnsakene og kok i 20min. Smak til med salt og pepper.",
                     Nutrients = "10g protein, 50g karbohydrat, 5g fett",
+                    Visibility = "Public",
                     Image = "https://images.matprat.no/fmg25b4e53-jumbotron/large"
                     
                 });
@@ -60,6 +59,7 @@ namespace smartmat.Data
                     Ingredients = "400g Laks, 1 Brokkoli, 5 Potet, 3 Gulrot, 100g Smør, Salt, Pepper",
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
+                    Visibility = "Public",
                     Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });

@@ -6,4 +6,4 @@ venv
 *.db
 *.pyc
 *.swp
-
+*.DS_Store
