@@ -59,10 +59,6 @@
         <form id = "search-form">
             <div id="searchbox" class="input-group mb-3">
                 <input type="search" id = "search-text" class="form-control" placeholder="eks. brokkoli, egg, melk, potet"/>
-<<<<<<< HEAD
-=======
-                <input type = "submit" class="btn btn-primary" value = "Søk">
->>>>>>> 5cde5e99ec7338537b98a17bc7c2a1e0a6fdf770
             </div>
         </form>
         
@@ -73,23 +69,13 @@
     @section Scripts
     {
         <script>
-<<<<<<< HEAD
             async function search(){
-=======
-            document.getElementById('search-form').onsubmit = async function (event)
-            {      
-                event.preventDefault();
-                
->>>>>>> 5cde5e99ec7338537b98a17bc7c2a1e0a6fdf770
                 let search = document.getElementById("search-text").value;
                 let result = await fetch("/Home/Recipes?search=" + search);
                 const recipes = await result.text();
                 document.getElementById("recipe-results").innerHTML = recipes;
             }
-<<<<<<< HEAD
             document.getElementById('search-form').onkeyup = search;
-=======
->>>>>>> 5cde5e99ec7338537b98a17bc7c2a1e0a6fdf770
         </script>
     }
     <div class="fillerdiv"></div>
