@@ -1,23 +1,23 @@
 ﻿@model smartmat.Models.UserRecipes
 
-<h2>Søketreff:</h2>
-<ul>
-    
-    @foreach (var r in Model.Recipes)
-    {
+<div class="container-fluid bg-light shadow rounded overflow-hidden" id="search-partial">
+    <h2 class="text-left p-2">Antall treff: </h2>
 
-        <li><a href="https://localhost:5001/Recipes/Details/@r.Id">
-            @r.Title <br>
-            <img src=@r.Image alt="Matbilde" width="200" height="100"><br>
+    <ul>
+        @foreach (var r in Model.Recipes)
+        {
+            <li  class="shadow overflow-hidden">
+                <a href="https://localhost:5001/Recipes/Details/@r.Id">
+                    @r.Title <br>
+                    <img src=@r.Image alt="Matbilde" class="shadow bg-light"><br>
 
-
-            @if (r.UserId == r.ApplicationUser.Id)
-            {
-                // This will add pre-existing fields in the Applications users table that relates to recipe
-                @r.ApplicationUser.UserName
-            }
-        </a></li> 
-
-    }
-
-</ul>
+                    @if (r.UserId == r.ApplicationUser.Id)
+                    {
+                        // This will add pre-existing fields in the Applications users table that relates to recipe
+                        @r.ApplicationUser.UserName
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</div>
