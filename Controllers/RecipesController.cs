@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,11 +18,15 @@ namespace smartmat.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public RecipesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public RecipesController(ApplicationDbContext context, 
+            UserManager<ApplicationUser> userManager, 
+            IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Recipes
@@ -59,6 +65,7 @@ namespace smartmat.Controllers
         {
             return View();
         }
+        
 
         // POST: Recipes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -66,20 +73,77 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,Image")] Recipe recipe)
+        public async Task<IActionResult> Create(RecipeUserViewModel recipe)
         {
             if (ModelState.IsValid)
             {
-                // Adding the foreign key to recipes
-                var user = await _userManager.GetUserAsync(User);
-                recipe.UserId = user.Id;
+                var res = await ImageCreate(recipe);
                 
-                _context.Add(recipe);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (res.IsSuccess)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
             }
+
             return View(recipe);
         }
+        
+        private async Task<RecipeUserViewModel> ImageCreate(RecipeUserViewModel recipe)
+        {
+            // new RecipeUser vm
+            var res = new RecipeUserViewModel();
+            
+            // Check if model is not empty
+            if (recipe != null)
+            {
+                // New recipe
+                var recipes = new Recipe();
+                var user = await _userManager.GetUserAsync(User);
+                
+                // Add non-file attributes and
+                // Adding the foreign key to recipes
+                recipes.UserId = user.Id;
+                recipes.Title = recipe.Title;
+                recipes.Ingredients = recipe.Ingredients;
+                recipes.Instructions = recipe.Instructions;
+                recipes.Introduction = recipe.Introduction;
+                recipes.Nutrients = recipe.Nutrients;
+                recipes.Visibility = recipe.Visibility;
+
+                var image = recipe.Image;
+                
+                // Check if image is uploaded
+                if (image != null)
+                {
+                    // New file name using Guid
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                    
+                    // Creating full file path string and appending the file name
+                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", fileName);
+                    
+                    // open-create the file in a stream and copying the uploaded
+                    // Into the new file
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(fileStream);
+                    }
+                    
+                    // Assigning the generated filePath
+                    recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/images/{fileName}";
+
+                }
+                // Set the success flag and push data onto the db
+                res.IsSuccess = true;
+                _context.Add(recipes);
+                await _context.SaveChangesAsync();
+            }
+
+            return res;
+
+            
+        }
+
 
         // GET: Recipes/Edit/5
         [Authorize]
