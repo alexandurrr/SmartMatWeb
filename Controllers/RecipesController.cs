@@ -75,6 +75,7 @@ namespace smartmat.Controllers
         [Authorize]
         public async Task<IActionResult> Create(RecipeUserViewModel recipe)
         {
+            // No changes needed here, refer to ImageCreate to add new attributes
             if (ModelState.IsValid)
             {
                 var res = await ImageCreate(recipe);
@@ -103,6 +104,8 @@ namespace smartmat.Controllers
                 
                 // Add non-file attributes and
                 // Adding the foreign key to recipes
+                // Too add new attribute from recipe model, simply follow example below:
+                // For example; recipes.NewAttribute = recipe.NewAttribute
                 recipes.UserId = user.Id;
                 recipes.Title = recipe.Title;
                 recipes.Ingredients = recipe.Ingredients;
@@ -120,7 +123,7 @@ namespace smartmat.Controllers
                     var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
                     
                     // Creating full file path string and appending the file name
-                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", fileName);
+                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
                     
                     // open-create the file in a stream and copying the uploaded
                     // Into the new file
@@ -130,7 +133,7 @@ namespace smartmat.Controllers
                     }
                     
                     // Assigning the generated filePath
-                    recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/images/{fileName}";
+                    recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
 
                 }
                 // Set the success flag and push data onto the db
