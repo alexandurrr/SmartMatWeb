@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using smartmat.Data;
 using smartmat.Models;
-using SQLitePCL;
 
 namespace smartmat.Controllers
 {
@@ -37,11 +34,6 @@ namespace smartmat.Controllers
             return View(vm);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -55,37 +47,51 @@ namespace smartmat.Controllers
             {
                 return NotFound();
             }
-            
-            string[] ingredients = search.Split(", ");  //for å kunne søke på flere ingredienser
 
-            // Grabbing all public recipes from database
+            // Selecting all recipes from database that are public or the users own recipes
             var user = await _userManager.GetUserAsync(User);
             var recipes = _db.Recipes
-                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                .ToList();
+                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user);
 
-            // Filtering out recipes based on ingredients
-            foreach (var i in ingredients)
+            // Calculates a rating for each ingredient based on the number of results
+            var searchIngredients = search.ToLower().Split(", ");
+            if (searchIngredients.Any())
+                searchIngredients[^1] = searchIngredients[^1].Replace(",", "");
+            
+            var searchRatings = new Dictionary<int, float>();
+
+            foreach (var recipe in recipes)
             {
-                var list = searchfor(recipes, i);
-                recipes = list;
+                var recipeIngredients = recipe.Ingredients.ToLower().Split(", ");
+                var currentSearchResults = (
+                        from searchIngredient in searchIngredients 
+                        from recipeIngredient in recipeIngredients 
+                        where recipeIngredient.Contains(searchIngredient) 
+                        select searchIngredient)
+                    .Count();
+                var totalIngredients = recipeIngredients.Length;
+                if (totalIngredients < 1)
+                {
+                    currentSearchResults = 0;
+                    totalIngredients = 1;
+                }
+                searchRatings.Add(recipe.Id, (float)currentSearchResults/totalIngredients);
             }
             
-            // Creating a UserRecipe, with filtered recipe
-            var ur = new UserRecipes
+            var result = recipes.AsEnumerable()
+                .Where(recipe => searchRatings[recipe.Id] > 0)
+                .OrderByDescending(recipe => searchRatings[recipe.Id]);
+            
+            
+            // Uses the RecipeUserViewModel to send the recipes to the Partial View
+            var ur = new RecipeUserViewModel
             {
-                Recipes = recipes,
-                ApplicationUsers = _userManager.Users.ToList()
+                Recipes = result.ToList(),
+                Users = _userManager.Users.ToList(),
+                Reviews = _db.Reviews.ToList()
             };
 
             return PartialView("_RecipesPartial", ur);
-        }
-
-        private List<Recipe> searchfor(List<Recipe> list, string i)
-        {
-            
-            var result = list.Where(a => a.Ingredients.ToLower().Contains(i.ToLower()));
-            return result.ToList();
         }
     }
 }

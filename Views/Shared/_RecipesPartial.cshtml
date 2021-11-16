@@ -1,23 +1,53 @@
-﻿@model smartmat.Models.UserRecipes
+﻿@model smartmat.Models.RecipeUserViewModel
+@{
+    var totalResultCount = Model.Recipes.Count();
+    var recipes = Model.Recipes.Take(8).ToList();
+}
 
-<h2>Søketreff:</h2>
-<ul>
+@if (recipes.Any())
+{
+    <h2>Søketreff:</h2>
+    <i style="font-size: 0.9em;">Viser @recipes.Count() av @totalResultCount treff </i>
+    <ul>
     
-    @foreach (var r in Model.Recipes)
-    {
+        @foreach (var r in recipes)
+        {
 
-        <li><a href="https://localhost:5001/Recipes/Details/@r.Id">
-            @r.Title <br>
-            <img src=@r.Image alt="Matbilde" width="200" height="100"><br>
+            <li><a href="https://localhost:5001/Recipes/Details/@r.Id">
+                @r.Title <br>
+                <img src=@r.Image alt="Matbilde" width="200" height="100"><br>
 
+                @if (r.Reviews != null)
+                {
+                    var avg = Math.Round(r.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
+                    var rest = avg % 1;
+                    var half = rest > 0;
+                    @for (var i = 0; i < avg-rest; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                    @if (half)
+                    {
+                        <span class="fa fa-star-half-o"></span>
+                    }
+                    @for (var i = Math.Round(avg); i < 5; i++)
+                    {
+                        <span class="fa fa-star-o"></span>
+                    }
+                }<br>
 
-            @if (r.UserId == r.ApplicationUser.Id)
-            {
-                // This will add pre-existing fields in the Applications users table that relates to recipe
-                @r.ApplicationUser.UserName
-            }
-        </a></li> 
+                @if (r.UserId == r.ApplicationUser.Id)
+                {
+                    // This will add pre-existing fields in the Applications users table that relates to recipe
+                    @r.ApplicationUser.UserName
+                }
+            </a></li> 
 
-    }
+        }
 
-</ul>
+    </ul>
+}
+else
+{
+    <p>Ingen søketreff</p>
+}
