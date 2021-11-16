@@ -73,7 +73,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(RecipeUserViewModel recipe)
+        public async Task<IActionResult> Create(RecipeImageViewModel recipe)
         {
             // No changes needed here, refer to ImageCreate to add new attributes
             if (ModelState.IsValid)
@@ -90,10 +90,10 @@ namespace smartmat.Controllers
             return View(recipe);
         }
         
-        private async Task<RecipeUserViewModel> ImageCreate(RecipeUserViewModel recipe)
+        private async Task<RecipeImageViewModel> ImageCreate(RecipeImageViewModel recipe)
         {
-            // new RecipeUser vm
-            var res = new RecipeUserViewModel();
+            // new RecipeImage vm
+            var res = new RecipeImageViewModel();
             
             // Check if model is not empty
             if (recipe != null)
