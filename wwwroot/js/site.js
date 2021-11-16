@@ -1,11 +1,18 @@
 ﻿$("#navbar-brand").mouseenter( flipGlasses );
+let flippingGlasses = false;
 function flipGlasses() {
-    $("#logo_glasses").css("animationName", "");
-    $("#logo_glasses_container").css("animationName","");
-    setTimeout(function(){
-        $("#logo_glasses").css("animationName", "flip");
-        $("#logo_glasses_container").css("animationName","bounce");
-    }, 50)
+    if (!flippingGlasses){
+        flippingGlasses = true;
+        $("#logo_glasses").css("animationName", "");
+        $("#logo_glasses_container").css("animationName","");
+        setTimeout(function(){
+            $("#logo_glasses").css("animationName", "flip");
+            $("#logo_glasses_container").css("animationName","bounce");
+        }, 50)
+        setTimeout(function(){
+            flippingGlasses = false;
+        }, 700)
+    }
 }
 
 
