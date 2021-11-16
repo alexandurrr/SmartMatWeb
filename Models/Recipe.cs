@@ -14,10 +14,11 @@ namespace smartmat.Models
         {
         }
 
-        public Recipe(string title, string introduction, string ingredients, string instructions, string nutrients, string visibility, string image)
+        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string image)
         {
             Title = title;
             Introduction = introduction;
+            Category = category;
             Ingredients = ingredients;
             Instructions = instructions;
             Nutrients = nutrients;
