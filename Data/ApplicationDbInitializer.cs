@@ -38,7 +38,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "20g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    ImagePath = "https://localhost:5001/images/test1.jpg"
+                    ImagePath = "https://localhost:5001/recipeimages/test1.jpg"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -49,7 +49,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og kok i 20min. Smak til med salt og pepper.",
                     Nutrients = "10g protein, 50g karbohydrat, 5g fett",
                     Visibility = "Public",
-                    ImagePath = "https://localhost:5001/images/test2.jpg"
+                    ImagePath = "https://localhost:5001/recipeimages/test2.jpg"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -60,7 +60,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    ImagePath = "https://localhost:5001/images/test3.jpg"
+                    ImagePath = "https://localhost:5001/recipeimages/test3.jpg"
                     
                 });
             }
