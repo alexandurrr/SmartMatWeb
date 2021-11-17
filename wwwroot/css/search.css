@@ -1,0 +1,42 @@
+﻿#flex-container{
+    margin: 3em 0 0 0;
+}
+
+#recipe-results{
+    max-width: 40em;
+    margin-bottom: 2em;
+}
+
+#search-partial ul li{
+    list-style-type: none;
+    display: inline-flex;
+    text-align: center;
+    margin: 15px 10px 0 0;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: transform .1s;
+}
+
+#search-partial li a{
+    font-size: 17px;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+#search-partial img{
+    width: 250px;
+    height: 150px;
+    margin: 8px 0 10px 0;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+#search-partial a:hover{
+    border-bottom: 3px solid darkorange;
+}
+
+#search-partial li:hover{
+    transform: scale(0.8);
+    opacity: 0.5;
+}

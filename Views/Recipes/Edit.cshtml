@@ -28,6 +28,27 @@
                 <span asp-validation-for="Ingredients" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" name="Category" id="Category">
+                    <option value="Frokost">Frokost</option>
+                    <option value="Middag" selected>Middag</option>
+                    <option value="Lunsj">Lunsj</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="null">Annet</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+           <div class="form-check form-check-inline">
+                <label asp-for="Glutenfree" class="control-label"></label>
+                <input asp-for="Glutenfree" class="form-check-input"/>
+                <span asp-validation-for="Glutenfree" class="text-danger"></span>
+            </div>
+           <div class="form-check form-check-inline">
+                <label asp-for="Vegetarian" class="control-label"></label>
+                <input asp-for="Vegetarian" class="form-check-input"/>
+                <span asp-validation-for="Vegetarian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Instructions" class="control-label"></label>
                 <input asp-for="Instructions" class="form-control" />
                 <span asp-validation-for="Instructions" class="text-danger"></span>
@@ -38,12 +59,13 @@
                 <span asp-validation-for="Nutrients" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Visibility" class="control-label"></label>
                 <select asp-for="Visibility" name="visibility" id="visibility">
-                    <option value="private">Private</option>
-                    <option value="public">Public</option>
+                    <option value="public">Offentlig</option>
+                    <option value="private">Privat</option>
                 </select>
                 <span asp-validation-for="Visibility" class="text-danger"></span>
-                            <br><br>
+                <br><br>
             </div>
             <br>
             <div class="form-group">

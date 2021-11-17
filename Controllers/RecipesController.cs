@@ -113,6 +113,9 @@ namespace smartmat.Controllers
                 recipes.Introduction = recipe.Introduction;
                 recipes.Nutrients = recipe.Nutrients;
                 recipes.Visibility = recipe.Visibility;
+                recipes.Glutenfree = recipe.Glutenfree;
+                recipes.Category = recipe.Category;
+                recipes.Vegetarian = recipe.Vegetarian;
 
                 var image = recipe.Image;
                 
@@ -175,7 +178,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Instructions,Nutrients,Visibility,ImagePath")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Category,Vegetarian,Glutenfree,Instructions,Nutrients,Visibility,ImagePath")] Recipe recipe)
         {
             var user = await _userManager.GetUserAsync(User);
             var recipeInDb = _context.Recipes
