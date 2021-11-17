@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Endre Oppskrift";
 }
-
+@* Need to change model, and figure out a way to edit image (which includes deleting from directory(?)) *@
 <h1>Edit</h1>
 
 <hr />
@@ -65,10 +65,15 @@
                     <option value="private">Privat</option>
                 </select>
                 <span asp-validation-for="Visibility" class="text-danger"></span>
+                <br><br>
             </div>
             <br>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+               <div class="form-group">
+                   <input asp-for="ImagePath" class="form-control" hidden/>
+                   <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>

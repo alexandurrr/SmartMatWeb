@@ -41,7 +41,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "20g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/6pmvkb4usd-jumbotron/large"
+                    ImagePath = "https://localhost:5001/recipeimages/test1.jpg"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -55,7 +55,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og kok i 20min. Smak til med salt og pepper.",
                     Nutrients = "10g protein, 50g karbohydrat, 5g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/fmg25b4e53-jumbotron/large"
+                    ImagePath = "https://localhost:5001/recipeimages/test2.jpg"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -69,7 +69,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
+                    ImagePath = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });
                 u.Recipes.Add(new Recipe
@@ -83,7 +83,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
+                    ImagePath = "https://localhost:5001/recipeimages/test3.jpg"
                     
                 });
             }

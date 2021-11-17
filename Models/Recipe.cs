@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using smartmat.Data;
+using System.Web;
+using Microsoft.AspNetCore.Mvc;
 
 namespace smartmat.Models
 {
@@ -14,7 +17,8 @@ namespace smartmat.Models
         {
         }
 
-        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string image)
+
+        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string imagepath)
         {
             Title = title;
             Introduction = introduction;
@@ -23,9 +27,13 @@ namespace smartmat.Models
             Instructions = instructions;
             Nutrients = nutrients;
             Visibility = visibility;
-            Image = image;
+            ImagePath = imagepath;
         }
-
+        // If you need to add more fields here
+        // Make sure to add the same field into RecipeUserViewModel.cs
+        // Edit the controller
+        // Then the controller will add the value from our view model
+        // Into Recipes.cs, then will push into the db
         public int Id { get; set; }
         
         [Required] 
@@ -60,18 +68,21 @@ namespace smartmat.Models
         [StringLength(1000)] 
         [DisplayName("Fremgangsmåte")]
         public string Instructions { get; set; }
-            
+        
         [Required] 
         [StringLength(1000)] 
         [DisplayName("Næringsstoffer")]
         public string Nutrients { get; set; }
-        public string Image { get; set; }
+        
+        // Image path in a string
+        // can be used with <img> to display
+        public string ImagePath { get; set; }
         
         [Required]
         [StringLength(100)]
         [DisplayName("Synlighet")]
         public string Visibility { get; set; }
-        
+
         // Foreign keys
         public string UserId { get; set; } 
         [ForeignKey("UserId")]
