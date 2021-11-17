@@ -35,7 +35,7 @@
             {
                 <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                     <h5 class="card-title">@recipe.Title</h5>
-                    <div class="imgcontainer card-img-middle"><img src="~/recipeimages/@(recipe.Id).jpg"></div>
+                    <div class="imgcontainer card-img-middle"><img src="@recipe.ImagePath"></div>
                     <p class="cardIntrotext">@recipe.Introduction</p>
                     <p class="card-author-box">Kategori: @recipe.Category<p/>
 
