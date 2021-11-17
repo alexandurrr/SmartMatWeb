@@ -16,21 +16,37 @@ namespace smartmat.Models
     
         // Recipes columns
         [Required]
+        [StringLength(200)]
         public string Title { get; set; }
    
         [Required]
+        [StringLength(1000)]
         public string Introduction { get; set; }
 
         [Required]
+        [StringLength(1000)]
         public string Ingredients { get; set; }
 
         [Required]
+        [StringLength(1000)] 
         public string Instructions { get; set; }
 
         [Required]
+        [StringLength(1000)] 
         public string Nutrients { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string Visibility { get; set; }
+        
+        [Required]
+        public bool Glutenfree { get; set; }
+        
+        [Required]
+        [StringLength(1000)]
+        public string Category { get; set; }
+        
+        [Required]
+        public bool Vegetarian { get; set; }
     }
 }
