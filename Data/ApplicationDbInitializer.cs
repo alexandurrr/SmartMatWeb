@@ -69,7 +69,7 @@ namespace smartmat.Data
                     Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
-                    Image = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
+                    ImagePath = "https://images.matprat.no/hs2frzl2jk-jumbotron/large"
                     
                 });
                 u.Recipes.Add(new Recipe
