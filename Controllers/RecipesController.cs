@@ -76,15 +76,12 @@ namespace smartmat.Controllers
         public async Task<IActionResult> Create(RecipeImageViewModel recipe)
         {
             // No changes needed here, refer to ImageCreate to add new attributes
-            if (ModelState.IsValid)
-            {
-                var res = await ImageCreate(recipe);
+            if (!ModelState.IsValid) return View(recipe);
+            var res = await ImageCreate(recipe);
                 
-                if (res.IsSuccess)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-
+            if (res.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
             }
 
             return View(recipe);
@@ -96,54 +93,53 @@ namespace smartmat.Controllers
             var res = new RecipeImageViewModel();
             
             // Check if model is not empty
-            if (recipe != null)
+            if (recipe == null) return res;
+            
+            // New recipe
+            var recipes = new Recipe();
+            var user = await _userManager.GetUserAsync(User);
+                
+            // Add non-file attributes and
+            // Adding the foreign key to recipes
+            // Too add new attribute from recipe model, simply follow example below:
+            // For example; recipes.NewAttribute = recipe.NewAttribute
+            recipes.UserId = user.Id;
+            recipes.Title = recipe.Title;
+            recipes.Ingredients = recipe.Ingredients;
+            recipes.Instructions = recipe.Instructions;
+            recipes.Introduction = recipe.Introduction;
+            recipes.Nutrients = recipe.Nutrients;
+            recipes.Visibility = recipe.Visibility;
+            recipes.Glutenfree = recipe.Glutenfree;
+            recipes.Category = recipe.Category;
+            recipes.Vegetarian = recipe.Vegetarian;
+
+            var image = recipe.Image;
+                
+            // Check if image is uploaded
+            if (image != null)
             {
-                // New recipe
-                var recipes = new Recipe();
-                var user = await _userManager.GetUserAsync(User);
-                
-                // Add non-file attributes and
-                // Adding the foreign key to recipes
-                // Too add new attribute from recipe model, simply follow example below:
-                // For example; recipes.NewAttribute = recipe.NewAttribute
-                recipes.UserId = user.Id;
-                recipes.Title = recipe.Title;
-                recipes.Ingredients = recipe.Ingredients;
-                recipes.Instructions = recipe.Instructions;
-                recipes.Introduction = recipe.Introduction;
-                recipes.Nutrients = recipe.Nutrients;
-                recipes.Visibility = recipe.Visibility;
-                recipes.Glutenfree = recipe.Glutenfree;
-                recipes.Category = recipe.Category;
-                recipes.Vegetarian = recipe.Vegetarian;
-
-                var image = recipe.Image;
-                
-                // Check if image is uploaded
-                if (image != null)
+                // New file name using Guid
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                    
+                // Creating full file path string and appending the file name
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
+                    
+                // open-create the file in a stream and copying the uploaded
+                // Into the new file
+                await using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    // New file name using Guid
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                    
-                    // Creating full file path string and appending the file name
-                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
-                    
-                    // open-create the file in a stream and copying the uploaded
-                    // Into the new file
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(fileStream);
-                    }
-                    
-                    // Assigning the generated filePath
-                    recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
-
+                    await image.CopyToAsync(fileStream);
                 }
-                // Set the success flag and push data onto the db
-                res.IsSuccess = true;
-                _context.Add(recipes);
-                await _context.SaveChangesAsync();
+                    
+                // Assigning the generated filePath
+                recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
+
             }
+            // Set the success flag and push data onto the db
+            res.IsSuccess = true;
+            _context.Add(recipes);
+            await _context.SaveChangesAsync();
 
             return res;
 

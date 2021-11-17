@@ -6,46 +6,47 @@
 
 @if (recipes.Any())
 {
-    <h2>Søketreff:</h2>
-    <i style="font-size: 0.9em;">Viser @recipes.Count() av @totalResultCount treff </i>
-    <ul>
-    
-        @foreach (var r in recipes)
-        {
+    <div class="container-fluid bg-light shadow rounded overflow-hidden" id="search-partial">
+        <h2>Søketreff:</h2>
+        <i style="font-size: 0.9em;">Viser @recipes.Count() av @totalResultCount treff </i>
+        <ul>
+            @foreach (var r in recipes)
+            {
 
-            <li><a href="https://localhost:5001/Recipes/Details/@r.Id">
-                @r.Title <br>
-                <img src=@r.ImagePath alt="Matbilde" width="200" height="100"><br>
+                <li class="shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">
+                    @r.Title <br>
+                    <img src=@r.ImagePath alt="Matbilde" width="200" height="100"><br>
 
-                @if (r.Reviews != null)
-                {
-                    var avg = Math.Round(r.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
-                    var rest = avg % 1;
-                    var half = rest > 0;
-                    @for (var i = 0; i < avg-rest; i++)
+                    @if (r.Reviews != null)
                     {
-                        <span class="fa fa-star"></span>
-                    }
-                    @if (half)
+                        var avg = Math.Round(r.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
+                        var rest = avg % 1;
+                        var half = rest > 0;
+                        @for (var i = 0; i < avg-rest; i++)
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                        @if (half)
+                        {
+                            <span class="fa fa-star-half-o"></span>
+                        }
+                        @for (var i = Math.Round(avg); i < 5; i++)
+                        {
+                            <span class="fa fa-star-o"></span>
+                        }
+                    }<br>
+
+                    @if (r.UserId == r.ApplicationUser.Id)
                     {
-                        <span class="fa fa-star-half-o"></span>
+                        // This will add pre-existing fields in the Applications users table that relates to recipe
+                        @r.ApplicationUser.UserName
                     }
-                    @for (var i = Math.Round(avg); i < 5; i++)
-                    {
-                        <span class="fa fa-star-o"></span>
-                    }
-                }<br>
+                </a></li> 
 
-                @if (r.UserId == r.ApplicationUser.Id)
-                {
-                    // This will add pre-existing fields in the Applications users table that relates to recipe
-                    @r.ApplicationUser.UserName
-                }
-            </a></li> 
+            }
 
-        }
-
-    </ul>
+        </ul>
+    </div>
 }
 else
 {
