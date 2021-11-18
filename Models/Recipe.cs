@@ -18,7 +18,7 @@ namespace smartmat.Models
         }
 
 
-        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string imagepath)
+        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string imagepath, int time)
         {
             Title = title;
             Introduction = introduction;
@@ -28,6 +28,7 @@ namespace smartmat.Models
             Nutrients = nutrients;
             Visibility = visibility;
             ImagePath = imagepath;
+            Time = time;
         }
         // If you need to add more fields here
         // Make sure to add the same field into RecipeUserViewModel.cs
@@ -82,6 +83,10 @@ namespace smartmat.Models
         [StringLength(100)]
         [DisplayName("Synlighet")]
         public string Visibility { get; set; }
+        
+        [Required]
+        [DisplayName("Minutter")]
+        public int Time { get; set; }
 
         // Foreign keys
         public string UserId { get; set; } 
@@ -89,5 +94,6 @@ namespace smartmat.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
         public List<Review> Reviews { get; set; }
     }
+
     
 }

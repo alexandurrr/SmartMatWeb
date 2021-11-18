@@ -48,5 +48,9 @@ namespace smartmat.Models
         
         [Required]
         public bool Vegetarian { get; set; }
+
+        [Required]
+        [StringLength(4)]
+        public int Time { get; set; }
     }
 }

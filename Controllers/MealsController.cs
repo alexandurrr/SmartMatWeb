@@ -37,8 +37,10 @@ namespace smartmat.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> FastFood()
+        public async Task<IActionResult> FastFood(string search)
         {
+            //var result = _db.Recipes.Where(a => a.Time <= 30);
+            //return View(result.ToList());
             var user = await _userManager.GetUserAsync(User);
             var vm = new RecipeUserViewModel
             {

@@ -105,6 +105,7 @@ namespace smartmat.Controllers
             // For example; recipes.NewAttribute = recipe.NewAttribute
             recipes.UserId = user.Id;
             recipes.Title = recipe.Title;
+            recipes.Time = recipe.Time;
             recipes.Ingredients = recipe.Ingredients;
             recipes.Instructions = recipe.Instructions;
             recipes.Introduction = recipe.Introduction;
