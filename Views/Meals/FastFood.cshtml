@@ -16,7 +16,7 @@
 
 <partial name="_MealNavPartial" />
 
-<h2>Her finner du alle oppskrifter under 20 minutt</h2>
+<h2>Her finner du alle oppskrifter under 30 minutt</h2>
 
 <div id="checkboxes">
     <div class="form-check" id="vegCheck">
@@ -40,7 +40,7 @@
     <div class="horizontal-scroll">
         @foreach (var recipe in Model.Recipes)
         {
-            @if (recipe.Category == "Rask_Mat")
+            @if (recipe.Time <= 30)
             {
                 <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                     <h5 class="card-title">@recipe.Title</h5>
