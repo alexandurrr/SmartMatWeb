@@ -6,7 +6,7 @@
 
 @if (recipes.Any())
 {
-    <div class="container-fluid bg-light shadow rounded overflow-hidden" id="search-partial">
+    <div class="container-fluid rounded overflow-hidden" id="search-partial">
         <h2>Søketreff:</h2>
         <i style="font-size: 0.9em;">Viser @recipes.Count() av @totalResultCount treff </i>
         <ul>
@@ -15,7 +15,7 @@
 
                 <li class="shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">
                     @r.Title <br>
-                    <img src=@r.ImagePath alt="Matbilde" width="200" height="100"><br>
+                    <img src="@r.ImagePath" alt="Matbilde" width="200" height="100"><br>
 
                     @if (r.Reviews != null)
                     {

@@ -7,6 +7,10 @@
     margin-bottom: 2em;
 }
 
+#search-partial ul {
+    margin-bottom: 3em;
+}
+
 #search-partial ul li{
     list-style-type: none;
     display: inline-flex;
@@ -22,6 +26,7 @@
     text-decoration: none;
     color: black;
     padding: 5px;
+    border-bottom: 3px solid transparent;
 }
 
 #search-partial img{
@@ -33,7 +38,7 @@
 }
 
 #search-partial a:hover{
-    border-bottom: 3px solid darkorange;
+    border-color: darkorange;
 }
 
 #search-partial li:hover{
