@@ -182,7 +182,7 @@ namespace smartmat.Controllers
         public async Task<IActionResult> Edit(int id, ImageEditViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
-            var recipeInDb = _context.Recipes
+            var recipeInDb = _context.Recipes.AsNoTracking()
                 .Any(r => r.ApplicationUser == user && r.Id == id);
             var currentRecipe = _context.Recipes.AsNoTracking().FirstOrDefault(s => s.Id == model.Recipe.Id);
             var image = model.Image;
@@ -199,7 +199,21 @@ namespace smartmat.Controllers
             
             try
             {
-                currentRecipe.Category = model.Recipe.Category;
+                if (image != null)
+                {
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+     
+                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
+                    
+                    await using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(fileStream);
+                    }
+                    
+                    model.Recipe.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
+
+                }
+                
                 currentRecipe.Glutenfree = model.Recipe.Glutenfree;
                 currentRecipe.Ingredients = model.Recipe.Ingredients;
                 currentRecipe.Instructions = model.Recipe.Instructions;
@@ -208,27 +222,9 @@ namespace smartmat.Controllers
                 currentRecipe.Time = model.Recipe.Time;
                 currentRecipe.Title = model.Recipe.Title;
                 currentRecipe.Vegetarian = model.Recipe.Vegetarian;
+                currentRecipe.Category = model.Recipe.Category;
                 currentRecipe.Visibility = model.Recipe.Visibility;
                 model.Recipe.ApplicationUser = user;
-                if (image != null)
-                {
-                    // New file name using Guid
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                    
-                    // Creating full file path string and appending the file name
-                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
-                    
-                    // open-create the file in a stream and copying the uploaded
-                    // Into the new file
-                    await using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(fileStream);
-                    }
-                    
-                    // Assigning the generated filePath
-                    model.Recipe.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
-
-                }
                 _context.Update(model.Recipe);
                 await _context.SaveChangesAsync();
             }
