@@ -47,7 +47,7 @@ namespace smartmat.Models
         [DisplayName("Introduksjon")]
         public string Introduction { get; set; }
         
-       // [Required]
+        [Required]
         [StringLength(1000)]
         [DisplayName("Kategori")]
         public string Category { get; set; }
@@ -81,7 +81,7 @@ namespace smartmat.Models
 
         public string ImageDelete { get; set; }
         
-       // [Required]
+        [Required]
         [StringLength(100)]
         [DisplayName("Synlighet")]
         public string Visibility { get; set; }

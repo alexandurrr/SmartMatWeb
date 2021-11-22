@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Recipe.Category" class="control-label"></label>
-                <select asp-for="Recipe.Category" name="Category" id="Category">
+                <select asp-for="Recipe.Category" name="Recipe.Category" id="Category">
                     <option value="Frokost">Frokost</option>
                     <option value="Middag" selected>Middag</option>
                     <option value="Lunsj">Lunsj</option>
@@ -65,7 +65,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Recipe.Visibility" class="control-label"></label>
-                <select asp-for="Recipe.Visibility" name="visibility" id="visibility">
+                <select asp-for="Recipe.Visibility" name="Recipe.Visibility" id="visibility">
                     <option value="public">Offentlig</option>
                     <option value="private">Privat</option>
                 </select>
@@ -80,9 +80,13 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <div class="form-group">
+                    <input asp-for="Recipe.ImagePath" class="form-control" hidden/>
+                    <span asp-validation-for="Recipe.ImagePath" class="text-danger"></span>
+                </div>
                <div class="form-group">
-                   <input asp-for="Recipe.ImagePath" class="form-control" hidden/>
-                   <span asp-validation-for="Recipe.ImagePath" class="text-danger"></span>
+                   <input asp-for="Recipe.ImageDelete" class="form-control" hidden/>
+                   <span asp-validation-for="Recipe.ImageDelete" class="text-danger"></span>
                </div>
                 <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
