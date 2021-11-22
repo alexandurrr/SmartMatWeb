@@ -54,9 +54,9 @@
     <div class="fillerdiv"></div>
     <div class="text-left" id="search-container">
         <h1 class="display-6" id="title">Oppdag og del oppskrifter basert på det du har i kjøleskapet</h1>
-        <p>Bli inspirert til å spise opp matrester.</p>
         
         <form id = "search-form">
+            <label for="search-text" style="font-size: 0.9em; opacity: 0.9;">Søk etter en spesifikk oppskrift eller ingrediensene du har tilgjengelig:</label>
             <div id="searchbox" class="input-group mb-3">
                 <input type="search" id = "search-text" class="form-control" placeholder="eks. brokkoli, egg, melk, potet"/>
             </div>
@@ -73,7 +73,6 @@
                 let search = $("#search-text").val();
                 if (search.length > 1){
                     let result = await fetch("/Home/Recipes?search=" + search);
-                    //document.getElementById("recipe-results").innerHTML = await result.text();
                     $("#recipe-results").html(await result.text());
                 }
                 else {
@@ -98,7 +97,7 @@
         {
             <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                 <h5 class="card-title">@recipe.Title</h5>
-                <div class="imgcontainer card-img-middle"><img src="~/recipeimages/@(recipe.Id).jpg"></div>
+                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="~/recipeimages/@(recipe.Id).jpg"></div>
                 <p class="cardIntrotext">@recipe.Introduction</p>
                 @if (recipe.Reviews != null)
                 {
@@ -118,9 +117,16 @@
                         <span class="fa fa-star-o"></span>
                     }
                 }
+                else
+                {
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <span class="fa fa-star" style="opacity: 0.2;"></span>
+                    }
+                }
                 @if (recipe.ApplicationUser != null)
                 {
-                    <div class="card-author-box"><img src="~/userimages/@(recipe.UserId).png">
+                    <div class="card-author-box"><img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="~/userimages/@(recipe.UserId).png">
                         <p>Av @recipe.ApplicationUser.UserName</p>
                     </div>
                 }

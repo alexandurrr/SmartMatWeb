@@ -44,7 +44,7 @@
             {
                 <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                     <h5 class="card-title">@recipe.Title</h5>
-                    <div class="imgcontainer card-img-middle"><img src="@recipe.ImagePath"></div>
+                    <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="@recipe.ImagePath"></div>
                     <p class="cardIntrotext">@recipe.Introduction</p>
                     <p class="card-author-box">Kategori: @recipe.Category<p/>
 
@@ -66,10 +66,17 @@
                             <span class="fa fa-star-o"></span>
                         }
                     }
+                    else
+                    {
+                        @for (var i = 0; i < 5; i++)
+                        {
+                            <span class="fa fa-star" style="opacity: 0.2;"></span>
+                        }
+                    }
                 
                     @if (recipe.ApplicationUser != null)
                     {
-                        <div class="card-author-box"><img src="~/userimages/@(recipe.UserId).png">
+                        <div class="card-author-box"><img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="~/userimages/@(recipe.UserId).png">
                             <p>Av @recipe.ApplicationUser.UserName</p>
                         </div>
                     }

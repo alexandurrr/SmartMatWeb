@@ -21,6 +21,7 @@ namespace smartmat.Controllers
         
         public async Task<IActionResult> Index()
         {
+            // Selects the best 5 recipes based on the average review score 
             var user = await _userManager.GetUserAsync(User);
             var vm = new RecipeUserViewModel
             {
@@ -28,6 +29,7 @@ namespace smartmat.Controllers
                 Recipes = _db.Recipes
                     .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
                     .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
+                    .Take(5)
                     .ToList(),
                 Reviews = _db.Reviews.ToList()
             };
@@ -75,7 +77,13 @@ namespace smartmat.Controllers
                     currentSearchResults = 0;
                     totalIngredients = 1;
                 }
-                searchRatings.Add(recipe.Id, (float)currentSearchResults/totalIngredients);
+
+                // Search by title
+                var rating = (float)currentSearchResults / totalIngredients;
+                if (recipe.Title.ToLower().Contains(search.ToLower()))
+                    rating += 1;
+                
+                searchRatings.Add(recipe.Id, rating);
             }
             
             var result = recipes.AsEnumerable()
