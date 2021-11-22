@@ -122,7 +122,8 @@ namespace smartmat.Controllers
             {
                 // New file name using Guid
                 var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                    
+                var deletePath =Path.Combine("wwwroot", "recipeimages", fileName);
+
                 // Creating full file path string and appending the file name
                 var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
                     
@@ -134,6 +135,7 @@ namespace smartmat.Controllers
                 }
                     
                 // Assigning the generated filePath
+                recipes.ImageDelete = deletePath;
                 recipes.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
 
             }
@@ -201,6 +203,8 @@ namespace smartmat.Controllers
             {
                 if (image != null)
                 {
+                 System.IO.File.Delete(model.Recipe.ImageDelete);
+                    
                     var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
      
                     var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
