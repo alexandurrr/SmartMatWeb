@@ -85,7 +85,7 @@ namespace smartmat.Models
         public string Visibility { get; set; }
         
         [Required]
-        [DisplayName("Minutter")]
+        [DisplayName("Tilberedningstid")]
         public int Time { get; set; }
 
         // Foreign keys
