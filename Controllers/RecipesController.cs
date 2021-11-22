@@ -158,6 +158,10 @@ namespace smartmat.Controllers
             }
             var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes.FindAsync(id);
+            var model = new ImageEditViewModel()
+            {
+                Recipe = _context.Recipes.FirstOrDefault(s => s.Id == id)
+            };
             if (recipe == null)
             {
                 return NotFound();
@@ -166,7 +170,7 @@ namespace smartmat.Controllers
             {
                 return RedirectToAction(nameof(NotAllowed));
             }
-            return View(recipe);
+            return View(model);
         }
 
         // POST: Recipes/Edit/5
@@ -175,30 +179,62 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Introduction,Ingredients,Category,Vegetarian,Glutenfree,Instructions,Nutrients,Visibility,ImagePath")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, ImageEditViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
             var recipeInDb = _context.Recipes
                 .Any(r => r.ApplicationUser == user && r.Id == id);
-            if (id != recipe.Id || !recipeInDb)
+            var currentRecipe = _context.Recipes.AsNoTracking().FirstOrDefault(s => s.Id == model.Recipe.Id);
+            var image = model.Image;
+
+            if (id != model.Recipe.Id || !recipeInDb)
             {
                 return RedirectToAction(nameof(NotAllowed));
             }
 
             if (!ModelState.IsValid)
             {
-                return View(recipe);
+                return View(model);
             }
             
             try
             {
-                recipe.ApplicationUser = user;
-                _context.Update(recipe);
+                currentRecipe.Category = model.Recipe.Category;
+                currentRecipe.Glutenfree = model.Recipe.Glutenfree;
+                currentRecipe.Ingredients = model.Recipe.Ingredients;
+                currentRecipe.Instructions = model.Recipe.Instructions;
+                currentRecipe.Introduction = model.Recipe.Introduction;
+                currentRecipe.Nutrients = model.Recipe.Nutrients;
+                currentRecipe.Time = model.Recipe.Time;
+                currentRecipe.Title = model.Recipe.Title;
+                currentRecipe.Vegetarian = model.Recipe.Vegetarian;
+                currentRecipe.Visibility = model.Recipe.Visibility;
+                model.Recipe.ApplicationUser = user;
+                if (image != null)
+                {
+                    // New file name using Guid
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                    
+                    // Creating full file path string and appending the file name
+                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "recipeimages", fileName);
+                    
+                    // open-create the file in a stream and copying the uploaded
+                    // Into the new file
+                    await using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(fileStream);
+                    }
+                    
+                    // Assigning the generated filePath
+                    model.Recipe.ImagePath = $"{Request.Scheme}://{Request.Host}/recipeimages/{fileName}";
+
+                }
+                _context.Update(model.Recipe);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipeExists(recipe.Id))
+                if (!RecipeExists(model.Recipe.Id))
                 {
                     return NotFound();
                 }
@@ -210,7 +246,7 @@ namespace smartmat.Controllers
             return RedirectToAction(nameof(Index));
             
         }
-
+        
         // GET: Recipes/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
