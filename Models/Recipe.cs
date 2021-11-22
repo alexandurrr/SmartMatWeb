@@ -78,6 +78,8 @@ namespace smartmat.Models
         // Image path in a string
         // can be used with <img> to display
         public string ImagePath { get; set; }
+
+        public string ImageDelete { get; set; }
         
        // [Required]
         [StringLength(100)]
