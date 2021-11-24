@@ -1,7 +1,6 @@
-﻿@model RecipeUserViewModel
+@model RecipeUserViewModel
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewData["Title"] = "Lunsj";
 }
 
 <style>
@@ -21,12 +20,12 @@
 <div id="checkboxes">
     <label class="form-check-label" for="flexCheckDefault">Vegetarmat</label>
     <div class="form-check" id="vegCheck">
-        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="LunchVegetarian"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></a>
+        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="LunchGlutenfree"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></a>
     </div>
     <br><br>
     <label class="form-check-label" for="flexCheckChecked">Glutenfri</label>
     <div class="form-check" id="glutCheck">
-        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="LunchGlutenfree"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></a>
+        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="LunchVegetarian"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked></a>
     </div>
 </div>
 
@@ -37,7 +36,7 @@
     <div class="horizontal-scroll">
         @foreach (var recipe in Model.Recipes)
         {
-            @if (recipe.Category == "Lunsj")
+            @if (recipe.Category == "Lunsj" && recipe.Glutenfree == true && recipe.Vegetarian == true)
             {
                 <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                     <h5 class="card-title">@recipe.Title</h5>
@@ -83,3 +82,4 @@
         }
     </div>
 </div>
+

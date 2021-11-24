@@ -19,17 +19,14 @@
 <h2>Her finner du alle middag oppskriftene</h2>
 
 <div id="checkboxes">
+    <label class="form-check-label" for="flexCheckDefault">Vegetarmat</label>
     <div class="form-check" id="vegCheck">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-            Vegetarmat
-        </label>
+        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="DinnerVegetarian"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></a>
     </div>
+    <br><br>
+    <label class="form-check-label" for="flexCheckChecked">Glutenfri</label>
     <div class="form-check" id="glutCheck">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-        <label class="form-check-label" for="flexCheckChecked">
-            Glutenfri
-        </label>
+        <a class="nav-link" asp-area="" asp-controller="Meals" asp-action="DinnerGlutenfree"><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"></a>
     </div>
 </div>
 
