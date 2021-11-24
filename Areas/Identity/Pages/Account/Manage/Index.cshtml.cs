@@ -1,4 +1,8 @@
+using System;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,13 +14,16 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [TempData]
@@ -31,6 +38,12 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
             public string Username { get; set; }
             public string Email { get; set; }
             public string Bio { get; set; }
+            
+            public IFormFile Image { get; set; }
+            
+            public string ImagePath { get; set; }
+            
+            public string ImageDelete { get; set; }
             public bool ActivityReminder { get; set; }
         }
         
@@ -43,6 +56,7 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
                 Username = user.UserName,
                 Email = user.Email,
                 Bio = user.Bio,
+                ImagePath = user.ImagePath,
                 ActivityReminder = user.ActivityReminder
             };
         }
@@ -62,6 +76,7 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            var image = Input.Image;
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -72,7 +87,33 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
                 Load(user);
                 return Page();
             }
+            
+            if (image != null)
+            {
+                if (user.ImagePath != null)
+                {
+                    System.IO.File.Delete(user.ImageDelete);
+                }
+                // New file name using Guid
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                var deletePath =Path.Combine("wwwroot", "userimages", fileName);
 
+                // Creating full file path string and appending the file name
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "userimages", fileName);
+                    
+                // open-create the file in a stream and copying the uploaded
+                // Into the new file
+                await using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+                
+                // Assigning the generated filePath
+                user.ImageDelete = deletePath;
+                user.ImagePath = $"{Request.Scheme}://{Request.Host}/userimages/{fileName}";
+            }
+            
+            Input.ImagePath = user.ImagePath;
             user.Firstname = Input.Firstname;
             user.Lastname = Input.Lastname;
             user.UserName = Input.Username;
