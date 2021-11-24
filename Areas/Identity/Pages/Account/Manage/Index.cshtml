@@ -10,14 +10,22 @@
 <div class="container-fluid">
 
     <partial name="_ProfilePartial" />
-        
+
     <div class="mainDiv container bg-light shadow rounded overflow-hidden">
         <div class="px-4 pt-0 pb-4 cover">
-            <div id="profile-container" class="card-img-overlay-top">
-                <img id="profileImg" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="" class="rounded-circle img-thumbnail"/>
-            </div>
-            <input id="imgUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture="user">
-            
+            @* Check to see if user has image, if not default image is displayed *@
+            @if (Model.Input.ImagePath == null)
+            {
+                <div id="profile-container" class="card-img-overlay-top">
+                    <img id="profileImg" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg" alt="" class="rounded-circle img-thumbnail"/>
+                </div>
+            }
+            else
+            {
+                <div id="profile-container" class="card-img-overlay-top">
+                    <img id="profileImg" src="@Model.Input.ImagePath" alt="" class="rounded-circle img-thumbnail"/>
+                </div>
+            }
             <div class="profileHead text-lg-left">
                 <h1>Hei,
                     @if (User.Identity != null)
@@ -35,10 +43,10 @@
                 <div class="text-justify mt-5" id="personal-data">
                     <h6>Personlige opplysninger</h6>
                 </div>
-                    
-                <form id="profile-form" method="post" asp-action="">
+
+                <form id="profile-form" method="post" asp-action="" enctype="multipart/form-data">
                     <div id="inputForm">
-                        <div class="form-row">        
+                        <div class="form-row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group col-md-6">
                                 <label asp-for="Input.Firstname">Fornavn</label>
@@ -62,6 +70,22 @@
                             <textarea asp-for="Input.Bio" type="text" class="form-control" id="Bio" placeholder="" style="height: 100%; letter-spacing: 1px; white-space: pre-wrap;"></textarea>
                         </div>
                         <br>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input asp-for="Input.Image" accept=".png,.jpg,.jpeg">
+                            </div>
+                            <span asp-validation-for="Input.Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <input asp-for="Input.ImagePath" class="form-control" hidden/>
+                                <span asp-validation-for="Input.ImagePath" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Input.ImageDelete" class="form-control" hidden/>
+                                <span asp-validation-for="Input.ImageDelete" class="text-danger"></span>
+                            </div>
+                        </div>
                         <div class="custom-control custom-checkbox">
                             <input asp-for="Input.ActivityReminder" type="checkbox" class="form-control custom-control-input" id="activityReminder">
                             <label class="custom-control-label font-weight-bold" for="activityReminder">Jeg ønsker å motta nyhetsbrev og varsler på epost.</label>
@@ -70,7 +94,7 @@
                     </div>
                 </form>
 
-                
+
                 <div class="text-justify mt-5" id="password-change">
                     <h6>Bytt passord</h6>
                 </div>
