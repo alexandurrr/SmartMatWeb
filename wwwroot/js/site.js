@@ -26,7 +26,18 @@ function fasterPreview( uploader ) {
             window.URL.createObjectURL(uploader.files[0]) );
     }
 }
-
+function checkGlutenfree()
+{
+    var chkBox = document.getElementById('checkGlutenfree')
+    if (chkBox.checked)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 $(".dropdown-item").click(function() 
 {
