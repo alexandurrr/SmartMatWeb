@@ -18,7 +18,7 @@ namespace smartmat.Models
         }
 
 
-        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, string visibility, string imagepath, int time)
+        public Recipe(string title, string introduction, string category, string ingredients, string instructions, string nutrients, bool glutenfree, bool vegetarian, string visibility, string imagepath, int time)
         {
             Title = title;
             Introduction = introduction;
@@ -26,9 +26,12 @@ namespace smartmat.Models
             Ingredients = ingredients;
             Instructions = instructions;
             Nutrients = nutrients;
+            Glutenfree = glutenfree;
+            Vegetarian = vegetarian;
             Visibility = visibility;
             ImagePath = imagepath;
             Time = time;
+            
         }
         // If you need to add more fields here
         // Make sure to add the same field into RecipeUserViewModel.cs

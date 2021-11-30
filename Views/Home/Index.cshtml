@@ -97,7 +97,7 @@
         {
             <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                 <h5 class="card-title">@recipe.Title</h5>
-                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="~/recipeimages/@(recipe.Id).jpg"></div>
+                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="@(recipe.ImagePath)"></div>
                 <p class="cardIntrotext">@recipe.Introduction</p>
                 @if (recipe.Reviews != null)
                 {
@@ -124,12 +124,17 @@
                         <span class="fa fa-star" style="opacity: 0.2;"></span>
                     }
                 }
-                @if (recipe.ApplicationUser != null)
+                <div class="card-author-box">
+                @if (recipe.ApplicationUser.ImagePath != null)
                 {
-                    <div class="card-author-box"><img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="~/userimages/@(recipe.UserId).png">
-                        <p>Av @recipe.ApplicationUser.UserName</p>
-                    </div>
+                    <img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="@(recipe.ApplicationUser.ImagePath)">
                 }
+                else
+                {
+                    <img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg">
+                }
+                <p>Av @recipe.ApplicationUser.UserName</p>
+                </div>
             </a>    
         }
     </div>
