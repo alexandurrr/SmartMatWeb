@@ -97,7 +97,7 @@
         {
             <a class="card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
                 <h5 class="card-title">@recipe.Title</h5>
-                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="~/recipeimages/@(recipe.Id).jpg"></div>
+                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="@(recipe.ImagePath)"></div>
                 <p class="cardIntrotext">@recipe.Introduction</p>
                 @if (recipe.Reviews != null)
                 {
@@ -126,7 +126,7 @@
                 }
                 @if (recipe.ApplicationUser != null)
                 {
-                    <div class="card-author-box"><img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="~/userimages/@(recipe.UserId).png">
+                    <div class="card-author-box"><img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="@(recipe.ApplicationUser.ImagePath)">
                         <p>Av @recipe.ApplicationUser.UserName</p>
                     </div>
                 }
