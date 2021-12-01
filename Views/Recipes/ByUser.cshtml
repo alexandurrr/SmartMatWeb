@@ -1,0 +1,17 @@
+﻿@model RecipeUserViewModel
+
+@{
+    var user = Model.Users.FirstOrDefault();
+    System.Diagnostics.Debug.Assert(user != null, nameof(user) + " != null");
+    ViewBag.Title = user.UserName;
+    Layout = "_Layout";
+}
+
+<style>
+    #search-partial, ul {
+        padding: 0;
+    }
+</style>
+
+<h1 class="standaloneHeader">Oppskrifter av @user</h1>
+<partial name="_RecipePartial" model="Model"/>

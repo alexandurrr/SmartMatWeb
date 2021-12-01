@@ -35,8 +35,16 @@ namespace smartmat.Controllers
             var user = await _userManager.GetUserAsync(User);
             var recipes = _context.Recipes
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                .ToList(); 
-            return View(recipes);
+                .OrderByDescending(recipe => recipe.Id)
+                .ToList();
+            
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = recipes.ToList(),
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
         }
 
         // GET: Recipes/Details/5
@@ -56,7 +64,37 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
-            return View(recipe);
+            ICollection<Recipe> r = new List<Recipe>{recipe};
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = r,
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
+        }
+        
+        // GET: Recipes/ByUser/5
+        public IActionResult ByUser(string id)
+        {
+            var user = _userManager.Users.Where(u => u.Id == id);
+            
+            if (!user.Any())
+            {
+                return NotFound();
+            }
+            
+            var recipe = _context.Recipes
+                .Where(recipe => recipe.Visibility == "Public" && recipe.UserId == id)
+                .OrderByDescending(recipe => recipe.Id);
+
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = recipe.ToList(),
+                Users = user.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
         }
 
         // GET: Recipes/Create
