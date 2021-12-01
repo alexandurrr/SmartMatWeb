@@ -13,10 +13,10 @@
             @foreach (var r in recipes)
             {
 
-                <li class="shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">
+                <li class="resultRow shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">
                     @r.Title <br>
                     <img src="@r.ImagePath" alt="Matbilde" width="200" height="100"><br>
-
+                    <span class="timeBubble attachedBubble @(r.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@r.Time</span><br><span class="min">min</span></span>
                     @if (r.Reviews != null)
                     {
                         var avg = Math.Round(r.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;

@@ -99,7 +99,7 @@ namespace smartmat.Controllers
                 Reviews = _db.Reviews.ToList()
             };
 
-            return PartialView("_RecipesPartial", ur);
+            return PartialView("_SearchPartial", ur);
         }
     }
 }

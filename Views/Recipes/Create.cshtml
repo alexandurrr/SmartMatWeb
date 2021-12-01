@@ -1,11 +1,12 @@
 @model smartmat.Models.RecipeImageViewModel 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Ny Oppskrift";
 }
 
+<partial name="_ProfilePartial"/>
 <div class="mainDiv container-fluid bg-light shadow rounded">
-    <h1 id="standaloneHeader" class="font-weight-bold">Ny Oppskrift</h1>
+    <h1 class="standaloneHeader font-weight-bold">Ny Oppskrift</h1>
     <hr />
     <form asp-action="Create" enctype="multipart/form-data">
         <div class="px-4 pt-0 pb-4 cover" id="inputForm">

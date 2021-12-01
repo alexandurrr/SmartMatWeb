@@ -41,8 +41,13 @@ namespace smartmat.Controllers
             }
 
             var recipes = _context.Recipes.Where(r => r.UserId == user.Id);
-
-            return View(recipes);
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = recipes.ToList(),
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
         }
         
         // GET Reviews
@@ -55,18 +60,17 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
-            var vm = new ReviewViewModel();
-
-            vm.MyReviews = _context.Reviews
-                .Where(r => r.ApplicationUserId == user.Id)
-                .ToList();
-            
-            vm.OthersReviews = _context.Reviews
-                .Where(r => r.Recipe.UserId == user.Id)
-                .ToList();
-            
-            vm.Recipes = _context.Recipes
-                .ToList();
+            var vm = new ReviewViewModel
+            {
+                MyReviews = _context.Reviews
+                    .Where(r => r.ApplicationUserId == user.Id)
+                    .ToList(),
+                OthersReviews = _context.Reviews
+                    .Where(r => r.Recipe.UserId == user.Id)
+                    .ToList(),
+                Recipes = _context.Recipes
+                    .ToList()
+            };
 
             return View(vm);
         }

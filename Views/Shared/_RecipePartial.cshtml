@@ -1,0 +1,37 @@
+﻿@model RecipeUserViewModel
+
+<div class="container-fluid rounded overflow-hidden" id="search-partial">
+    <ul>
+        @foreach (var r in Model.Recipes)
+        {
+            <li class="resultRow shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">
+                @r.Title <br>
+                <img src="@r.ImagePath" alt="Matbilde" width="200" height="100"><br>
+                <span class="timeBubble attachedBubble @(r.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@r.Time</span><br><span class="min">min</span></span>
+                @if (r.Reviews != null)
+                {
+                    var avg = Math.Round(r.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
+                    var rest = avg % 1;
+                    var half = rest > 0;
+                    @for (var i = 0; i < avg-rest; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                    @if (half)
+                    {
+                        <span class="fa fa-star-half-o"></span>
+                    }
+                    @for (var i = Math.Round(avg); i < 5; i++)
+                    {
+                        <span class="fa fa-star-o"></span>
+                    }
+                }<br>
+
+                @if (r.UserId == r.ApplicationUser.Id)
+                {
+                    @r.ApplicationUser.UserName
+                }
+            </a></li>
+        }
+    </ul>
+</div>

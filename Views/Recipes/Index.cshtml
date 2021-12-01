@@ -1,53 +1,17 @@
-@model IEnumerable<smartmat.Models.Recipe>
+@model RecipeUserViewModel
 
 @{
     ViewData["Title"] = "Alle Oppskrifter";
 }
 
-<h1>Alle Oppskrifter</h1>
+<style>
+    #search-partial, ul {
+        padding: 0;
+    }
+</style>
 
-<p>
-    <a asp-action="Create">Lag ny oppskrift</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Introduction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredients)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Instructions)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Introduction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredients)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instructions)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Gå til oppskrift</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Slett</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h1 class="standaloneHeader">Alle Oppskrifter</h1>
+
+<a class="btn btn-secondary centeredButton" asp-action="Create">Lag ny oppskrift</a>
+
+<partial name="_RecipePartial" model="Model"/>

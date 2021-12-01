@@ -1,7 +1,7 @@
 ﻿@model smartmat.Models.ReviewViewModel
 
 @{
-    ViewBag.Title = "Tilbakemeldinger";
+    ViewBag.Title = "Mine Tilbakemeldinger";
     Layout = "_Layout";
 }
 
@@ -24,7 +24,7 @@
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
 <div class="mainDiv container-fluid bg-light shadow rounded">
-    <h1 id="standaloneHeader" class="font-weight-bold">Tilbakemeldinger</h1>
+    <h1 class="standaloneHeader font-weight-bold">Mine Tilbakemeldinger</h1>
     
     <h3>Dine Tilbakemeldinger</h3>
     @if (!Model.MyReviews.Any())
