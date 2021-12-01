@@ -45,3 +45,46 @@
     transform: scale(0.8);
     opacity: 0.5;
 }
+
+.timeBubble {
+    display: inline-block;
+    color: white;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    padding: 0.5em;
+    font-size: 1.1em;
+    text-anchor: middle;
+    box-shadow: 3px 3px 5px -5px black;
+    border: 1px solid #00000020;
+    transform: translateY(1em);
+    text-align: center;
+}
+.timeBubble span {
+    margin: 0; padding: 0;
+    display: inline-block;
+}
+.timeBubble .min {
+    transform: translateY(-1.4em);
+    font-size: 0.6em;
+}
+.orangeBubble {
+    background-color: #f7931d;
+}
+.blueBubble {
+    background-color: #1aa5aa;
+}
+
+.resultRow {
+    position:relative;
+}
+.attachedBubble {
+    position: absolute;
+    right: 0.8em;
+    bottom: 4em;
+}
+.bigBubble {
+    bottom: 7em;
+    right: 1em;
+    font-size: 1.2em;
+}
