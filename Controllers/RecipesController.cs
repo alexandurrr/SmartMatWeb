@@ -54,7 +54,7 @@ namespace smartmat.Controllers
             {
                 return NotFound();
             }
-
+            
             var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
@@ -73,7 +73,48 @@ namespace smartmat.Controllers
             };
             return View(viewModel);
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Details(int id, RecipeUserViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var recipe = await _context.Recipes
+                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (model.IsFavorite)
+            {
+                var tempRecipeID = recipe.Id.ToString();
+                var userFav = user.Favorites;
+                var tempUser = String.Concat(tempRecipeID, ",", userFav);
+                user.Favorites = tempUser;
+                _context.Update(recipe);
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+
+            if (model.UnFavorite)
+            {
+                var tempRecipeID = recipe.Id.ToString();
+                string userFavorites = user.Favorites;
+                var values = userFavorites.Split(',').ToList();
+                values.Remove(tempRecipeID);
+                string newvalues = String.Join(",", values.Select(x => x.ToString()).ToArray());
+                user.Favorites = newvalues;
+                _context.Update(user);
+                await _context.SaveChangesAsync();
+            }
+            ICollection<Recipe> r = new List<Recipe>{recipe};
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = r,
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
+        }
+
         // GET: Recipes/ByUser/5
         public IActionResult ByUser(string id)
         {

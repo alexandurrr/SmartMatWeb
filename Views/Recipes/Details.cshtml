@@ -7,7 +7,15 @@
     System.Diagnostics.Debug.Assert(recipe != null, nameof(recipe) + " != null");
     ViewData["Title"] = recipe.Title;
 }
-
+@inject UserManager<ApplicationUser> _userManager;
+@{
+    var user = await _userManager.GetUserAsync(User);
+    var userId = (user == null ? "-1" : user.Id);
+}
+    @{
+        string userFavorites = user.Favorites;
+        List<int> values = new List<int>();
+    }
 <style>
     #main {
         text-align: center;
@@ -107,17 +115,42 @@
     <p>@recipe.Nutrients</p>
 </div>
 <div id="bottomLinks">
-    @inject UserManager<ApplicationUser> _userManager;
-    @{
-        var user = await _userManager.GetUserAsync(User);
-        var userId = (user == null ? "-1" : user.Id);
-    }
+        @if (user.Favorites != null && user.Favorites.Length != 0){
+            userFavorites = userFavorites.Remove(userFavorites.Length - 1);
+            values = userFavorites.Split(',').Select(int.Parse).ToList();
+              
+          }
+        
+            @if (!values.Contains(recipe.Id))
+            {
+                <form asp-action="Details">
+                    <div class="form-check form-check-inline">
+                        <label asp-for="@Model.IsFavorite" class="control-label"></label>
+                        <input asp-for="@Model.IsFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
+                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form asp-action="Details">
+                    <div class="form-check form-check-inline">
+                        <label asp-for="@Model.UnFavorite" class="control-label"></label>
+                        <input asp-for="@Model.UnFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
+                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
+                    </div>
+                </form>
+            }
+     
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
-        <a asp-action="Delete" asp-route-id="@recipe.Id">Slett</a> @s
-        <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a> @s
+        <a asp-action="Delete" asp-route-id="@recipe.Id">Slett</a>
+        @s
+        <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a>
+        @s
     }
-    
+
+
     <a asp-action="Index">Se alle oppskrifter</a>
 </div>

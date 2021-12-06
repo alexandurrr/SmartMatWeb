@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -73,6 +74,39 @@ namespace smartmat.Controllers
             };
 
             return View(vm);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyFavorites()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (user.Favorites != null && user.Favorites.Length != 0)
+            {
+                string userFavorites = user.Favorites;
+                userFavorites = userFavorites.Remove(userFavorites.Length - 1);
+                var values = userFavorites.Split(',').Select(int.Parse).ToList();
+                var recipes = _context.Recipes;
+                var query = recipes.Where(r => values.Contains(r.Id));
+                var viewModel = new RecipeUserViewModel
+                {
+                    Recipes = query.ToList(),
+                    Users = _userManager.Users.ToList(),
+                    Reviews = _context.Reviews.ToList()
+                };
+                return View(viewModel);
+            }
+            else
+            {
+                var viewModel = new RecipeUserViewModel { };
+                return View(viewModel);
+            }
+            
+
         }
     }
 }

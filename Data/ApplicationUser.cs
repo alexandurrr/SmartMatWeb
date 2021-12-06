@@ -26,5 +26,7 @@ namespace smartmat.Data
         public string ImagePath { get; set; }
         
         public string ImageDelete { get; set; }
+        
+        public string Favorites { get; set; }
     }
 }
