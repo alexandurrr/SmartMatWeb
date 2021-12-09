@@ -85,9 +85,9 @@ namespace smartmat.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (model.IsFavorite)
             {
-                var tempRecipeID = recipe.Id.ToString();
+                var tempRecipeId = recipe.Id.ToString();
                 var userFav = user.Favorites;
-                var tempUser = String.Concat(tempRecipeID, ",", userFav);
+                var tempUser = String.Concat(tempRecipeId, ",", userFav);
                 user.Favorites = tempUser;
                 _context.Update(recipe);
                 _context.Update(user);
@@ -96,10 +96,10 @@ namespace smartmat.Controllers
 
             if (model.UnFavorite)
             {
-                var tempRecipeID = recipe.Id.ToString();
+                var tempRecipeId = recipe.Id.ToString();
                 string userFavorites = user.Favorites;
                 var values = userFavorites.Split(',').ToList();
-                values.Remove(tempRecipeID);
+                values.Remove(tempRecipeId);
                 string newvalues = String.Join(",", values.Select(x => x.ToString()).ToArray());
                 user.Favorites = newvalues;
                 _context.Update(user);

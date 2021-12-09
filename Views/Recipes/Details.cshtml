@@ -1,21 +1,14 @@
 @using smartmat.Data
 @using Microsoft.AspNetCore.Identity
 @model smartmat.Models.RecipeUserViewModel
-
+@inject UserManager<ApplicationUser> _userManager;
 @{
     var recipe = Model.Recipes.FirstOrDefault();
     System.Diagnostics.Debug.Assert(recipe != null, nameof(recipe) + " != null");
     ViewData["Title"] = recipe.Title;
-}
-@inject UserManager<ApplicationUser> _userManager;
-@{
     var user = await _userManager.GetUserAsync(User);
     var userId = (user == null ? "-1" : user.Id);
 }
-    @{
-        string userFavorites = user.Favorites;
-        List<int> values = new List<int>();
-    }
 <style>
     #main {
         text-align: center;
@@ -115,12 +108,16 @@
     <p>@recipe.Nutrients</p>
 </div>
 <div id="bottomLinks">
-        @if (user.Favorites != null && user.Favorites.Length != 0){
-            userFavorites = userFavorites.Remove(userFavorites.Length - 1);
-            values = userFavorites.Split(',').Select(int.Parse).ToList();
-              
-          }
-        
+        @if (user != null){
+            
+            var userFavorites = user.Favorites;
+            var values = new List<int>();
+            if (!string.IsNullOrEmpty(userFavorites))
+            {
+                userFavorites = userFavorites.Remove(userFavorites.Length - 1);
+                values = userFavorites.Split(',').Select(int.Parse).ToList();
+            }
+            
             @if (!values.Contains(recipe.Id))
             {
                 <form asp-action="Details">
@@ -141,7 +138,8 @@
                     </div>
                 </form>
             }
-     
+          }
+        
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
