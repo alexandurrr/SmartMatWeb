@@ -64,55 +64,34 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
+            var favorite = user != null && _context.Favorites
+                .Any(favorite => favorite.ApplicationUserId == user.Id && favorite.RecipeId == id);
+
             ICollection<Recipe> r = new List<Recipe>{recipe};
             var viewModel = new RecipeUserViewModel
             {
                 Recipes = r,
                 Users = _userManager.Users.ToList(),
-                Reviews = _context.Reviews.ToList()
+                Reviews = _context.Reviews.ToList(),
+                Favorite = favorite
             };
             return View(viewModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Details(int id, RecipeUserViewModel model)
+        public async void Details(int id, bool favorite)
         {
             var user = await _userManager.GetUserAsync(User);
-            var recipe = await _context.Recipes
-                .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (model.IsFavorite)
+            if (favorite)
+                _context.Favorites.Add(new FavoritesRecipeUser {RecipeId = id, ApplicationUserId = user.Id});
+            else
             {
-                var tempRecipeId = recipe.Id.ToString();
-                var userFav = user.Favorites;
-                var tempUser = String.Concat(tempRecipeId, ",", userFav);
-                user.Favorites = tempUser;
-                _context.Update(recipe);
-                _context.Update(user);
-                await _context.SaveChangesAsync();
+                var connection = _context.Favorites
+                    .FirstOrDefault(c => c.ApplicationUserId == user.Id && c.RecipeId == id);
+                if (connection != null)
+                    _context.Favorites.Remove(connection);
             }
-
-            if (model.UnFavorite)
-            {
-                var tempRecipeId = recipe.Id.ToString();
-                string userFavorites = user.Favorites;
-                var values = userFavorites.Split(',').ToList();
-                values.Remove(tempRecipeId);
-                string newvalues = String.Join(",", values.Select(x => x.ToString()).ToArray());
-                user.Favorites = newvalues;
-                _context.Update(user);
-                await _context.SaveChangesAsync();
-            }
-            ICollection<Recipe> r = new List<Recipe>{recipe};
-            var viewModel = new RecipeUserViewModel
-            {
-                Recipes = r,
-                Users = _userManager.Users.ToList(),
-                Reviews = _context.Reviews.ToList()
-            };
-            return View(viewModel);
+            await _context.SaveChangesAsync();
         }
 
         // GET: Recipes/ByUser/5

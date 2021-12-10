@@ -1,5 +1,6 @@
 @using smartmat.Data
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore.Query.Internal
 @model smartmat.Models.RecipeUserViewModel
 @inject UserManager<ApplicationUser> _userManager;
 @{
@@ -52,6 +53,62 @@
     }
     .tags, #bottomLinks {
         margin-top: 1em;
+    }
+    
+    #favoriteButton {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        height: 2em;
+        width: 2em;
+        font-size: 2em;
+    }
+    #favoriteButton label {
+        float:left;
+        width:4.0em;
+        margin: 0; padding: 0;
+    }
+    #favoriteButton span {
+        height: 100%; width: 100%;
+        display: inline-block;
+        text-align: center;
+        padding: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteCheckbox {
+        position: absolute;
+        top: -4em;
+    }
+    
+    .fa-heart:before, .fa-heart-o:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteButton:hover .fa-heart, #favoriteButton:hover .fa-heart-o {
+        opacity: 0.3;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart {
+        opacity: 1;
+        animation: zoom 1s ease forwards;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart-o {
+        opacity: 0;
+        animation: zoom 1s ease forwards;
+    }
+    .fa-heart, .fa-heart-o {
+        transition: opacity 600ms ease 200ms;
+        transform-origin: top left;
+    }
+    .fa-heart {
+        opacity: 0;
+    }
+    .fa-heart-o {
+        opacity: 1;
     }
 </style>
 
@@ -108,38 +165,14 @@
     <p>@recipe.Nutrients</p>
 </div>
 <div id="bottomLinks">
-        @if (user != null){
-            
-            var userFavorites = user.Favorites;
-            var values = new List<int>();
-            if (!string.IsNullOrEmpty(userFavorites))
-            {
-                userFavorites = userFavorites.Remove(userFavorites.Length - 1);
-                values = userFavorites.Split(',').Select(int.Parse).ToList();
-            }
-            
-            @if (!values.Contains(recipe.Id))
-            {
-                <form asp-action="Details">
-                    <div class="form-check form-check-inline">
-                        <label asp-for="@Model.IsFavorite" class="control-label"></label>
-                        <input asp-for="@Model.IsFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
-                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
-                    </div>
-                </form>
-            }
-            else
-            {
-                <form asp-action="Details">
-                    <div class="form-check form-check-inline">
-                        <label asp-for="@Model.UnFavorite" class="control-label"></label>
-                        <input asp-for="@Model.UnFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
-                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
-                    </div>
-                </form>
-            }
-          }
-        
+    @if (user != null){
+        <div>
+            <span style="margin-bottom: 0;vertical-align: text-top;">Lagre som favoritt:</span>
+            <div class="form-check form-check-inline" id="favoriteButton">
+                <label><input asp-for="@Model.Favorite" class="form-check-input" id="favoriteCheckbox"/><span class="fa fa-heart"></span><span class="fa fa-heart-o"></span></label>
+            </div>    
+        </div>
+    }
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
@@ -152,3 +185,12 @@
 
     <a asp-action="Index">Se alle oppskrifter</a>
 </div>
+
+@section Scripts
+{
+    <script>
+        $('#favoriteCheckbox').change(function (){
+            fetch("/Recipes/Details/?id="+@recipe.Id+"&favorite="+this.checked, {method: 'POST'});
+        })
+    </script>
+}

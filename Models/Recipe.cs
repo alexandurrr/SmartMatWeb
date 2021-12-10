@@ -98,6 +98,7 @@ namespace smartmat.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         public List<Review> Reviews { get; set; }
+        public List<FavoritesRecipeUser> Favorites { get; set; }
     }
 
     

@@ -54,7 +54,7 @@ if (darkModeCheckbox){
 }
 
 setTimeout(function(){
-    let css = '#navBar, body, #indexBackground, {transition: background-color 500ms, opacity 300ms, color 500ms, border-radius 500ms;} #darkModeSelector, #darkModeSelector:after {-webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out;} #search-partial ul li {transition: background-color 500ms, opacity 300ms, color 500ms, transform 100ms;}';
+    let css = '#navBar, body, #indexBackground {transition: background-color 500ms, opacity 300ms, color 500ms, border-radius 500ms;} #darkModeSelector, #darkModeSelector:after {-webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out;} #search-partial ul li {transition: background-color 500ms, opacity 300ms, color 500ms, transform 100ms;}';
     let style = document.createElement('style');
     style.innerText = css;
     document.getElementsByTagName('head')[0].appendChild(style);

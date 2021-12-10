@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -84,29 +85,17 @@ namespace smartmat.Controllers
             {
                 return NotFound();
             }
-
-            if (user.Favorites != null && user.Favorites.Length != 0)
-            {
-                string userFavorites = user.Favorites;
-                userFavorites = userFavorites.Remove(userFavorites.Length - 1);
-                var values = userFavorites.Split(',').Select(int.Parse).ToList();
-                var recipes = _context.Recipes;
-                var query = recipes.Where(r => values.Contains(r.Id));
-                var viewModel = new RecipeUserViewModel
-                {
-                    Recipes = query.ToList(),
-                    Users = _userManager.Users.ToList(),
-                    Reviews = _context.Reviews.ToList()
-                };
-                return View(viewModel);
-            }
-            else
-            {
-                var viewModel = new RecipeUserViewModel { };
-                return View(viewModel);
-            }
             
-
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = _context.Favorites
+                    .Where(favorite => favorite.ApplicationUserId == user.Id)
+                    .Select(favorite => favorite.Recipe)
+                    .ToList(),
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
         }
     }
 }
