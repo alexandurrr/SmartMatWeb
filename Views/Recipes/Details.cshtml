@@ -23,13 +23,13 @@
         background-color: #624d4d;
         color: white;
     }
-    ul, #instructions {
+    .recipeList, #instructions {
         text-align: left;
         width: 30em;
         max-width: 100%;
         margin: 1em auto;
     }
-    ul {
+    .recipeList {
         list-style-type: none;
         width: 20em;
         padding: 0;
@@ -110,6 +110,29 @@
     .fa-heart-o {
         opacity: 1;
     }
+    
+    #shareInput, #shareButton {
+        position: relative;
+        border: 1px solid gray;
+        font-size: 0.8em;
+        box-shadow: 3px 3px 4px -1px #00000036;
+    }
+    #shareInput {
+        border-radius: 1em 0 0 1em;
+        padding: 0.5em 0 0.5em 1em;
+        margin: 2em 0 1em;
+        width: 20em;
+        z-index: -1;
+    }
+    #shareButton {
+        border-radius: 0 1em 1em 0;
+        padding: 0.5em 1em;
+        background-color: #FFB84F5C;
+        transition: background-color 100ms;
+    }
+    #shareButton:hover {
+        background-color: #FFB84F;
+    }
 </style>
 
 <div id="background"></div>
@@ -153,7 +176,7 @@
     <p>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Time) : <span class="timeBubble @(recipe.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@recipe.Time</span><br><span class="min">min</span></span></p>
     <p>@recipe.Introduction</p>
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Ingredients)</h2>
-    <ul>
+    <ul class="recipeList">
         @foreach (var ingredient in recipe.Ingredients.Split(", "))
         {
             <li>@ingredient</li>
@@ -163,6 +186,9 @@
     <p id="instructions">@recipe.Instructions</p>
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Nutrients)</h2>
     <p>@recipe.Nutrients</p>
+</div>
+<div>
+    <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
 </div>
 <div id="bottomLinks">
     @if (user != null){
@@ -192,5 +218,16 @@
         $('#favoriteCheckbox').change(function (){
             fetch("/Recipes/Details/?id="+@recipe.Id+"&favorite="+this.checked, {method: 'POST'});
         })
+        
+        let shareInput = document.getElementById("shareInput");
+        let shareButton = document.getElementById("shareButton");
+        shareInput.value = window.location.href;
+        $('#shareButton').click(function (){
+            shareInput.select();
+            shareInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(shareInput.value);
+            shareButton.innerText = "Kopiert!";
+            setTimeout(function (){shareButton.innerText = "Kopier";}, 10000);
+        });
     </script>
 }
