@@ -1,7 +1,7 @@
 ﻿@model RecipeUserViewModel
 
-<div class="container-fluid rounded overflow-hidden" id="search-partial">
-    <ul>
+<div class="container-fluid rounded overflow-hidden" id="search-partial" style="padding: 0;text-align: center;">
+    <ul style="padding: 0;">
         @foreach (var r in Model.Recipes)
         {
             <li class="resultRow shadow overflow-hidden"><a href="https://localhost:5001/Recipes/Details/@r.Id">

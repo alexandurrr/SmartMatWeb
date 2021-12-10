@@ -57,9 +57,8 @@ namespace smartmat.Controllers
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user);
 
             // Calculates a rating for each ingredient based on the number of results
-            var searchIngredients = search.ToLower().Split(", ");
-            if (searchIngredients.Any())
-                searchIngredients[^1] = searchIngredients[^1].Replace(",", "");
+            var searchIngredients = string.Join(",", search.ToLower().Split(", ")).Split(",").ToList();
+            searchIngredients = searchIngredients.Where(val => val != "" && val != " ").ToList();
             
             var searchRatings = new Dictionary<int, float>();
 

@@ -21,6 +21,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div id="navSearchBar"><form id="navSearchForm"><input id="navSearchInput" type="search" placeholder="pannekaker eller melk, egg..."/></form><i id="navSearchIcon" class="fa fa-search" aria-hidden="true"></i></div>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <li class="nav-item">
@@ -35,6 +36,7 @@
 
 <div class="container">
     <main role="main" class="pb-3" id="main">
+        <div id="navSearchResultContainer"><div id="navSearchResult" style="margin-left: 0;"></div><a asp-area="" asp-controller="Recipes" asp-action="Index" class="allRecipesLink">Se alle oppskriftene</a><div id="navSearchLukk">Lukk</div></div>
         @RenderBody()
         <div class="fillerdiv"></div>
     </main>

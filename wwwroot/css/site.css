@@ -27,6 +27,9 @@ body {
 
 
 /*    NAV-BAR     */
+#navBar {
+  z-index: 10;
+}
 #logo_glasses {
   background-image: url("../siteimages/glasses.png");
   background-size: contain;
@@ -93,6 +96,81 @@ a.navbar-brand {
   margin: 0.5em 0;
 }
 
+
+/* Nav-bar Search */
+#navSearchBar {
+  display: inline-block;
+  position: relative;
+  width: 2em;
+  height: 2em;
+  margin: 0 1em;
+  cursor: pointer;
+  padding: 0.5em;
+  overflow: hidden;
+  border-radius: 1em;
+  transition: width 200ms;
+}
+#navSearchInput, #navSearchBar i {
+  position: absolute;
+  display: inline-block;
+  top: 0; left: 0;
+}
+#navSearchInput{
+  width: 100%;
+  height: 100%;
+  transition: opacity 200ms;
+  border: 1px solid gray;
+  border-radius: 1em;
+  padding: 0 2em 0 1em;
+  opacity: 0;
+}
+#navSearchBar i {
+  left: unset;
+  right: 0.5em;
+  padding: 0.5em;
+}
+
+#navSearchResultContainer {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 4em;
+  left: 50%;
+  transform: translate(-50%, -4em);
+  width: 40em;
+  max-width: 100%;
+  z-index: 2;
+  transition: opacity 200ms, transform 250ms;
+  background-color: var(--globalBackground);
+  border: 1px solid rgba(128, 128, 128, 0.47);
+  border-radius: 0 0 1em 1em;
+  padding: 3em 1em 1em;
+  box-shadow: 4px 4px 5px -2px rgba(0, 0, 0, 0.4);
+}
+#navSearchLukk {
+  margin: 0 2em 1em auto;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  width: max-content;
+}
+#navSearchLukk:hover{
+  background-color: rgba(128, 128, 128, 0.14);
+}
+.allRecipesLink {
+  margin: 0 auto;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  width: max-content;
+  display: block;
+  color: var(--globalColor);
+  text-decoration: underline gray;
+}
+.allRecipesLink:hover {
+  text-decoration: underline black;
+}
 
 
 /*  CARDS  */

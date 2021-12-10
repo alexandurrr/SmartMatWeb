@@ -17,6 +17,59 @@ function flipGlasses() {
     }
 }
 
+/* Nav-bar Search */
+let navSearchBar = document.getElementById("navSearchBar");
+let navSearchInput = document.getElementById("navSearchInput");
+let navSearchIcon = document.getElementById("navSearchIcon");
+let navSearchResult = document.getElementById("navSearchResultContainer");
+let navSearchLukk = document.getElementById("navSearchLukk");
+let navBarOpen = false;
+
+async function search() {
+    let search = $("#navSearchInput").val();
+    if (search.length > 1){
+        let result = await fetch("/Home/Recipes?search=" + search);
+        $("#navSearchResult").html(await result.text());
+
+        navSearchResult.style.display = "block";
+        setTimeout(function(){navSearchResult.style.opacity = "1";navSearchResult.style.transform = "translate(-50%, 0)";}, 30)
+    }
+    else {
+        $("#navSearchResult").html("");
+        closeSearch();
+    }
+    openSearch();
+}
+function openSearch(){
+    navSearchInput.focus();
+    navBarOpen = true;
+    navSearchBar.style.width = "16em";
+    navSearchInput.style.opacity = "1";
+}
+function closeSearch(){
+    if (navBarOpen) {
+        navBarOpen = false;
+        navSearchBar.style.width = "2em";
+        navSearchInput.style.opacity = "0";
+        navSearchResult.style.opacity = "0";
+        navSearchResult.style.transform = "translate(-50%, -4em)";
+        setTimeout(function(){navSearchResult.style.display = "none";}, 200);
+    }
+}
+
+navSearchBar.addEventListener("click", function() {
+    if (!navBarOpen) {
+        openSearch();
+    } 
+})
+navSearchIcon.addEventListener("click", search)
+navSearchInput.onkeyup = search;
+document.getElementById("navSearchForm").onsubmit = async function (event){
+    event.preventDefault();
+    await search();
+};
+navSearchLukk.addEventListener("click", closeSearch);
+
 
 /* DARK MODE */
 function toggleDarkMode(){
