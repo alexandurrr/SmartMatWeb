@@ -1,10 +1,9 @@
 @using Microsoft.AspNetCore.Identity
 @using smartmat.Data
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> _signInManager
+@inject UserManager<ApplicationUser> _userManager
 
-
-@if (SignInManager.IsSignedIn(User))
+@if (_signInManager.IsSignedIn(User))
 {
     
     <li class="nav-item">
@@ -12,9 +11,10 @@
     </li>
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
-            <button type="submit" style="border: none;" class="nav-link btn btn-link text-dark">Logg ut</button>
+            <button type="submit" style="border-radius: 2em; padding: 0.5em 1em;" class="nav-link btn btn-link text-dark">Logg ut</button>
         </form>
     </li>
+    <input type="checkbox" id="darkModeSelector"/>
 }
 else
 {

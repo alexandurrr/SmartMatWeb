@@ -1,4 +1,5 @@
-﻿@model RecipeUserViewModel
+﻿@using Microsoft.IdentityModel.Tokens
+@model RecipeUserViewModel
 @{
     ViewData["Title"] = "Forside";
 }
@@ -8,12 +9,12 @@
     #title {
       font-weight: 700;
     }
-    #background {
+    #indexBackground {
       position: absolute;
       right: 0;
       height: 70vh;
       z-index: -100;
-      filter: blur(1px) brightness(107%);
+      filter: brightness(107%);
     }
     #flex-container {
       min-height: 75vh;
@@ -49,7 +50,7 @@
 </style>
 <partial name="_MealNavPartial" />
 
-<img src="~/siteimages/background.jpg" alt="bakgrunnsbilde av mat" id="background">
+<img src="~/siteimages/background.jpg" alt="bakgrunnsbilde av mat" id="indexBackground">
 <div id="flex-container">
     <div class="fillerdiv"></div>
     <div class="text-left" id="search-container">
@@ -69,6 +70,11 @@
     @section Scripts
     {
         <script>
+            let main = document.getElementById("main");
+            if (innerWidth < 1030 || (innerWidth < 1600 && main.classList.contains("darkMode"))){
+                $("#background").css("display", "none");
+            }
+        
             async function search(){
                 let search = $("#search-text").val();
                 if (search.length > 1){

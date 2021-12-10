@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using smartmat.Models;
 
 namespace smartmat.Data
@@ -28,5 +29,7 @@ namespace smartmat.Data
         public string ImageDelete { get; set; }
         
         public string Favorites { get; set; }
+        
+        public bool DarkMode { get; set; }
     }
 }

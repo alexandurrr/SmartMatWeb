@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using smartmat.Data
+@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8"/>
@@ -9,11 +11,10 @@
     <link rel="stylesheet" href="~/css/site.css" runat="server"/>
     <link rel="stylesheet" href="~/css/profile.css" runat="server"/>
     <link rel="stylesheet" href="~/css/search.css" runat="server"/>
-
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav id="navBar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a id="navbar-brand" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div id="nav_logo" class="logo"><div id="logo_glasses_container"><div id="logo_glasses"></div></div><div id="logo_burger"></div></div>SmartMat.no</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -47,7 +48,7 @@
                 <p style="font-style: italic;">Oppdag og del oppskrifter basert på det du har i kjøleskapet.</p>
             </div>
             <div class="col">
-                <a class="text-muted" href="mailto:kontakt@smartmat.no?subject=OBS! Dette er ikke en ekte epost :p"><img src="~/siteimages/email-icon.png" alt="epost ikon" style="opacity: 0.8; height: 1em; margin-right: 0.5em;">kontakt@smartmat.no</a>
+                <a class="text-muted" href="mailto:kontakt@smartmat.no?subject=OBS! Dette er ikke en ekte epost :p"><img src="~/siteimages/email-icon.png" id="emailIcon" alt="epost ikon" style="opacity: 0.8; height: 1em; margin-right: 0.5em;">kontakt@smartmat.no</a>
             </div>
         </div>
     </div>

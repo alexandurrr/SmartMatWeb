@@ -3,6 +3,8 @@ for details on configuring this project to bundle and minify static web assets. 
 
 :root {
   --primary: #FFB84F;
+  --globalBackground: white;
+  --globalColor: black;
 }
 
 body {
@@ -101,7 +103,7 @@ a.navbar-brand {
 .card {
   width: 24em;
   padding: 2em;
-  color: black !important;
+  color: black;
   display: inline-block;
   white-space: normal;
   margin: 1em 2em 1em 0;
@@ -177,6 +179,57 @@ a {
 .centeredButton:hover {
   background-color: #f7931d;
   color: white;
+}
+
+/*  Dark Mode  */
+.darkMode {
+  background-color: black!important;
+  color: white!important;
+}
+.darkModeText {
+  color: white!important;
+}
+.darkModeBorder {
+  color: white!important;
+  background-color: #151515 !important;
+  border: 1px solid #ffffffa0;
+}
+#darkModeSelector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 2.5em;
+  height: 1.5em;
+  background: #ddd;
+  border: 1px solid white;
+  border-radius: 3em;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin: 0 1em;
+  transform: translateY(0.5em);
+}
+
+#darkModeSelector:checked{
+  background: #000000a0;
+}
+
+#darkModeSelector:after{
+  position: absolute;
+  content: "";
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #fff;
+  -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+  box-shadow: 0 0 .25em rgba(0,0,0,.3);
+  -webkit-transform: scale(.7);
+  transform: scale(.7);
+  left: 0;
+}
+
+#darkModeSelector:checked:after{
+  left: calc(100% - 1.5em);
 }
 
 /* Sticky footer styles

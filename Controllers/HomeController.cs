@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using smartmat.Data;
 using smartmat.Models;
 
@@ -100,6 +101,22 @@ namespace smartmat.Controllers
             };
 
             return PartialView("_SearchPartial", ur);
+        }
+
+        [HttpPost]
+        public async void DarkMode(bool darkModeValue)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return;
+            user.DarkMode = darkModeValue;
+            await _userManager.UpdateAsync(user);
+        }
+        
+        [HttpGet]
+        public async Task<bool> DarkMode()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return user is {DarkMode: true};
         }
     }
 }

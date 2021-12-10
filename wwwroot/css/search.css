@@ -12,19 +12,22 @@
 }
 
 #search-partial ul li{
+    background-color: var(--globalBackground);
+    color: var(--globalColor);
     list-style-type: none;
     display: inline-flex;
     text-align: center;
     margin: 15px 10px 0 0;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
-    transition: transform .1s;
+    border: 1px solid white;
+    transition: transform 200ms;
 }
 
 #search-partial li a{
     font-size: 17px;
     text-decoration: none;
-    color: black;
+    color: inherit;
     padding: 5px;
     border-bottom: 3px solid transparent;
 }
