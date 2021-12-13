@@ -2,14 +2,30 @@
     padding: 2em 1em;
 }
 
+.previous a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 2px;
+}
+
+.previous a:hover{
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
 #profileNav li a{
-    color: #1d2124;
+    color: black;
     font-weight: bold;
     border-bottom: 2px solid transparent;
+    font-size: 18px;
+    padding: 1em 3em 1em 3em;
 }
 
 #profileNav li a:hover{
-    border-bottom: 2px solid sandybrown;
+    border-bottom: 2px solid darkorange;
+    transform: scale(1.1);
 }
 
 #imgUpload
@@ -55,11 +71,19 @@ h6{
     border-bottom: 2px solid lightgray;
 }
 
-#activityReminder{
-    margin: 30px 0 10px 30%;
+.custom-file {
+    transform: translateX(-16em) translateY(-21em);
 }
 
-#activityReminder button{
-    transform: translateX(25em);
-    margin: 30px 0 0 0;
+#password-change .btn{
+    margin-top: -2em;
+    background-color: #383d41;
+    border-radius: 20px;
+    padding: -5px;
+    transition-property: transform;
+    transition-duration: 100ms;
+}
+
+#password-change .btn:hover{
+    transform: scale(1.1);
 }

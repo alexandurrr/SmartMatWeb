@@ -214,8 +214,7 @@ html {
 }
 
 .footer {
-  padding: 3em;
-  margin-top: 2em;
+  margin: 5em 0 1em 0;
 }
 .footer a:not(.nav_logo) {
   color: black;

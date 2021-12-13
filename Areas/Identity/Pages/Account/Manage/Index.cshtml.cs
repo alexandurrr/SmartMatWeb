@@ -44,7 +44,6 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
             public string ImagePath { get; set; }
             
             public string ImageDelete { get; set; }
-            public bool ActivityReminder { get; set; }
         }
         
         private void Load(ApplicationUser user)
@@ -57,7 +56,6 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
                 Email = user.Email,
                 Bio = user.Bio,
                 ImagePath = user.ImagePath,
-                ActivityReminder = user.ActivityReminder
             };
         }
 
@@ -119,7 +117,6 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
             user.UserName = Input.Username;
             user.Email = Input.Email;
             user.Bio = Input.Bio;
-            user.ActivityReminder = Input.ActivityReminder;
             
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);

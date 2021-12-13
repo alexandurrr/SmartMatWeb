@@ -11,7 +11,7 @@
 
     <partial name="_ProfilePartial" />
 
-    <div class="mainDiv container bg-light shadow rounded overflow-hidden">
+    <div class="mainDiv container bg-light shadow-lg rounded overflow-hidden">
         <div class="px-4 pt-0 pb-4 cover">
             @* Check to see if user has image, if not default image is displayed *@
             @if (Model.Input.ImagePath == null)
@@ -32,8 +32,8 @@
                     {
                         @User.Identity.Name
                     }
-                </h1>
-                <p class="text-brown" style="color: saddlebrown;">Din matscore</p>
+                </h1><br/>
+                <p style="color: saddlebrown;">Din matscore</p>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star"></span>
@@ -69,7 +69,6 @@
                             <label asp-for="Input.Bio">Litt om deg</label>
                             <textarea asp-for="Input.Bio" type="text" class="form-control" id="Bio" placeholder="" style="height: 100%; letter-spacing: 1px; white-space: pre-wrap;"></textarea>
                         </div>
-                        <br>
                         <div class="form-group">
                             <div class="custom-file">
                                 <input asp-for="Input.Image" accept=".png,.jpg,.jpeg">
@@ -86,21 +85,14 @@
                                 <span asp-validation-for="Input.ImageDelete" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="custom-control custom-checkbox">
-                            <input asp-for="Input.ActivityReminder" type="checkbox" class="form-control custom-control-input" id="activityReminder">
-                            <label class="custom-control-label font-weight-bold" for="activityReminder">Jeg ønsker å motta nyhetsbrev og varsler på epost.</label>
+                        <div class="text-sm-right text-dark" id="password-change">
+                            <a class="btn btn-secondary" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Endre passord</a>
                         </div>
-                        <button type="submit" class="btn btn-primary">Lagre</button>
+                        <div class="text-lg-center">
+                            <button class="btn btn-primary ml-3 text-dark">Lagre</button>
+                        </div>
                     </div>
                 </form>
-
-
-                <div class="text-justify mt-5" id="password-change">
-                    <h6>Bytt passord</h6>
-                </div>
-                <div id="inputForm">
-                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Bytt passord</a>
-                </div>
             </div>
         </div>
     </div>

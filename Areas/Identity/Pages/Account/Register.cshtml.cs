@@ -52,14 +52,14 @@ namespace smartmat.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Det nye passordet må være på minst 6 og maksimalt 100 tegn.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Passord")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Bekreft passord")]
+            [Compare("Password", ErrorMessage = "Nytt passord og Bekreft passord stemmer ikke overens")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -79,7 +79,7 @@ namespace smartmat.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("Bruker opprettet en ny konto med passord.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -90,7 +90,7 @@ namespace smartmat.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"Vennligst bekreft ditt nye brukerkonto ved å <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>trykker her</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
