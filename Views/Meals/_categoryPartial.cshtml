@@ -1,0 +1,25 @@
+﻿<style>
+    #checkboxes{
+        font-weight: bold;
+        text-align: center;
+    }
+    #checkboxes input {
+        margin-right: 1.5em;
+    }
+    p {
+        text-align: center;
+        margin: 1em;
+    }
+</style>
+
+<partial name="_MealNavPartial" />
+<h1 class="standaloneHeader font-weight-bold" id="category">@ViewData["Title"]</h1>
+
+<div id="checkboxes">
+    <label for="vegetarian">Vegetar</label>
+    <input type="checkbox" value="" id="vegetarian">
+    <label for="glutenfree">Glutenfri</label>
+    <input type="checkbox" value="" id="glutenfree">
+</div>
+
+<div id="resultDiv"></div>

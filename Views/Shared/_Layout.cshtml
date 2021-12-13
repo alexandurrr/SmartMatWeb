@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using smartmat.Data
+@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8"/>
@@ -9,17 +11,17 @@
     <link rel="stylesheet" href="~/css/site.css" runat="server"/>
     <link rel="stylesheet" href="~/css/profile.css" runat="server"/>
     <link rel="stylesheet" href="~/css/search.css" runat="server"/>
-
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav id="navBar" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a id="navbar-brand" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div id="nav_logo" class="logo"><div id="logo_glasses_container"><div id="logo_glasses"></div></div><div id="logo_burger"></div></div>SmartMat.no</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div id="navSearchBar"><form id="navSearchForm"><input id="navSearchInput" type="search" placeholder="pannekaker eller melk, egg..."/></form><i id="navSearchIcon" class="fa fa-search" aria-hidden="true"></i></div>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
                     <li class="nav-item">
@@ -34,6 +36,7 @@
 
 <div class="container">
     <main role="main" class="pb-3" id="main">
+        <div id="navSearchResultContainer"><div id="navSearchResult" style="margin-left: 0;text-align: center;"></div><a asp-area="" asp-controller="Recipes" asp-action="Index" class="allRecipesLink">Se alle oppskriftene</a><div id="navSearchLukk">Lukk</div></div>
         @RenderBody()
         <div class="fillerdiv"></div>
     </main>
@@ -48,6 +51,9 @@
             </div>       
             <div class="col">        
                 <a class="text-muted" href="mailto:kontakt@smartmat.no?subject=OBS! Dette er ikke en ekte epost :p"><img src="~/siteimages/email-icon.png" alt="epost ikon" style="opacity: 0.8; height: 1em; margin-right: 0.5em;">kontakt@smartmat.no</a>
+            </div>
+            <div class="col">
+                <a class="text-muted" href="mailto:kontakt@smartmat.no?subject=OBS! Dette er ikke en ekte epost :p"><img src="~/siteimages/email-icon.png" id="emailIcon" alt="epost ikon" style="opacity: 0.8; height: 1em; margin-right: 0.5em;">kontakt@smartmat.no</a>
             </div>
             
 

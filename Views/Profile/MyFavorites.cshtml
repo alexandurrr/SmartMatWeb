@@ -1,0 +1,17 @@
+@model RecipeUserViewModel
+
+@{
+    ViewBag.Title = "Favorites";
+    Layout = "_Layout";
+}
+
+<partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
+
+<h1 class="standaloneHeader font-weight-bold">Mine Favoritter</h1>
+
+@if (!Model.Recipes.Any())
+{
+    <p>Ingen favoritter</p><br>
+    <a asp-area="" asp-controller="Recipes" asp-action="Index">Finn oppskrifter</a>
+}
+<partial name="_RecipePartial" model="Model"/>

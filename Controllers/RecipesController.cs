@@ -54,7 +54,7 @@ namespace smartmat.Controllers
             {
                 return NotFound();
             }
-
+            
             var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
@@ -64,16 +64,36 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
+            var favorite = user != null && _context.Favorites
+                .Any(favorite => favorite.ApplicationUserId == user.Id && favorite.RecipeId == id);
+
             ICollection<Recipe> r = new List<Recipe>{recipe};
             var viewModel = new RecipeUserViewModel
             {
                 Recipes = r,
                 Users = _userManager.Users.ToList(),
-                Reviews = _context.Reviews.ToList()
+                Reviews = _context.Reviews.ToList(),
+                Favorite = favorite
             };
             return View(viewModel);
         }
-        
+
+        [HttpPost]
+        public async void Details(int id, bool favorite)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (favorite)
+                _context.Favorites.Add(new FavoritesRecipeUser {RecipeId = id, ApplicationUserId = user.Id});
+            else
+            {
+                var connection = _context.Favorites
+                    .FirstOrDefault(c => c.ApplicationUserId == user.Id && c.RecipeId == id);
+                if (connection != null)
+                    _context.Favorites.Remove(connection);
+            }
+            await _context.SaveChangesAsync();
+        }
+
         // GET: Recipes/ByUser/5
         public IActionResult ByUser(string id)
         {

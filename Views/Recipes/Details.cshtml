@@ -1,13 +1,15 @@
 @using smartmat.Data
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore.Query.Internal
 @model smartmat.Models.RecipeUserViewModel
-
+@inject UserManager<ApplicationUser> _userManager;
 @{
     var recipe = Model.Recipes.FirstOrDefault();
     System.Diagnostics.Debug.Assert(recipe != null, nameof(recipe) + " != null");
     ViewData["Title"] = recipe.Title;
+    var user = await _userManager.GetUserAsync(User);
+    var userId = (user == null ? "-1" : user.Id);
 }
-
 <style>
     #main {
         text-align: center;
@@ -21,13 +23,13 @@
         background-color: #624d4d;
         color: white;
     }
-    ul, #instructions {
+    .recipeList, #instructions {
         text-align: left;
         width: 30em;
         max-width: 100%;
         margin: 1em auto;
     }
-    ul {
+    .recipeList {
         list-style-type: none;
         width: 20em;
         padding: 0;
@@ -51,6 +53,85 @@
     }
     .tags, #bottomLinks {
         margin-top: 1em;
+    }
+    
+    #favoriteButton {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        height: 2em;
+        width: 2em;
+        font-size: 2em;
+    }
+    #favoriteButton label {
+        float:left;
+        width:4.0em;
+        margin: 0; padding: 0;
+    }
+    #favoriteButton span {
+        height: 100%; width: 100%;
+        display: inline-block;
+        text-align: center;
+        padding: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteCheckbox {
+        position: absolute;
+        top: -4em;
+    }
+    
+    .fa-heart:before, .fa-heart-o:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteButton:hover .fa-heart, #favoriteButton:hover .fa-heart-o {
+        opacity: 0.3;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart {
+        opacity: 1;
+        animation: zoom 1s ease forwards;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart-o {
+        opacity: 0;
+        animation: zoom 1s ease forwards;
+    }
+    .fa-heart, .fa-heart-o {
+        transition: opacity 600ms ease 200ms;
+        transform-origin: top left;
+    }
+    .fa-heart {
+        opacity: 0;
+    }
+    .fa-heart-o {
+        opacity: 1;
+    }
+    
+    #shareInput, #shareButton {
+        position: relative;
+        border: 1px solid gray;
+        font-size: 0.8em;
+        box-shadow: 3px 3px 4px -1px #00000036;
+    }
+    #shareInput {
+        border-radius: 1em 0 0 1em;
+        padding: 0.5em 0 0.5em 1em;
+        margin: 2em 0 1em;
+        width: 20em;
+        z-index: -1;
+    }
+    #shareButton {
+        border-radius: 0 1em 1em 0;
+        padding: 0.5em 1em;
+        background-color: #FFB84F5C;
+        transition: background-color 100ms;
+    }
+    #shareButton:hover {
+        background-color: #FFB84F;
     }
 </style>
 
@@ -95,7 +176,7 @@
     <p>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Time) : <span class="timeBubble @(recipe.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@recipe.Time</span><br><span class="min">min</span></span></p>
     <p>@recipe.Introduction</p>
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Ingredients)</h2>
-    <ul>
+    <ul class="recipeList">
         @foreach (var ingredient in recipe.Ingredients.Split(", "))
         {
             <li>@ingredient</li>
@@ -106,18 +187,47 @@
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Nutrients)</h2>
     <p>@recipe.Nutrients</p>
 </div>
+<div>
+    <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
+</div>
 <div id="bottomLinks">
-    @inject UserManager<ApplicationUser> _userManager;
-    @{
-        var user = await _userManager.GetUserAsync(User);
-        var userId = (user == null ? "-1" : user.Id);
+    @if (user != null){
+        <div>
+            <span style="margin-bottom: 0;vertical-align: text-top;">Lagre som favoritt:</span>
+            <div class="form-check form-check-inline" id="favoriteButton">
+                <label><input asp-for="@Model.Favorite" class="form-check-input" id="favoriteCheckbox"/><span class="fa fa-heart"></span><span class="fa fa-heart-o"></span></label>
+            </div>    
+        </div>
     }
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
-        <a asp-action="Delete" asp-route-id="@recipe.Id">Slett</a> @s
-        <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a> @s
+        <a asp-action="Delete" asp-route-id="@recipe.Id">Slett</a>
+        @s
+        <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a>
+        @s
     }
-    
+
+
     <a asp-action="Index">Se alle oppskrifter</a>
 </div>
+
+@section Scripts
+{
+    <script>
+        $('#favoriteCheckbox').change(function (){
+            fetch("/Recipes/Details/?id="+@recipe.Id+"&favorite="+this.checked, {method: 'POST'});
+        })
+        
+        let shareInput = document.getElementById("shareInput");
+        let shareButton = document.getElementById("shareButton");
+        shareInput.value = window.location.href;
+        $('#shareButton').click(function (){
+            shareInput.select();
+            shareInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(shareInput.value);
+            shareButton.innerText = "Kopiert!";
+            setTimeout(function (){shareButton.innerText = "Kopier";}, 10000);
+        });
+    </script>
+}

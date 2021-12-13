@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -73,6 +75,27 @@ namespace smartmat.Controllers
             };
 
             return View(vm);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyFavorites()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            
+            var viewModel = new RecipeUserViewModel
+            {
+                Recipes = _context.Favorites
+                    .Where(favorite => favorite.ApplicationUserId == user.Id)
+                    .Select(favorite => favorite.Recipe)
+                    .ToList(),
+                Users = _userManager.Users.ToList(),
+                Reviews = _context.Reviews.ToList()
+            };
+            return View(viewModel);
         }
     }
 }
