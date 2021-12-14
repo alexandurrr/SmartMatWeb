@@ -20,7 +20,7 @@
     font-weight: bold;
     border-bottom: 2px solid transparent;
     font-size: 18px;
-    padding: 1em 3em 1em 3em;
+    padding: 1em 2em 1em 2em;
 }
 
 #profileNav li a:hover{
@@ -86,4 +86,34 @@ h6{
 
 #password-change .btn:hover{
     transform: scale(1.1);
+}
+
+.flex-column {
+    float: left;
+    width: 50%;
+}
+
+#newRecipe{
+    width: 80%;
+}
+
+#newRecipe .form-group{
+    text-align: center;
+    font-size: 18px;
+    margin: 2em 0 0 0;
+}
+
+.boxes .column{
+    margin: 2em 0 2em 0;
+    padding: 0 3em 0 0;
+}
+
+.recipeImg{
+    display: grid;
+    transform: translate(20em, 20em);
+}
+
+.time{
+    max-width: 15%;
+    transform: translateX(22em);
 }

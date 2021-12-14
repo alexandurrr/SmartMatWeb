@@ -158,7 +158,19 @@ a.navbar-brand {
 #navSearchLukk:hover{
   background-color: rgba(128, 128, 128, 0.14);
 }
-.allRecipesLink {
+
+.allRecipesLink{
+  border-radius: 1em;
+  max-width: 15%;
+  transition-property: transform;
+  transition-duration: 100ms;
+}
+
+.allRecipesLink:hover{
+  transform: scale(1.1);
+}
+
+/*.allRecipesLink {
   margin: 0 auto;
   cursor: pointer;
   padding: 0.5em 1em;
@@ -170,7 +182,7 @@ a.navbar-brand {
 }
 .allRecipesLink:hover {
   text-decoration: underline black;
-}
+}*/
 
 
 /*  CARDS  */

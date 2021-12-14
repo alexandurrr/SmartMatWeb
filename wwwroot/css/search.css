@@ -80,7 +80,20 @@
 
 .resultRow {
     position:relative;
+    color: black;
+    margin: 1em 1em 2em 1em;
 }
+
+.resultRow:hover{
+    text-decoration: none;
+    color: black;
+    border-top-color: lightgray;
+    border-right-color: lightgray;
+    border-bottom-color: dimgray;
+    border-left-color: dimgray;
+    border-width: 3px;
+}
+
 .attachedBubble {
     position: absolute;
     right: 0.8em;

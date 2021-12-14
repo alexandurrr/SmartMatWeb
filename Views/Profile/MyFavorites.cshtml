@@ -7,11 +7,14 @@
 
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
-<h1 class="standaloneHeader font-weight-bold">Mine Favoritter</h1>
+<div class="mainDiv container bg-light shadow-lg rounded overflow-hidden">
 
-@if (!Model.Recipes.Any())
-{
-    <p>Ingen favoritter</p><br>
-    <a asp-area="" asp-controller="Recipes" asp-action="Index">Finn oppskrifter</a>
-}
-<partial name="_RecipePartial" model="Model"/>
+        <h1 class="standaloneHeader font-weight-bold">Mine Favoritter</h1>
+
+        @if (!Model.Recipes.Any())
+        {
+            <p>Ingen favoritter</p><br>
+            <a asp-area="" asp-controller="Recipes" asp-action="Index">Finn oppskrifter</a>
+        }
+            <partial name="_RecipePartial" model="Model"/>
+</div>

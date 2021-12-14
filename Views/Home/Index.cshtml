@@ -1,5 +1,4 @@
-﻿@using Microsoft.IdentityModel.Tokens
-@model RecipeUserViewModel
+﻿@model RecipeUserViewModel
 @{
     ViewData["Title"] = "Forside";
 }
@@ -66,7 +65,7 @@
     </div>
 
     <div id="recipe-results"></div>
-    <a asp-area="" asp-controller="Recipes" asp-action="Index" class="allRecipesLink" style="text-align: left">Se alle oppskriftene</a>
+    <a asp-area="" asp-controller="Recipes" asp-action="Index" class="btn btn-dark allRecipesLink">Se alle oppskriftene</a>
     
     @section Scripts
     {
