@@ -19,11 +19,11 @@ namespace smartmat.Models
 
         public int Id { get; set; }
         
-        [Required]
+        
         public int RecipeId { get; set; }
         public Recipe Recipe { get; set; }
 
-        [Required] 
+         
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         
@@ -33,10 +33,12 @@ namespace smartmat.Models
         
         [Required]
         [StringLength(200)]
+        [DisplayName("Tittel")]
         public string Title { get; set; }
         
         [Required]
         [StringLength(1000)]
+        [DisplayName("Melding")]
         public string Description { get; set; }
         
     }

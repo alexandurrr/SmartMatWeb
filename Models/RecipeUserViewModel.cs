@@ -11,12 +11,15 @@ namespace smartmat.Models
         public ICollection<Recipe> Recipes { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
         public ICollection<Review> Reviews { get; set; }
-        
+
+        public Review FormReview { get; set; }
+
         [DisplayName("Liker")]
         public bool IsFavorite { get; set; }
         
         [DisplayName("Liker ikke")]
         public bool UnFavorite { get; set; }
+
         
     }
 }

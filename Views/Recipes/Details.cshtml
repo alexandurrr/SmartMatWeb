@@ -1,9 +1,12 @@
 @using smartmat.Data
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal
+@using smartmat.Controllers
 @model smartmat.Models.RecipeUserViewModel
 @inject UserManager<ApplicationUser> _userManager;
 @{
     var recipe = Model.Recipes.FirstOrDefault();
+    var review = Model.Reviews.FirstOrDefault();
     System.Diagnostics.Debug.Assert(recipe != null, nameof(recipe) + " != null");
     ViewData["Title"] = recipe.Title;
     var user = await _userManager.GetUserAsync(User);
@@ -53,6 +56,65 @@
     .tags, #bottomLinks {
         margin-top: 1em;
     }
+    
+   @* **********************************Stars css***************************************' *@
+   .star-rating form {
+       display: none;
+   }
+   .star-rating input {
+    display: none; 
+   }
+   .star-rating {
+       margin: 50px auto;
+       display: table;
+       width: 350px;
+   }
+   .star-rating label {
+       padding: 10px;
+       float: right;
+       font-size: 20px;
+       color: #eee;
+   }
+   .star-rating input:not(:checked) ~ label:hover,
+   .star-rating input:not(:checked) ~ label:hover ~ label {
+       color: #000000;
+   }
+   .star-rating input:checked ~ label {
+       color: #000000;
+   }
+   .star-rating form .rating-reaction:before {
+       width: 100%;
+       float: left;
+       color: #000000;
+   }
+   .star-rating #rating-1:checked ~ form .rating-reaction:before {
+     
+   }
+   .star-rating #rating-2:checked ~ form .rating-reaction:before {
+       
+   }
+   .star-rating #rating-3:checked ~ form .rating-reaction:before {
+       
+   }
+   .star-rating #rating-4:checked ~ form .rating-reaction:before {
+       
+   }
+   .star-rating #rating-5:checked ~ form .rating-reaction:before {
+       
+   }
+   .star-rating input:checked ~ form {
+       border-top: 1px solid #ddd;
+       width: 100%;
+       padding-top: 15px;
+       margin-top: 15px;
+       display: inline-block;
+   }
+   .star-rating form .rating-reaction {
+       font-size: 24px;
+       float: left;
+       text-transform: capitalize;
+   }
+    
 </style>
 
 <div id="background"></div>
@@ -120,20 +182,22 @@
             
             @if (!values.Contains(recipe.Id))
             {
-                <form asp-action="Details">
+                <form asp-action="Favorite">
                     <div class="form-check form-check-inline">
                         <label asp-for="@Model.IsFavorite" class="control-label"></label>
                         <input asp-for="@Model.IsFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
+                        <input value="@recipe.Id" name="id" type="hidden"/>
                         <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
                     </div>
                 </form>
             }
             else
             {
-                <form asp-action="Details">
+                <form asp-action="Favorite">
                     <div class="form-check form-check-inline">
                         <label asp-for="@Model.UnFavorite" class="control-label"></label>
                         <input asp-for="@Model.UnFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
+                        <input value="@recipe.Id" name="id" type="hidden"/>
                         <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
                     </div>
                 </form>
@@ -149,6 +213,85 @@
         @s
     }
 
+        <a asp-action="Index">Se alle oppskrifter</a>
+        
+        <br />
+        <br />
+        
+            @foreach (var item in Model.Reviews)
+            {
+                @if (item.RecipeId == recipe.Id)
+                     {
+                         <br/>
+                         <br/>
+                         @for (int i = 0; i < item.Stars; i++)
+                         {
+                             <span class="fa fa-star"></span>
+                         } 
+                         @for (int i = item.Stars; i < 5; i++)
+                         {
+                             <span class="fa fa-star-o"></span>
+                         }
+                         <br/>
+                @item.Title
+                <br/>
+                @item.Description
+                         <br/>
+                         <p>Skrevet av @item.ApplicationUser</p>
+                         <br/><br/>
+                     }
+        }
+        
+         <div class="mainDiv container-fluid bg-light shadow rounded">
+            <h2 class="standaloneHeader">Gi tilbakemelding</h2>
+             <hr />
+             <body>
+             <meta charset="utf-8" />
+             <meta name="viewport" content="width=device-width, initial-scale=1" />
+             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
+                     
+             
+             </body>
+             
+            <form asp-action="Details" method="post" enctype="multipart/form-data">
+                <div class="px-4 pt-0 pb-4 cover" id="inputForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
+                    <span class="rating-reaction"></span>
+                   <div class="star-rating">
+                       <div class="star-input">
+                           <input type="radio" asp-for="FormReview.Stars" id="rating-5" value="5" required>
+                           
+                           <label for="rating-5" class="fas fa-star"></label>
+                           <input type="radio" asp-for="FormReview.Stars" id="rating-4" value="4" required>
+                           <label for="rating-4" class="fas fa-star"></label>
+                           <input type="radio" asp-for="FormReview.Stars" id="rating-3" value="3" required>
+                           <label for="rating-3" class="fas fa-star"></label>
+                           <input type="radio" asp-for="FormReview.Stars" id="rating-2" value="2" required>
+                           <label for="rating-2" class="fas fa-star"></label>
+                           <input type="radio" asp-for="FormReview.Stars" id="rating-1" value="1" required>
+                           <label for="rating-1" class="fas fa-star"></label>
+                                    </div>
+                                </div>
+                    <input value="@recipe.Id" asp-for="FormReview.RecipeId" type="hidden"/>
+                    <div class="form-group">
+                        <label asp-for="FormReview.Title" class="control-label"></label>
+                        <input asp-for="FormReview.Title" class="form-control" required/>
+                        <span asp-validation-for="FormReview.Title" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="FormReview.Description" class="control-label"></label>
+                        <textarea asp-for="FormReview.Description" class="form-control" required></textarea>
+                        <span asp-validation-for="FormReview.Description" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Publiser" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-    <a asp-action="Index">Se alle oppskrifter</a>
+        
 </div>
