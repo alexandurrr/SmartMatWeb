@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using smartmat.Data;
 using smartmat.Models;
-using SQLitePCL;
 
 namespace smartmat.Controllers
 {
@@ -22,181 +18,31 @@ namespace smartmat.Controllers
             _userManager = userManager;
         }
         
-        public async Task<IActionResult> Breakfast()
+        public ViewResult Breakfast()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> BreakfastVegetarian()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> BreakfastGlutenfree()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> BreakfastGlutVeg()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
+            return View();
         }
 
-        public async Task<IActionResult> FastFood()
+        public ViewResult FastFood()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            return View(vm);
+            return View();
         }
         
-        public async Task<IActionResult> FastFoodVegetarian()
+        public ViewResult Lunch()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> FastFoodGlutenfree()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> FastFoodGlutVeg()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-
-        public async Task<IActionResult> Lunch()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            return View(vm);
+            return View();
         }       
         
-        public async Task<IActionResult> LunchVegetarian()
+        public ViewResult Dinner()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
+            return View();
         }
         
-        public async Task<IActionResult> LunchGlutenfree()
+        public ViewResult Dessert()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
+            return View();
         }
-        
-        public async Task<IActionResult> LunchGlutVeg()
+        public async Task<IActionResult> GetFilteredRecipes(string category, bool vegetarian, bool glutenfree)
         {
             var user = await _userManager.GetUserAsync(User);
             var vm = new RecipeUserViewModel
@@ -204,138 +50,13 @@ namespace smartmat.Controllers
                 Users = _userManager.Users.ToList(),
                 Recipes = _db.Recipes
                     .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
+                    .Where(recipe => (category == "Rask Mat" && recipe.Time <= 30) || recipe.Category == category)
+                    .Where(recipe => recipe.Vegetarian || !vegetarian)
+                    .Where(recipe => recipe.Glutenfree || !glutenfree)
+                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars)).ToList(),
                 Reviews = _db.Reviews.ToList()
             };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> Dinner()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DinnerGlutenfree()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DinnerVegetarian()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DinnerGlutVeg()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> Dessert()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DessertVegetarian()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DessertGlutenfree()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
-        }
-        
-        public async Task<IActionResult> DessertGlutVeg()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var vm = new RecipeUserViewModel
-            {
-                Users = _userManager.Users.ToList(),
-                Recipes = _db.Recipes
-                    .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars))
-                    .ToList(),
-                Reviews = _db.Reviews.ToList()
-            };
-            
-            return View(vm);
+            return PartialView("_RecipePartial", vm);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
