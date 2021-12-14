@@ -1,31 +1,17 @@
-@using smartmat.Data
-@using Microsoft.AspNetCore.Identity
 @model RecipeUserViewModel
 
 @{
     ViewBag.Title = "Favorites";
     Layout = "_Layout";
 }
-<style>
-    #search-partial, ul {
-       padding: 0;
-    }
-</style>
 
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
 <h1 class="standaloneHeader font-weight-bold">Mine Favoritter</h1>
-   @inject UserManager<ApplicationUser> _userManager;
-    @{
-        var user = await _userManager.GetUserAsync(User);
-        var userId = (user == null ? "-1" : user.Id);
-    }
-@if (user.Favorites == null || user.Favorites.Length <= 0)
+
+@if (!Model.Recipes.Any())
 {
     <p>Ingen favoritter</p><br>
     <a asp-area="" asp-controller="Recipes" asp-action="Index">Finn oppskrifter</a>
 }
-else if (user.Favorites.Length > 0)
-{
-    <partial name="_RecipePartial" model="Model"/>
-}
+<partial name="_RecipePartial" model="Model"/>

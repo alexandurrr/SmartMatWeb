@@ -6,10 +6,10 @@
 
 @if (recipes.Any())
 {
-    <div class="container-fluid rounded overflow-hidden" id="search-partial">
+    <div class="container-fluid rounded overflow-hidden" id="search-partial" style="padding: 0;text-align: center;">
         <h2>Søketreff:</h2>
         <i style="font-size: 0.9em;">Viser @recipes.Count() av @totalResultCount treff </i>
-        <ul>
+        <ul style="padding: 0;">
             @foreach (var r in recipes)
             {
 

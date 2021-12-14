@@ -1,7 +1,5 @@
 @using smartmat.Data
 @using Microsoft.AspNetCore.Identity
-@using Microsoft.AspNetCore.Identity.UI.V4.Pages.Internal
-@using smartmat.Controllers
 @model smartmat.Models.RecipeUserViewModel
 @inject UserManager<ApplicationUser> _userManager;
 @{
@@ -25,13 +23,13 @@
         background-color: #624d4d;
         color: white;
     }
-    ul, #instructions {
+    .recipeList, #instructions {
         text-align: left;
         width: 30em;
         max-width: 100%;
         margin: 1em auto;
     }
-    ul {
+    .recipeList {
         list-style-type: none;
         width: 20em;
         padding: 0;
@@ -57,23 +55,86 @@
         margin-top: 1em;
     }
     
+    /*      FAVORITE     */
+    #favoriteButton {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        height: 2em;
+        width: 2em;
+        font-size: 2em;
+    }
+    #favoriteButton label {
+        float:left;
+        width:4.0em;
+        margin: 0; padding: 0;
+    }
+    #favoriteButton span {
+        height: 100%; width: 100%;
+        display: inline-block;
+        text-align: center;
+        padding: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteCheckbox {
+        position: absolute;
+        top: -4em;
+    }
+    
+    .fa-heart:before, .fa-heart-o:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #favoriteButton:hover .fa-heart, #favoriteButton:hover .fa-heart-o {
+        opacity: 0.3;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart {
+        opacity: 1;
+        animation: zoom 1s ease forwards;
+    }
+    #favoriteCheckbox:checked ~ .fa-heart-o {
+        opacity: 0;
+        animation: zoom 1s ease forwards;
+    }
+    .fa-heart, .fa-heart-o {
+        transition: opacity 600ms ease 200ms;
+        transform-origin: top left;
+    }
+    .fa-heart {
+        opacity: 0;
+    }
+    .fa-heart-o {
+        opacity: 1;
+    }
+    
    @* **********************************Stars css***************************************' *@
    .star-rating form {
        display: none;
+   }
+   .star-input {
+       text-align: center;
+       -moz-transform: scale(-1, 1);
+       -webkit-transform: scale(-1, 1);
+       transform: scale(-1, 1);
    }
    .star-rating input {
     display: none; 
    }
    .star-rating {
-       margin: 50px auto;
+       margin: 1em auto;
        display: table;
        width: 350px;
    }
    .star-rating label {
        padding: 10px;
-       float: right;
        font-size: 20px;
-       color: #eee;
+       color: #d5d5d5;
+       cursor: pointer;
    }
    .star-rating input:not(:checked) ~ label:hover,
    .star-rating input:not(:checked) ~ label:hover ~ label {
@@ -115,6 +176,29 @@
        text-transform: capitalize;
    }
     
+    /*   SHARE RECIPE   */
+    #shareInput, #shareButton {
+        position: relative;
+        border: 1px solid gray;
+        font-size: 0.8em;
+        box-shadow: 3px 3px 4px -1px #00000036;
+    }
+    #shareInput {
+        border-radius: 1em 0 0 1em;
+        padding: 0.5em 0 0.5em 1em;
+        margin: 2em 0 1em;
+        width: 20em;
+        z-index: -1;
+    }
+    #shareButton {
+        border-radius: 0 1em 1em 0;
+        padding: 0.5em 1em;
+        background-color: #FFB84F5C;
+        transition: background-color 100ms;
+    }
+    #shareButton:hover {
+        background-color: #FFB84F;
+    }
 </style>
 
 <div id="background"></div>
@@ -158,7 +242,7 @@
     <p>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Time) : <span class="timeBubble @(recipe.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@recipe.Time</span><br><span class="min">min</span></span></p>
     <p>@recipe.Introduction</p>
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Ingredients)</h2>
-    <ul>
+    <ul class="recipeList">
         @foreach (var ingredient in recipe.Ingredients.Split(", "))
         {
             <li>@ingredient</li>
@@ -169,41 +253,19 @@
     <h2>@Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Nutrients)</h2>
     <p>@recipe.Nutrients</p>
 </div>
+<div style="margin: 2em 0;">
+    <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
+</div>
 <div id="bottomLinks">
-        @if (user != null){
-            
-            var userFavorites = user.Favorites;
-            var values = new List<int>();
-            if (!string.IsNullOrEmpty(userFavorites))
-            {
-                userFavorites = userFavorites.Remove(userFavorites.Length - 1);
-                values = userFavorites.Split(',').Select(int.Parse).ToList();
-            }
-            
-            @if (!values.Contains(recipe.Id))
-            {
-                <form asp-action="Favorite">
-                    <div class="form-check form-check-inline">
-                        <label asp-for="@Model.IsFavorite" class="control-label"></label>
-                        <input asp-for="@Model.IsFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
-                        <input value="@recipe.Id" name="id" type="hidden"/>
-                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
-                    </div>
-                </form>
-            }
-            else
-            {
-                <form asp-action="Favorite">
-                    <div class="form-check form-check-inline">
-                        <label asp-for="@Model.UnFavorite" class="control-label"></label>
-                        <input asp-for="@Model.UnFavorite" value="true" class="form-check-input" onclick="this.form.submit()"/>
-                        <input value="@recipe.Id" name="id" type="hidden"/>
-                        <span asp-validation-for="@Model.IsFavorite" class="text-danger"></span>
-                    </div>
-                </form>
-            }
-          }
-        
+    @if (user != null)
+    {
+        <div>
+            <span style="margin-bottom: 0;vertical-align: text-top;">Lagre som favoritt:</span>
+            <div class="form-check form-check-inline" id="favoriteButton">
+                <label><input asp-for="@Model.Favorite" class="form-check-input" id="favoriteCheckbox"/><span class="fa fa-heart"></span><span class="fa fa-heart-o"></span></label>
+            </div>
+        </div>
+    }
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
@@ -212,86 +274,98 @@
         <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a>
         @s
     }
+    <a asp-action="Index">Se alle oppskrifter</a>
+</div>
+        
+<br />
+<br />
 
-        <a asp-action="Index">Se alle oppskrifter</a>
-        
-        <br />
-        <br />
-        
-            @foreach (var item in Model.Reviews)
-            {
-                @if (item.RecipeId == recipe.Id)
-                     {
-                         <br/>
-                         <br/>
-                         @for (int i = 0; i < item.Stars; i++)
-                         {
-                             <span class="fa fa-star"></span>
-                         } 
-                         @for (int i = item.Stars; i < 5; i++)
-                         {
-                             <span class="fa fa-star-o"></span>
-                         }
-                         <br/>
-                @item.Title
-                <br/>
-                @item.Description
-                         <br/>
-                         <p>Skrevet av @item.ApplicationUser</p>
-                         <br/><br/>
-                     }
-        }
-        
-         <div class="mainDiv container-fluid bg-light shadow rounded">
-            <h2 class="standaloneHeader">Gi tilbakemelding</h2>
-             <hr />
-             <body>
-             <meta charset="utf-8" />
-             <meta name="viewport" content="width=device-width, initial-scale=1" />
-             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" />
-                     
-             
-             </body>
-             
-            <form asp-action="Details" method="post" enctype="multipart/form-data">
-                <div class="px-4 pt-0 pb-4 cover" id="inputForm">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    
-                    <span class="rating-reaction"></span>
-                   <div class="star-rating">
-                       <div class="star-input">
-                           <input type="radio" asp-for="FormReview.Stars" id="rating-5" value="5" required>
-                           
-                           <label for="rating-5" class="fas fa-star"></label>
-                           <input type="radio" asp-for="FormReview.Stars" id="rating-4" value="4" required>
-                           <label for="rating-4" class="fas fa-star"></label>
-                           <input type="radio" asp-for="FormReview.Stars" id="rating-3" value="3" required>
-                           <label for="rating-3" class="fas fa-star"></label>
-                           <input type="radio" asp-for="FormReview.Stars" id="rating-2" value="2" required>
-                           <label for="rating-2" class="fas fa-star"></label>
-                           <input type="radio" asp-for="FormReview.Stars" id="rating-1" value="1" required>
-                           <label for="rating-1" class="fas fa-star"></label>
-                                    </div>
-                                </div>
-                    <input value="@recipe.Id" asp-for="FormReview.RecipeId" type="hidden"/>
-                    <div class="form-group">
-                        <label asp-for="FormReview.Title" class="control-label"></label>
-                        <input asp-for="FormReview.Title" class="form-control" required/>
-                        <span asp-validation-for="FormReview.Title" class="text-danger"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label asp-for="FormReview.Description" class="control-label"></label>
-                        <textarea asp-for="FormReview.Description" class="form-control" required></textarea>
-                        <span asp-validation-for="FormReview.Description" class="text-danger"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" value="Publiser" class="btn btn-primary"/>
+<div style="margin: 4em auto 2em; width: 60%; padding: 0 1em 2em; border-radius: 1em; border: 1px solid rgba(128,128,128,0.2); background-color: #dbdbdb14;">
+    <h2 class="standaloneHeader">Tilbakemeldinger</h2>
+    @foreach (var item in Model.Reviews)
+    {
+        @if (item.RecipeId == recipe.Id)
+         {
+             @for (var i = 0; i < item.Stars; i++)
+             {
+                 <span class="fa fa-star"></span>
+             } 
+             @for (var i = item.Stars; i < 5; i++)
+             {
+                 <span class="fa fa-star-o"></span>
+             }
+             <br/>
+            @item.Title<br/>
+            @item.Description<br/>
+            <p>Skrevet av @item.ApplicationUser</p>
+         }
+    }
+    <br>
+     
+    <h3>Skriv tilbakemelding</h3>
+    @if (user == null)
+    {
+        <p>Du må være innlogget for å skrive en tilbakemelding</p>
+    }
+    else
+    {
+         <form asp-action="Details" method="post" enctype="multipart/form-data">
+            <div class="px-4 pt-0 pb-4 cover" id="inputForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <span class="rating-reaction"></span>
+                <div class="star-rating">
+                    <div class="star-input">
+                        <input type="radio" asp-for="FormReview.Stars" id="rating-5" value="5" required>
+                        <label for="rating-5" class="fa fa-star"></label>
+                        <input type="radio" asp-for="FormReview.Stars" id="rating-4" value="4" required>
+                        <label for="rating-4" class="fa fa-star"></label>
+                        <input type="radio" asp-for="FormReview.Stars" id="rating-3" value="3" required>
+                        <label for="rating-3" class="fa fa-star"></label>
+                        <input type="radio" asp-for="FormReview.Stars" id="rating-2" value="2" required>
+                        <label for="rating-2" class="fa fa-star"></label>
+                        <input type="radio" asp-for="FormReview.Stars" id="rating-1" value="1" required>
+                        <label for="rating-1" class="fa fa-star"></label>
                     </div>
                 </div>
-            </form>
-        </div>
+                <input value="@recipe.Id" asp-for="FormReview.RecipeId" type="hidden"/>
+                <div class="form-group">
+                    <label asp-for="FormReview.Title" class="control-label"></label>
+                    <input asp-for="FormReview.Title" class="form-control" required/>
+                    <span asp-validation-for="FormReview.Title" class="text-danger"></span>
+                </div>
 
-        
+                <div class="form-group">
+                    <label asp-for="FormReview.Description" class="control-label"></label>
+                    <textarea asp-for="FormReview.Description" class="form-control" required></textarea>
+                    <span asp-validation-for="FormReview.Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Publiser" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>   
+    }
 </div>
+
+
+@section Scripts
+{
+    <script>
+        $('#favoriteCheckbox').change(function (){
+            fetch("/Recipes/Favorite/?id="+@recipe.Id+"&favorite="+this.checked, {method: 'POST'});
+        })
+        
+        let shareInput = document.getElementById("shareInput");
+        let shareButton = document.getElementById("shareButton");
+        shareInput.value = window.location.href;
+        $('#shareButton').click(function (){
+            shareInput.select();
+            shareInput.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(shareInput.value);
+            shareButton.innerText = "Kopiert!";
+            setTimeout(function (){shareButton.innerText = "Kopier";}, 10000);
+        });
+    </script>
+}

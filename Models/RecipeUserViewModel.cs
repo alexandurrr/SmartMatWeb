@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
 using smartmat.Data;
 
 namespace smartmat.Models
@@ -13,13 +10,7 @@ namespace smartmat.Models
         public ICollection<Review> Reviews { get; set; }
 
         public Review FormReview { get; set; }
-
-        [DisplayName("Liker")]
-        public bool IsFavorite { get; set; }
-        
-        [DisplayName("Liker ikke")]
-        public bool UnFavorite { get; set; }
-
+        public bool Favorite { get; set; }
         
     }
 }
