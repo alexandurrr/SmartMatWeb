@@ -10,16 +10,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using smartmat.Data;
 
+
 namespace smartmat
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            
             var host = CreateHostBuilder(args).Build();
 
             using (var services = host.Services.CreateScope())
             {
+                
+                
                 var db = services.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 
                 var um = services.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -30,6 +34,7 @@ namespace smartmat
   
             host.Run();
         }
+        
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
