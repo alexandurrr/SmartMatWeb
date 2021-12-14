@@ -20,8 +20,8 @@ namespace smartmat.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public RecipesController(ApplicationDbContext context, 
-            UserManager<ApplicationUser> userManager, 
+        public RecipesController(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
             IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
@@ -37,7 +37,7 @@ namespace smartmat.Controllers
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
                 .OrderByDescending(recipe => recipe.Id)
                 .ToList();
-            
+
             var viewModel = new RecipeUserViewModel
             {
                 Recipes = recipes.ToList(),
@@ -54,7 +54,7 @@ namespace smartmat.Controllers
             {
                 return NotFound();
             }
-            
+
             var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
                 .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
@@ -64,7 +64,7 @@ namespace smartmat.Controllers
                 return NotFound();
             }
 
-            ICollection<Recipe> r = new List<Recipe>{recipe};
+            ICollection<Recipe> r = new List<Recipe> {recipe};
             var viewModel = new RecipeUserViewModel
             {
                 Recipes = r,
@@ -77,7 +77,7 @@ namespace smartmat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Details(int id, RecipeUserViewModel model)
+        public async Task<IActionResult> Favorite(int id, RecipeUserViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
             var recipe = await _context.Recipes
@@ -105,16 +105,40 @@ namespace smartmat.Controllers
                 _context.Update(user);
                 await _context.SaveChangesAsync();
             }
-            ICollection<Recipe> r = new List<Recipe>{recipe};
+
+            return RedirectToAction(nameof(Details), new{id=recipe.Id});
+            /*ICollection<Recipe> r = new List<Recipe> {recipe};
             var viewModel = new RecipeUserViewModel
             {
                 Recipes = r,
                 Users = _userManager.Users.ToList(),
                 Reviews = _context.Reviews.ToList()
             };
-            return View(viewModel);
+            return View(viewModel);*/
         }
+        
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Details(RecipeUserViewModel recipeUserViewModel)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                recipeUserViewModel.FormReview.ApplicationUser = await _userManager.GetUserAsync(User);
+                recipeUserViewModel.FormReview.ApplicationUserId = recipeUserViewModel.FormReview.ApplicationUser.Id;
+                _context.Reviews.Add(recipeUserViewModel.FormReview); 
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Details));
+            }
+            
+            
+            return View(recipeUserViewModel);
+            
+            
+        }
+        
         // GET: Recipes/ByUser/5
         public IActionResult ByUser(string id)
         {
@@ -224,10 +248,8 @@ namespace smartmat.Controllers
             await _context.SaveChangesAsync();
 
             return res;
-
             
         }
-
 
         // GET: Recipes/Edit/5
         [Authorize]

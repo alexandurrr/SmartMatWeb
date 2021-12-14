@@ -25,8 +25,8 @@ namespace smartmat.Data
             };
             um.CreateAsync(user, "Password1.").Wait();
             db.SaveChanges();
-            
-            
+
+
             // Recipe test data (while also adding a USER relation)
             foreach (var u in db.Users.Include(b => b.Recipes) )
             {
@@ -94,7 +94,7 @@ namespace smartmat.Data
             
             
             // Review Test Data
-            for (int i = 1; i < 3; i++)
+            for (int i = 1; i < 4; i++)
             {
                 db.Add(new Review
                 {
