@@ -40,6 +40,12 @@
     border-bottom-right-radius: 13px;
 }
 
+.userImage {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    border-radius: 50% !important;
+}
+
 #search-partial a:hover{
     border-color: darkorange;
 }

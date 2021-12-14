@@ -186,8 +186,8 @@ a.navbar-brand {
 
 
 /*  CARDS  */
-.horizontal-scroll {
-  overflow-x: scroll;
+.horizontal-scroll #search-partial {
+  overflow-x: scroll !important;
   white-space: nowrap;
 }
 .card {

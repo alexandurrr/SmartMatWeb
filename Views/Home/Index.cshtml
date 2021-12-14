@@ -99,50 +99,6 @@
 <div id="popular-recipes">
     <h3>Populære oppskrifter</h3>
     <div class="horizontal-scroll">
-        @foreach (var recipe in Model.Recipes)
-        {
-            <a class="resultRow card rounded" asp-area="" asp-controller="Recipes" asp-action="Details" asp-route-id="@recipe.Id">
-                <h5 class="card-title">@recipe.Title</h5>
-                <div class="imgcontainer card-img-middle"><img alt="Oppskriftsbilde @recipe.Title" src="@(recipe.ImagePath)"></div>
-                <p class="cardIntrotext">@recipe.Introduction</p>
-                <span class="timeBubble attachedBubble bigBubble @(recipe.Time >= 30 ? "orangeBubble" : "blueBubble")"><span>@recipe.Time</span><br><span class="min">min</span></span>
-                @if (recipe.Reviews != null)
-                {
-                    var avg = Math.Round(recipe.Reviews.Average(r => r.Stars)/0.5)*0.5;
-                    var rest = avg % 1;
-                    var half = rest > 0;
-                    @for (var i = 0; i < avg-rest; i++)
-                    {
-                        <span class="fa fa-star"></span>
-                    }
-                    @if (half)
-                    {
-                        <span class="fa fa-star-half-o"></span>
-                    }
-                    @for (var i = Math.Round(avg); i < 5; i++)
-                    {
-                        <span class="fa fa-star-o"></span>
-                    }
-                }
-                else
-                {
-                    @for (var i = 0; i < 5; i++)
-                    {
-                        <span class="fa fa-star" style="opacity: 0.2;"></span>
-                    }
-                }
-                <div class="card-author-box">
-                @if (recipe.ApplicationUser.ImagePath != null)
-                {
-                    <img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="@(recipe.ApplicationUser.ImagePath)">
-                }
-                else
-                {
-                    <img alt="Brukerbilde @recipe.ApplicationUser.UserName" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg">
-                }
-                <p>Av @recipe.ApplicationUser.UserName</p>
-                </div>
-            </a>    
-        }
+        <partial name="_RecipePartial" model="Model"/>
     </div>
 </div>
