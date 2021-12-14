@@ -33,12 +33,25 @@
                         @User.Identity.Name
                     }
                 </h1><br/>
-                <p style="color: saddlebrown;">Din matscore</p>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                @if (Model.Input.Reviews != null)
+                {
+                    <p style="color: saddlebrown; margin: 0;">Din gjennomsnittlige matscore:</p>
+                    var avg = Math.Round(Model.Input.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
+                    var rest = avg % 1;
+                    var half = rest > 0;
+                    @for (var i = 0; i < avg-rest; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                    @if (half)
+                    {
+                        <span class="fa fa-star-half-o"></span>
+                    }
+                    @for (var i = Math.Round(avg); i < 5; i++)
+                    {
+                        <span class="fa fa-star-o"></span>
+                    }
+                }<br>
 
                 <div class="text-justify mt-5" id="personal-data">
                     <h6>Personlige opplysninger</h6>
