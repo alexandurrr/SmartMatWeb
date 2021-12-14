@@ -120,7 +120,7 @@
     #shareInput {
         border-radius: 1em 0 0 1em;
         padding: 0.5em 0 0.5em 1em;
-        margin: 2em 0 1em;
+        margin: 2em 0 1em 1em;
         width: 20em;
         z-index: -1;
     }
@@ -134,6 +134,8 @@
         background-color: #FFB84F;
     }
 </style>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0" nonce="s8agveGn"></script>
 
 <div id="background"></div>
 <h1>@recipe.Title</h1>
@@ -188,6 +190,7 @@
     <p>@recipe.Nutrients</p>
 </div>
 <div>
+    <div class="fb-share-button" data-href="https://localhost:5001/Recipes/Details/@recipe.Id" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flocalhost%3A5001%2FRecipes%2FDetails%2F @recipe.Id &amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Del</a></div>
     <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
 </div>
 <div id="bottomLinks">
