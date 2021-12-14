@@ -14,7 +14,7 @@ namespace smartmat.Models
         public string ingredientList { get; set; }
         
         
-        [Required(ErrorMessage = "Skriv din mobil nr.")]
+        [Required(ErrorMessage = "Dette feltet må fylles ut")]
         [DisplayName("Mobile nr.")]
         public string phoneNumber { get; set; }
         

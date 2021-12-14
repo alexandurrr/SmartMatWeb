@@ -127,8 +127,29 @@ namespace smartmat.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> SendSms(RecipeSmsViewModel sms)
+        public async Task<IActionResult> SendSms(int id, RecipeSmsViewModel sms)
         {
+            var recipe = await _context.Recipes
+                .Where(recipe => recipe.Visibility == "Public" || recipe.Id == id)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+            
+            ICollection<Recipe> r = new List<Recipe>{recipe};
+
+            var viewModel = new RecipeSmsViewModel
+            {
+                Recipes = r
+            };
+            
+            if (!ModelState.IsValid)
+            {
+               
+                return View(viewModel);
+            }
             var accountSid = "ACe8b8974db6fac84ebd80d84897e9acf4";
             var authToken = "9f24065c619953c08a82b18cd13813b2";
             TwilioClient.Init(accountSid,authToken);
@@ -140,7 +161,7 @@ namespace smartmat.Controllers
                 to: to,
                 from: from,
                 body: sms.ingredientList);
-            return Redirect("https://localhost:5001/Recipes");
+            return Redirect("https://localhost:5001/Recipes/Details/" + id);
 
         }
 
