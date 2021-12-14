@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using smartmat.Data;
 
 namespace smartmat.Models
@@ -11,6 +12,6 @@ namespace smartmat.Models
 
         public Review FormReview { get; set; }
         public bool Favorite { get; set; }
-        
+
     }
 }
