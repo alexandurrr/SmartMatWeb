@@ -9,12 +9,12 @@
 
 <div class="mainDiv container bg-light shadow-lg rounded overflow-hidden">
 
-        <h1 class="standaloneHeader font-weight-bold">Mine Favoritter</h1>
+        <h2 class="standaloneHeader font-weight-bold">Mine Favoritter</h2>
 
         @if (!Model.Recipes.Any())
         {
-            <p>Ingen favoritter</p><br>
-            <a asp-area="" asp-controller="Recipes" asp-action="Index">Finn oppskrifter</a>
+            <h5 class="text-lg-center" style="color:gray;">Du har ingen favoritter ennå</h5><br>
+            <a asp-area="" asp-controller="Recipes" asp-action="Index" class="allRecipes btn btn-dark">Finn oppskrifter</a>
         }
             <partial name="_RecipePartial" model="Model"/>
 </div>

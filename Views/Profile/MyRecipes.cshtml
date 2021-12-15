@@ -7,12 +7,14 @@
 
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
-<h1 class="standaloneHeader font-weight-bold">Mine Oppskrifter</h1>
-    
-@if (!Model.Recipes.Any())
-{
-    <p>Du har ingen oppskrifter enda.</p><br>
-    <a asp-area="" asp-controller="Recipes" asp-action="Create">Lag din første oppskrift</a>
-}
+<div class="mainDiv container bg-light shadow-lg rounded overflow-hidden justify-content-center">
+    <h2 class="standaloneHeader font-weight-bold">Mine Oppskrifter</h2>
+        
+    @if (!Model.Recipes.Any())
+    {
+        <h5 style="color:gray;">Du har ingen oppskrifter enda.</h5><br>
+        <a asp-area="" asp-controller="Recipes" asp-action="Create" style="color:gray;">Lag din første oppskrift</a>
+    }
 
-<partial name="_RecipePartial" model="Model"/>
+    <partial name="_RecipePartial" model="Model"/>
+</div>

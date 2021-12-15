@@ -3,27 +3,28 @@
 @{
     ViewData["Title"] = "Endre Oppskrift";
 }
-@* Need to change model, and figure out a way to edit image (which includes deleting from directory(?)) *@
-<h1>Edit</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
+@* Need to change model, and figure out a way to edit image (which includes deleting from directory(?)) *@
+<div class="mainDiv container bg-light shadow-lg rounded overflow-hidden text-lg-center" id="newRecipe">
+    <h2>Rediger oppskrift</h2>
+    <img alt="Recipe Image" src="@Model.Recipe.ImagePath" class="rounded mt-2 mb-2" width="400" height="200">
+
+    <div class="px-4 pt-0 pb-4 cover m-2" id="inputFormNyOpp">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Recipe.Id" />
             <div class="form-group">
-                <label asp-for="Recipe.Title" class="control-label"></label>
+                <label asp-for="Recipe.Title" class="control-label pb-2"></label>
                 <input asp-for="Recipe.Title" class="form-control" />
                 <span asp-validation-for="Recipe.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Introduction" class="control-label"></label>
+                <label asp-for="Recipe.Introduction" class="control-label pb-2"></label>
                 <input asp-for="Recipe.Introduction" class="form-control" />
                 <span asp-validation-for="Recipe.Introduction" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label"></label>
+                <label asp-for="Recipe.Ingredients" class="control-label pb-2"></label>
                 <input asp-for="Recipe.Ingredients" class="form-control" />
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
@@ -43,24 +44,31 @@
                 <input asp-for="Recipe.Glutenfree" class="form-check-input"/>
                 <span asp-validation-for="Recipe.Glutenfree" class="text-danger"></span>
             </div>
-           <div class="form-check form-check-inline">
+            <div class="form-check form-check-inline">
                 <label asp-for="Recipe.Vegetarian" class="control-label"></label>
                 <input asp-for="Recipe.Vegetarian" class="form-check-input"/>
                 <span asp-validation-for="Recipe.Vegetarian" class="text-danger"></span>
             </div>
+           <div class="recipeImg form-group justify-content-lg-center">
+               <div class="custom-file">
+                   <label asp-for="Image">Endre bilde av oppskriften</label>
+                   <input asp-for="Image" accept=".png,.jpg,.jpeg">
+                   <span asp-validation-for="Image" class="text-danger"></span>
+               </div>
+            </div>
             <div class="form-group">
-                <label asp-for="Recipe.Instructions" class="control-label"></label>
+                <label asp-for="Recipe.Instructions" class="control-label pb-2"></label>
                 <input asp-for="Recipe.Instructions" class="form-control" />
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Nutrients" class="control-label"></label>
+                <label asp-for="Recipe.Nutrients" class="control-label pb-2"></label>
                 <input asp-for="Recipe.Nutrients" class="form-control" />
                 <span asp-validation-for="Recipe.Nutrients" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Time" class="control-label"></label>
-                <input asp-for="Recipe.Time" class="form-control"/>
+            <div class="form-group text-lg-center">
+                <label asp-for="Recipe.Time" class="control-label pb-2"></label>
+                <input asp-for="Recipe.Time" class="time form-control"/>
                 <span asp-validation-for="Recipe.Time" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,29 +81,24 @@
                 <br><br>
             </div>
             <br>
-           <div class="form-group">
-                <div class="custom-file">
-                    <input asp-for="Image" accept=".png,.jpg,.jpeg">
-                </div>
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <div class="form-group">
                     <input asp-for="Recipe.ImagePath" class="form-control" hidden/>
                     <span asp-validation-for="Recipe.ImagePath" class="text-danger"></span>
                 </div>
-               <div class="form-group">
-                   <input asp-for="Recipe.ImageDelete" class="form-control" hidden/>
-                   <span asp-validation-for="Recipe.ImageDelete" class="text-danger"></span>
-               </div>
-                <input type="submit" value="Save" class="btn btn-primary"/>
+                <div class="form-group">
+                    <input asp-for="Recipe.ImageDelete" class="form-control" hidden/>
+                    <span asp-validation-for="Recipe.ImageDelete" class="text-danger"></span>
+                </div>
+                
+                <input type="submit" value="Save" class="btn btn-primary text-dark"/>
             </div>
         </form>
-         <img alt="Recipe Image" src="@Model.Recipe.ImagePath">
-    </div>
 </div>
+
 
 <div>
-    <a asp-action="Index">Se alle oppskrifter</a>
+    <a asp-action="Index" class="previous btn btn-dark">Se alle oppskrifter</a>
 </div>
 
+</div>

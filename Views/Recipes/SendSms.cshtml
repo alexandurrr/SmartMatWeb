@@ -1,0 +1,75 @@
+@model RecipeSmsViewModel
+
+@{
+    var recipe = Model.Recipes.FirstOrDefault();
+    System.Diagnostics.Debug.Assert(recipe != null, nameof(recipe) + " != null");
+    Model.ingredientList = recipe.Ingredients;
+    ViewData["Title"] = recipe.Title;
+    Layout = "_Layout";
+}
+
+<style>
+    h1 {
+        text-align: center
+    }
+    table {
+        width: max-content;
+        margin: 1em auto;
+    }
+    .recipeCheckbox:checked ~ span {
+        text-decoration-line: line-through;
+    }
+</style>
+
+<h1>Send ingrediensene på SMS</h1>
+
+<table>
+    @foreach (var ingredient in recipe.Ingredients.Split(", "))
+    {
+        <tr>
+            <td>
+                <input type="checkbox" class="recipeCheckbox" name="@ingredient"><span> @ingredient</span>
+            </td>
+        </tr>
+    }
+</table>
+
+<form asp-action="SendSms">
+    <div class="px-4 pt-0 pb-4 cover" id="inputForm">
+    <div class="form-group">
+        <input asp-for="@Model.ingredientList" type="hidden" id="ingredientlist" class="form-control" />
+        <span asp-validation-for="@Model.ingredientList" class="text-danger"></span>
+    </div>
+        <div>
+            <label asp-for="@Model.phoneNumber" class="control-label"></label>
+            <input asp-for="@Model.phoneNumber"  placeholder="med landskode, f.eks: +4712345678"  class="form-control" />
+            <span asp-validation-for="@Model.phoneNumber" class="text-danger"></span>
+        </div>
+        <br>
+    <div class="form-group">
+        <input type="submit" value="Send SMS" class="btn btn-primary "/>
+    </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        let recipeCheckbox = document.getElementsByClassName("recipeCheckbox");
+        let ingredientlist = document.getElementById("ingredientlist");
+        function updateIngredientList(){
+            let ingredients = "";
+            for (let checkbox of recipeCheckbox){
+                if (!checkbox.checked){
+                    ingredients += checkbox.name + ", ";
+                }
+            }
+            if (ingredients.length >= 2){
+                ingredients = ingredients.substr(0, ingredients.length - 2);
+            }
+            ingredientlist.value = ingredients;
+        }
+        $('.recipeCheckbox').click(updateIngredientList);
+        updateIngredientList();
+    </script>
+}

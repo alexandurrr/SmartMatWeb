@@ -26,12 +26,12 @@
 <partial name="_ProfilePartial" xmlns="http://www.w3.org/1999/html"/>
 
 <div class="mainDiv container-fluid bg-light shadow rounded">
-    <h1 class="standaloneHeader font-weight-bold">Mine Tilbakemeldinger</h1>
+    <h2 class="standaloneHeader font-weight-bold">Mine Tilbakemeldinger</h2>
     
     <h3>Dine Tilbakemeldinger</h3>
     @if (!Model.MyReviews.Any())
     {
-        <p>Du har ikke gitt noen tilbakemeldinger enda.</p><br>
+        <h6 style="color:gray;">Du har ikke gitt noen tilbakemeldinger enda.</h6><br>
     }
     @foreach (var review in Model.MyReviews)
     {
