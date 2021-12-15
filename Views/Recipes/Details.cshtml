@@ -158,6 +158,16 @@
     }
 </div>
 <p>Av <a asp-action="ByUser" asp-route-id="@recipe.UserId">@recipe.ApplicationUser.UserName</a> (@(recipe.Visibility == "Public" ? "Offentlig" : "Privat"))</p>
+@if (user != null)
+{
+    <div>
+        <span style="margin-bottom: 0;vertical-align: text-top;">Lagre som favoritt:</span>
+        <div class="form-check form-check-inline" id="favoriteButton">
+            <label><input asp-for="@Model.Favorite" class="form-check-input" id="favoriteCheckbox"/><span class="fa fa-heart"></span><span class="fa fa-heart-o"></span></label>
+        </div>
+    </div>
+}
+
 <div class="tags">
     @if (recipe.Category != null)
     {
@@ -191,25 +201,20 @@
     <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
 </div>
 <div id="bottomLinks">
-    @if (user != null){
-        <div>
-            <span style="margin-bottom: 0;vertical-align: text-top;">Lagre som favoritt:</span>
-            <div class="form-check form-check-inline" id="favoriteButton">
-                <label><input asp-for="@Model.Favorite" class="form-check-input" id="favoriteCheckbox"/><span class="fa fa-heart"></span><span class="fa fa-heart-o"></span></label>
-            </div>    
-        </div>
-    }
+    
+   <div><a href="https://localhost:5001/Recipes/SendSMS/@recipe.Id" class="btn btn-primary" style="margin: 1em;">Send oppskriften til mobilen</a></div> 
+    
     @if (recipe.ApplicationUser.Id == userId)
     {
         const string s = "|";
-        <a asp-action="Delete" asp-route-id="@recipe.Id">Slett</a>
+        <a asp-action="Delete" asp-route-id="@recipe.Id" class="previous btn btn-dark">Slett</a>
         @s
-        <a asp-action="Edit" asp-route-id="@recipe.Id">Rediger</a>
+        <a asp-action="Edit" asp-route-id="@recipe.Id" class="previous btn btn-dark">Rediger</a>
         @s
     }
 
 
-    <a asp-action="Index">Se alle oppskrifter</a>
+    <a asp-action="Index" class="previous btn btn-dark">Se alle oppskrifter</a>
 </div>
 
 @section Scripts

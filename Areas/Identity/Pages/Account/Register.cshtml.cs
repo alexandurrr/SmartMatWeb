@@ -52,7 +52,7 @@ namespace smartmat.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "Det nye passordet må være på minst 6 og maksimalt 100 tegn.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Passordet må være på minst 6 og maksimalt 100 tegn.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Passord")]
             public string Password { get; set; }

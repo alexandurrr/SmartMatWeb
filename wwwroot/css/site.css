@@ -170,21 +170,6 @@ a.navbar-brand {
   transform: scale(1.1);
 }
 
-/*.allRecipesLink {
-  margin: 0 auto;
-  cursor: pointer;
-  padding: 0.5em 1em;
-  border-radius: 1em;
-  width: max-content;
-  display: block;
-  color: var(--globalColor);
-  text-decoration: underline gray;
-}
-.allRecipesLink:hover {
-  text-decoration: underline black;
-}*/
-
-
 /*  CARDS  */
 .horizontal-scroll {
   overflow-x: scroll;
