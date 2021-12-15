@@ -36,6 +36,14 @@
                         }
                     }<br>
 
+                    @if (r.ApplicationUser.ImagePath != null)
+                    {
+                        <img alt="Brukerbilde @r.ApplicationUser.UserName" class="userImage" src="@(r.ApplicationUser.ImagePath)">
+                    }
+                    else
+                    {
+                        <img alt="Brukerbilde @r.ApplicationUser.UserName" class="userImage" src="https://thumbs.dreamstime.com/b/happy-chef-logo-cooking-restaurant-food-symbol-194682894.jpg">
+                    }
                     @if (r.UserId == r.ApplicationUser.Id)
                     {
                         // This will add pre-existing fields in the Applications users table that relates to recipe

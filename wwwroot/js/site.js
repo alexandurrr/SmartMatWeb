@@ -75,8 +75,8 @@ navSearchLukk.addEventListener("click", closeSearch);
 function toggleDarkMode(){
     if (darkModeCheckbox.checked){
         $("body, #navBar").addClass("darkMode");
-        $("a, label").addClass("darkModeText");
-        $("button, .mainDiv, #search-partial li, .horizontal-scroll a, .reviewBox").addClass("darkModeBorder");
+        $("button, a, label").addClass("darkModeText");
+        $(".mainDiv, #search-partial li, .horizontal-scroll a, .reviewBox").addClass("darkModeBorder");
         $("#indexBackground").css({borderRadius: "50%", opacity: "0.7"});
         $(":root").css({globalBackground: "black", globalColor: "black"});
         document.documentElement.style.setProperty('--globalBackground', 'black');
@@ -123,18 +123,6 @@ function fasterPreview( uploader ) {
     if ( uploader.files && uploader.files[0] ){
         $('#profileImg').attr('src',
             window.URL.createObjectURL(uploader.files[0]) );
-    }
-}
-function checkGlutenfree()
-{
-    var chkBox = document.getElementById('checkGlutenfree')
-    if (chkBox.checked)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
     }
 }
 

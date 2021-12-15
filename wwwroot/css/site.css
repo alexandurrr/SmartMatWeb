@@ -158,24 +158,21 @@ a.navbar-brand {
 #navSearchLukk:hover{
   background-color: rgba(128, 128, 128, 0.14);
 }
-.allRecipesLink {
-  margin: 0 auto;
-  cursor: pointer;
-  padding: 0.5em 1em;
+
+.allRecipesLink{
   border-radius: 1em;
-  width: max-content;
-  display: block;
-  color: var(--globalColor);
-  text-decoration: underline gray;
-}
-.allRecipesLink:hover {
-  text-decoration: underline black;
+  max-width: 15%;
+  transition-property: transform;
+  transition-duration: 100ms;
 }
 
+.allRecipesLink:hover{
+  transform: scale(1.1);
+}
 
 /*  CARDS  */
-.horizontal-scroll {
-  overflow-x: scroll;
+.horizontal-scroll #search-partial {
+  overflow-x: scroll !important;
   white-space: nowrap;
 }
 .card {
@@ -352,8 +349,7 @@ html {
 }
 
 .footer {
-  padding: 3em;
-  margin-top: 2em;
+  margin: 5em 0 1em 0;
 }
 .footer a:not(.nav_logo) {
   color: black;

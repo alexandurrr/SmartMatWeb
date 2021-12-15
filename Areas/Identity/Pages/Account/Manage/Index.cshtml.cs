@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using smartmat.Data;
+using smartmat.Models;
 
 namespace smartmat.Areas.Identity.Pages.Account.Manage
 {
@@ -14,15 +17,18 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context,
             IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -40,11 +46,10 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
             public string Bio { get; set; }
             
             public IFormFile Image { get; set; }
-            
             public string ImagePath { get; set; }
-            
             public string ImageDelete { get; set; }
-            public bool ActivityReminder { get; set; }
+            
+            public ICollection<Review> Reviews { get; set; }
         }
         
         private void Load(ApplicationUser user)
@@ -57,7 +62,7 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
                 Email = user.Email,
                 Bio = user.Bio,
                 ImagePath = user.ImagePath,
-                ActivityReminder = user.ActivityReminder
+                Reviews = _context.Reviews.Where(review => review.Recipe.ApplicationUser == user).ToList()
             };
         }
 
@@ -119,7 +124,6 @@ namespace smartmat.Areas.Identity.Pages.Account.Manage
             user.UserName = Input.Username;
             user.Email = Input.Email;
             user.Bio = Input.Bio;
-            user.ActivityReminder = Input.ActivityReminder;
             
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
