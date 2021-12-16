@@ -421,6 +421,10 @@ namespace smartmat.Controllers
             {
                 return RedirectToAction(nameof(NotAllowed));
             }
+            if (recipe.ImagePath != null)
+            {
+                System.IO.File.Delete(recipe.ImageDelete);
+            }
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

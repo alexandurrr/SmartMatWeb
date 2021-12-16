@@ -270,7 +270,7 @@
     <input type="text" id="shareInput" readonly><button id="shareButton">Kopier Lenke</button>
 </div>
 <div id="bottomLinks">
-    <div><a href="https://localhost:5001/Recipes/SendSMS/@recipe.Id" class="btn btn-primary" style="margin: 1em;">Send oppskriften til mobilen</a></div>
+    <div><a href="https://localhost:5001/Recipes/SendSMS/@recipe.Id" class="btn btn-primary" style="margin-top: -1.3em; margin-bottom: 1em">Send oppskriften til mobilen</a></div>
     
     @if (recipe.ApplicationUser.Id == userId)
     {
@@ -280,7 +280,7 @@
         <a asp-action="Edit" asp-route-id="@recipe.Id" class="previous btn btn-dark">Rediger</a>
         @s
     }
-    <a asp-action="Index">Se alle oppskrifter</a>
+    <a asp-action="Index" class="previous btn btn-dark">Se alle oppskrifter</a>
 </div>
         
 <br />
@@ -340,8 +340,7 @@
                     <input asp-for="FormReview.Title" class="form-control" required/>
                     <span asp-validation-for="FormReview.Title" class="text-danger"></span>
                 </div>
-
-<<<<<<< HEAD
+                
                 <div class="form-group">
                     <label asp-for="FormReview.Description" class="control-label"></label>
                     <textarea asp-for="FormReview.Description" class="form-control" required></textarea>
@@ -354,9 +353,6 @@
             </div>
         </form>   
     }
-=======
-    <a asp-action="Index" class="previous btn btn-dark">Se alle oppskrifter</a>
->>>>>>> d0fb49f0a3c14345b661189d318dc0502a405382
 </div>
 
 

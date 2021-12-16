@@ -33,7 +33,7 @@
                         @User.Identity.Name
                     }
                 </h1><br/>
-                @if (Model.Input.Reviews != null)
+                @if (Model.Input.Reviews.Any())
                 {
                     <p style="color: saddlebrown; margin: 0;">Din gjennomsnittlige matscore:</p>
                     var avg = Math.Round(Model.Input.Reviews.Average(recipe => recipe.Stars)/0.5)*0.5;
