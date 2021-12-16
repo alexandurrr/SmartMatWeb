@@ -33,7 +33,7 @@ namespace smartmat.Data
                 u.Recipes.Add(new Recipe
                 {
                     Title = "Eggerøre",
-                    Introduction = "intro1",
+                    Introduction = "Enkel eggerøre med ost. Her kan du putte oppi hva enn du har tilgjengelig!",
                     Ingredients = "1 Egg, 2dl Melk, 400g Ost, 1stk Paprika, Salt, Pepper",
                     Category = "Frokost",
                     Glutenfree = false,
@@ -48,7 +48,7 @@ namespace smartmat.Data
                 u.Recipes.Add(new Recipe
                 {
                     Title = "Grønnsakssuppe",
-                    Introduction = "intro2",
+                    Introduction = "Kjempe god suppe for kalde vinterdager",
                     Ingredients = "1stk Brokkoli, 1/2 Blomkål, 4 Potet, 1 Sellerirot, 2 Gulrot, Salt, Pepper",
                     Category = "Middag",
                     Glutenfree = true,
@@ -63,7 +63,7 @@ namespace smartmat.Data
                 u.Recipes.Add(new Recipe
                 {
                     Title = "Stekt laks med grønnsaker",
-                    Introduction = "intro3",
+                    Introduction = "Enkel og rask oppskrift, veldig god med fersk fisk!",
                     Ingredients = "400g Laks, 1 Brokkoli, 5 Potet, 3 Gulrot, 100g Smør, Salt, Pepper",
                     Category = "Middag",
                     Glutenfree = true,
@@ -78,12 +78,12 @@ namespace smartmat.Data
                 u.Recipes.Add(new Recipe
                 {
                     Title = "Kylling Nuggets",
-                    Introduction = "intro3",
-                    Ingredients = "600g kyllingfilet, 4ss majones, 3ss dijonsennep, 4dl brødkrum, 1ts paprikapulver, 1ts hvitløkspulver, 1ts oregano, 0.5ts salt, 0.25 ts pepper",
+                    Introduction = "Verdens beste hjemmelaget kyllingnuggets!",
+                    Ingredients = "600g kyllingfilet, 4ss majones, 3ss dijonsennep, 4dl hvetemel, 1 egg, 1ts paprikapulver, 1ts hvitløkspulver, 1ts oregano, 0.5ts salt, 0.25 ts pepper",
                     Category = "Middag",
                     Glutenfree = false,
                     Vegetarian = false,
-                    Instructions = "Kutt opp grønnsakene og damp i 10min. Stek laksen i panne i 10min. Smak til med salt og pepper.",
+                    Instructions = "Rull kyllingbitene i blanding av egg og hvete. Krydre slik du vil ha det. Stek i ovnen til de er sprø.",
                     Nutrients = "30g protein, 50g karbohydrat, 10g fett",
                     Visibility = "Public",
                     Time = 50,
