@@ -28,10 +28,6 @@ namespace smartmat.Controllers
             return View();
         }
         
-        public ViewResult Lunch()
-        {
-            return View();
-        }       
         
         public ViewResult Dinner()
         {
@@ -50,7 +46,7 @@ namespace smartmat.Controllers
                 Users = _userManager.Users.ToList(),
                 Recipes = _db.Recipes
                     .Where(recipe => recipe.Visibility == "Public" || recipe.ApplicationUser == user)
-                    .Where(recipe => (category == "Rask Mat" && recipe.Time <= 30) || recipe.Category == category)
+                    .Where(recipe => (category == "Rask Mat" && recipe.Time <= 20) || recipe.Category == category)
                     .Where(recipe => recipe.Vegetarian || !vegetarian)
                     .Where(recipe => recipe.Glutenfree || !glutenfree)
                     .OrderByDescending(recipe => recipe.Reviews.Average(r => r.Stars)).ToList(),

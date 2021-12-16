@@ -32,7 +32,6 @@
                     <select asp-for="Category" name="Category" id="Category">
                         <option value="Frokost">Frokost</option>
                         <option value="Middag" selected>Middag</option>
-                        <option value="Lunsj">Lunsj</option>
                         <option value="Dessert">Dessert</option>
                         <option value="null">Annet</option>
                     </select>
@@ -58,7 +57,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Nutrients" class="control-label pb-2"></label>
-                <input asp-for="Nutrients" class="form-control" placeholder="eks: salt, jern, kalsium osv."/>
+                <input asp-for="Nutrients" class="form-control" placeholder="eks: 20g protein, 50g karbohydrat, 20g fett."/>
                 <span asp-validation-for="Nutrients" class="text-danger"></span>
             </div>
             <div class="form-group">
