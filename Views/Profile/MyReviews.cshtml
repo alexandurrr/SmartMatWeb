@@ -54,7 +54,7 @@
     <h3>Tilbakemeldinger til deg</h3>
     @if (!Model.OthersReviews.Any())
     {
-        <p>Du har ikke fått noen tilbakemeldinger enda.</p><br>
+        <h6 style="color:gray;">Du har ikke fått noen tilbakemeldinger enda.</h6><br>
     }
     @foreach (var review in Model.OthersReviews)
     {
