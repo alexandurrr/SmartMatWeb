@@ -1,0 +1,193 @@
+4b6b7b2  Trine Renee Berg               2021-12-17 Pull request #32: Small changes to testdata and removed lunch from navbar
+109b385  Marah Zidan                    2021-12-17 small fix
+2218e55  Alexander Gyatso               2021-12-17 Fixed small bug where recipes are always set to private
+f7ce79e  Trine Renee Berg               2021-12-17 Small changes to testdata and removed lunch from navbar
+067c2d7  Trine Renee Berg               2021-12-16 Added intros
+aaabc00  Marah Zidan                    2021-12-16 Fixed internal bugs
+c3993aa  Fredrik Bendiksen              2021-12-15 Merge branch 'main' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into reviews
+d0fb49f  Fredrik Bendiksen              2021-12-15 Fixed merge bugs
+9dc2d09  Fredrik Bendiksen              2021-12-15 Merge branch 'bugfix' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into bugfix
+a94f880  Marah Zidan                    2021-12-15 Merge branch 'main' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into bugfix
+437405c  Marah Zidan                    2021-12-15 Fixed bugs in layout
+7ea23e4  Fredrik Bendiksen              2021-12-14 Merge branch 'main' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into reviews
+f41cf5a  Fredrik Bendiksen              2021-12-14 Merged main into reviews and added minor tweeks and checks
+8c1ad1c  Alexander Gyatso               2021-12-14 Merge branch 'main' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into send-recipes
+386dc3d  Trine Renee Berg               2021-12-14 Added reviews to recipe-view
+3807a95  Trine Renee Berg               2021-12-14 Added Review-Controller
+43a9b7e  Fredrik Bendiksen              2021-12-14 Added option to check away ingredients you don't want when sending SMS
+4ec7428  Fredrik Bendiksen              2021-12-14 Added sharing with Facebook in details view
+3cf7a7e  Fredrik Bendiksen              2021-12-14 Fixed profile start rating
+8fcf4aa  Fredrik Bendiksen              2021-12-14 Changed the 'Popular recipes' styling to match the rest of the recipes
+eeaae24  John Nicklas Bernhardsen       2021-12-14 Updated to origin main and fixed merging conflict
+9983e49  Marah Zidan                    2021-12-14 Fixed bugs
+fc40ff9  Alexander Gyatso               2021-12-13 Added function to send sms's to verified numbers
+7c7e8b5  John Nicklas Bernhardsen       2021-12-14 Added external Authentication with Google and Facebook
+6e34eb8  Marah Zidan                    2021-12-13 Merged the previous changes from other branches into this branch, aka error fix
+330e0b9  Marah Zidan                    2021-12-13 Fixed layout, buttons and language
+87bf8eb  Fredrik Bendiksen              2021-12-10 Added option to copy link to a recipe to the clipboard
+fe67601  Fredrik Bendiksen              2021-12-10 added a search icon in the nav-bar where the user can search in recipes
+9ef7125  Fredrik Bendiksen              2021-12-10 Rewrote functionality for favorites with partial page updates and many-to-many relationship and styled the like-button
+6d4887e  Fredrik Bendiksen              2021-12-10 Made the Category Views use the same source code and use partial page updates to fetch the recipes that match the filter
+1db4ff6  Fredrik Bendiksen              2021-12-10 Created dark-mode for logged in users
+b0dd0a5  Alexander Gyatso               2021-12-09 bugfix for favorite-recipes
+bfe52fc  Alexander Gyatso               2021-12-06 Added function to favorite and unfavorite recipes (can also use to count amount of favorties for each recipe)
+8eb3bb7  Fredrik Bendiksen              2021-12-01 Added View and Controller for viewing all public recipes from an individual user
+50a925a  Fredrik Bendiksen              2021-12-01 Styled the view of individual recipe
+bbe0c9b  Fredrik Bendiksen              2021-12-01 Created a Partial View for displaying a list of recipes accross the application and made the styling more consistent
+a9f8d93  Fredrik Bendiksen              2021-11-30 Merge branch 'main'
+8f53a55  Fredrik Bendiksen              2021-11-30 Fixed images in popular recipes
+1c15545  John Nicklas Bernhardsen       2021-11-30 Pull request #22: Vegetarain and Glutenfree filtering
+6b5c1ba  Fredrik Bendiksen              2021-11-30 Updated Popular Recipe images
+7489f2e  John Nicklas Bernhardsen       2021-11-24 Added new views for each category with glutenfree and vegetarian filtering
+375c74a  Alexander Gyatso               2021-11-24 Added new fields for image path and delete path
+c191688  Alexander Gyatso               2021-11-24 Added new fields for image creation/deletion
+54d7326  Alexander Gyatso               2021-11-24 Added field to input user image, and display user if statement
+c50279e  Alexander Gyatso               2021-11-22 Fixed bug where edit would not add values to certain fields
+3cf8ba1  Alexander Gyatso               2021-11-22 Added new field ImageDelete, to find path to delete image
+0f8f04d  Alexander Gyatso               2021-11-22 Added file deletion when adding a new image
+5127e70  Alexander Gyatso               2021-11-22 Removed error with image
+86d080d  Alexander Gyatso               2021-11-22 Created new view model for image editing
+d530725  Alexander Gyatso               2021-11-22 Added the new VM to edit field
+90dcef8  Alexander Gyatso               2021-11-22 Removed fields causing bugs in controller
+8bdb7d0  Alexander Gyatso               2021-11-22 Added controller fields for image editing
+d0bb4f2  Fredrik Bendiksen              2021-11-22 Fixed bug when creating recipe
+e0640cd  Fredrik Bendiksen              2021-11-22 Pull request #18: Search By Title
+c7a774e  Trine Renee Berg               2021-11-20 Removed Raskmat-category from create recipe
+b5fc54e  Trine Renee Berg               2021-11-18 Added filtering on time
+8b9d4c4  Trine Renee Berg               2021-11-18 Added time to testdata
+19aca29  Fredrik Bendiksen              2021-11-20 Improved the search function to search by title as well, and refined search result design continuity
+934f25e  Fredrik Bendiksen              2021-11-17 Fixed searchfield bug where the css did not apply correctly
+dafea84  Fredrik Bendiksen              2021-11-17 Merge branch 'main' into extendedSearch
+0b1979d  Alexander Gyatso               2021-11-17 Added correct image path
+cad5e0a  Alexander Gyatso               2021-11-17 Fixed small issue related to imagepath
+2ddde4c  Alexander Gyatso               2021-11-17 Minor fixes, added new image paths to Meals view
+4b5663f  Alexander Gyatso               2021-11-17 Fixed issues with new VM
+87b49e2  Alexander Gyatso               2021-11-17 Added correct filepaths to test data
+35cad6e  Alexander Gyatso               2021-11-17 Minor changes to work with code
+713cb9d  Alexander Gyatso               2021-11-16 Added new VM to divide up existing VMs
+e8ceae5  Alexander Gyatso               2021-11-16 Changed view model in create, now it uses RecipeImageVM
+5edcdd3  Alexander Gyatso               2021-11-16 Removed extra fields in RecipeUserVM, added to new VM
+f480b16  Alexander Gyatso               2021-11-16 Changed the view model of ImageCreate and Create
+da2a3cb  Alexander Gyatso               2021-11-16 Made it so imagepath is unchanged and hidden in edit form
+c0fa4c3  Alexander Gyatso               2021-11-16 Added imagepath in constructor
+053f784  Alexander Gyatso               2021-11-16 Changed edit so images does not disappear when editing, work on edit next branch
+1fe7660  Fredrik Bendiksen              2021-11-16 Fixed bug in the Logo animation
+d9204d7  Fredrik Bendiksen              2021-11-16 Made the search function sort the recipes by the best suitible recipe based on the number of ingredients the recipes had that matched.
+9a8c820  Marah Zidan                    2021-11-16 Merge branch 'searchlayout' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into searchlayout
+f8dfe14  Marah Zidan                    2021-11-16 Edited searchlayout
+f7aed05  Marah Zidan                    2021-11-14 Added layout to search result
+9350c82  Marah Zidan                    2021-11-13 Added search.css
+30fff4f  Marah Zidan                    2021-11-16 Edited searchlayout
+38f1a3e  Alexander Gyatso               2021-11-16 Removed test images from old folder
+1fe0484  Alexander Gyatso               2021-11-16 Test images for test data
+64b7195  Alexander Gyatso               2021-11-16 Removed images folder, using recipeimages folder instead
+9716356  Alexander Gyatso               2021-11-16 Made input for images to only allow png,jpg,jpeg instead of any file
+33760d2  Alexander Gyatso               2021-11-16 Added new fields to VM, added required to attributes
+38cb314  Alexander Gyatso               2021-11-16 Changed folder path in test data
+4c9b3a8  Alexander Gyatso               2021-11-16 Fixed small bugs with controller, added more comments
+35206c5  John Nicklas Bernhardsen       2021-11-16 Modified create recipe view to also include a choose category dropdown menu to be added to the model
+53ccb40  John Nicklas Bernhardsen       2021-11-16 Created lunch view with filtering out every recipe with lunch category
+dbcfc1e  John Nicklas Bernhardsen       2021-11-16 Created fastfood view with filtering out every recipe with fastfood category
+e45ca8a  John Nicklas Bernhardsen       2021-11-16 Created dinner view with filtering out every recipe with dinner category
+3fb97c7  John Nicklas Bernhardsen       2021-11-16 Created dessert view with filtering out every recipe with dessert category
+131e139  John Nicklas Bernhardsen       2021-11-16 Created breakfast view with filtering out every recipe with breakfast category
+704987d  John Nicklas Bernhardsen       2021-11-16 Modified Recipe model to with category attribute
+4e0abfc  John Nicklas Bernhardsen       2021-11-16 Modified meals controller adding support for public view, author and review score
+c760e94  Alexander Gyatso               2021-11-15 Added new images folder with test jpgs
+435b642  Alexander Gyatso               2021-11-15 Added new images folder
+21a9f3f  Alexander Gyatso               2021-11-15 Edited partial to take in Imagepath
+3339cda  Alexander Gyatso               2021-11-15 Need to add edit function for images
+95dbb91  Alexander Gyatso               2021-11-15 Changed image to Imagepath to match recipe model
+faaa218  Alexander Gyatso               2021-11-15 Changed model to RecipeUser VM, added Image upload method
+f70e2cc  Alexander Gyatso               2021-11-15 Added non-file columns from recipe, and Image IFormFile
+85e94c7  Alexander Gyatso               2021-11-15 Added Imagepath string, removed image
+6a36331  Alexander Gyatso               2021-11-15 Added Imagepath to testdata, removed Image
+ce7d47b  Alexander Gyatso               2021-11-15 Changed Recipes controller so we can add images
+024a62e  Marah Zidan                    2021-11-14 Added layout to search result
+ef13677  Marah Zidan                    2021-11-13 Added search.css
+ed69dc9  Fredrik Bendiksen              2021-11-10 Added support for categories, glutenfree and vegetarian when creating, viewing and editing recipes
+e971e9e  Fredrik Bendiksen              2021-11-10 Fixed errors in previous merge
+28ea94c  Fredrik Bendiksen              2021-11-10 Pull request #10: Profile
+adac8cb  Fredrik Bendiksen              2021-11-10 Merge branch 'main' into profile
+c723fcd  Fredrik Bendiksen              2021-11-10 Pull request #11: Receipt visibility
+7e95fd5  Fredrik Bendiksen              2021-11-09 Merge branch 'main' into receipt-visibility
+adf3bc2  Fredrik Bendiksen              2021-11-09 Created logic to only show public recipes and the users own recipes
+11619d9  Trine Renee Berg               2021-11-05 Added Image to recipecontroller
+8d3d389  Trine Renee Berg               2021-11-05 fixed double display of url and user in _recipespartial
+25c4b32  Alexander Gyatso               2021-11-03 Added parent view model for user recipes, this can also take in more models if needed
+609d37c  Alexander Gyatso               2021-11-03 Added parent view model for users and recipes instead of just recipes
+daf10be  Alexander Gyatso               2021-11-03 Connected test data to Users, without connection recipe search does not work
+dad3509  Alexander Gyatso               2021-11-03 Added UserRecipes to Homecontroller, now it returns the family view
+ab91649  Trine Renee Berg               2021-11-03 added link to full recipe and image
+98ec04b  Trine Renee Berg               2021-11-03 fixed food-image
+8ad138f  Trine Renee Berg               2021-11-03 Added NotFound(); to homecontroller
+1214e70  Trine Renee Berg               2021-11-03 Satt inn enheter i testdata:ingrediensliste for å teste søk
+3f8a263  Trine Renee Berg               2021-10-29 Added partial view for recipesearch(homepage)
+01497e9  Trine Renee Berg               2021-10-29 Added testdata for search
+6f139a6  Trine Renee Berg               2021-10-29 Added search to home-controller with functions
+8b22fe8  Fredrik Bendiksen              2021-11-05 Connected Popular Recipes to model and Controller
+d5e5127  Fredrik Bendiksen              2021-11-09 Merge branch 'main' into profile
+f018c07  Trine Renee Berg               2021-11-05 Added Image to recipecontroller and Resized food-images
+1174020  Trine Renee Berg               2021-11-05 fixed double display of url and user in _recipespartial
+39a2158  Alexander Gyatso               2021-11-03 Added parent view model for user recipes, this can also take in more models if needed
+f1bcbf4  Alexander Gyatso               2021-11-03 Added parent view model for users and recipes instead of just recipes
+f9139b9  Alexander Gyatso               2021-11-03 Connected test data to Users, without connection recipe search does not work
+bd08cc8  Alexander Gyatso               2021-11-03 Added UserRecipes to Homecontroller, now it returns the family view
+e8473be  Trine Renee Berg               2021-11-03 added link to full recipe and image
+7fe3ec9  Trine Renee Berg               2021-11-03 fixed food-image
+0b03259  Trine Renee Berg               2021-11-03 Added NotFound(); to homecontroller
+c8757e4  Trine Renee Berg               2021-11-03 Satt inn enheter i testdata:ingrediensliste for å teste søk
+50a4211  Trine Renee Berg               2021-10-29 Added partial view for recipesearch(homepage)
+b2ee2c0  Trine Renee Berg               2021-10-29 Added testdata for search
+33b70b2  Trine Renee Berg               2021-10-29 Added search to home-controller with functions
+007f300  Fredrik Bendiksen              2021-11-05 Connected Popular Recipes to model and Controller
+c2dd70c  Fredrik Bendiksen              2021-11-09 Fixed Profile Logic
+3294451  Marah Zidan                    2021-11-07 Added Meals NavnBar
+a2679df  Marah Zidan                    2021-11-07 Tried to edit User Info inputs in Profile view, still does not work yet
+b669b4c  Fredrik Bendiksen              2021-11-01 Created models, logic and views for 'Tilbakemeldinger'
+b9031f7  Fredrik Bendiksen              2021-11-01 Created view and controller for 'Mine Oppskrifter'
+9f83391  Marah Zidan                    2021-11-01 Added Checkbox for Newsletter
+0aa2860  Marah Zidan                    2021-11-01 Final layout of profiles first page (still need to edit functions to make it functional)
+06f7ac5  John Nicklas Bernhardsen       2021-11-09 Added receipt visibility function
+5cde5e9  Fredrik Bendiksen              2021-11-08 Pull request #6: Connected Popular Recipes to model and Controller
+1267a5f  Fredrik Bendiksen              2021-11-08 Merge branch 'main' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into popular-recipes
+ad5b677  Trine Renee Berg               2021-11-07 Pull request #7: Fetch api
+0ad34ba  Trine Renee Berg               2021-11-05 Added Image to recipecontroller
+2c6f619  Trine Renee Berg               2021-11-05 fixed double display of url and user in _recipespartial
+d8ff6f2  Alexander Gyatso               2021-11-03 Added parent view model for user recipes, this can also take in more models if needed
+2fca4b5  Alexander Gyatso               2021-11-03 Added parent view model for users and recipes instead of just recipes
+5f1f05c  Alexander Gyatso               2021-11-03 Connected test data to Users, without connection recipe search does not work
+030f6fb  Alexander Gyatso               2021-11-03 Added UserRecipes to Homecontroller, now it returns the family view
+56553a1  Trine Renee Berg               2021-11-03 added link to full recipe and image
+31fdc94  Trine Renee Berg               2021-11-03 fixed food-image
+97517c7  Trine Renee Berg               2021-11-03 Added NotFound(); to homecontroller
+da52983  Trine Renee Berg               2021-11-03 Satt inn enheter i testdata:ingrediensliste for å teste søk
+c98ed33  Trine Renee Berg               2021-10-29 Added partial view for recipesearch(homepage)
+5188a12  Fredrik Bendiksen              2021-11-05 Connected Popular Recipes to model and Controller
+37fefc9  Fredrik Bendiksen              2021-11-01 Created models, logic and views for 'Tilbakemeldinger'
+80bb98b  Fredrik Bendiksen              2021-11-01 Created view and controller for 'Mine Oppskrifter'
+9664c9a  Fredrik Bendiksen              2021-11-01 Merge branch 'profile' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into profile
+4e35ec5  Fredrik Bendiksen              2021-11-01 Designed 'Ny Oppskrift' and extracted the profile nav-menu into a Partial View
+c4637b5  Marah Zidan                    2021-11-01 
+14e7739  Marah Zidan                    2021-11-01 Final layout of profiles first page (still need to edit functions to make it functional)
+04ce3e6  Fredrik Bendiksen              2021-11-01 Merge branch 'profile' of ssh://tools.uia.no:7999/ikt201g21h/smartmat into profile
+89c9ff8  Marah Zidan                    2021-11-01 Edited profile view
+f0fcb0d  Marah Zidan                    2021-11-01 Added links to Layout
+6d52eb7  Marah Zidan                    2021-11-01 edited userprofile
+9eacb7e  Marah Zidan                    2021-10-31 Modified profile view and css
+4a1f4b7  Marah Zidan                    2021-10-31 Added profile.css to layout
+8925d13  Marah Zidan                    2021-10-30 Added view, css, controller to profile
+7dcc6dc  Trine Renee Berg               2021-10-29 Added testdata for search
+17bbf5b  Trine Renee Berg               2021-10-29 Added search to home-controller with functions
+cf55dd0  Marah Zidan                    2021-10-29 Added Profile view, css, controller
+1fcb3c4  Alexander Gyatso               2021-10-27 Pull request #4: Added relation between Recipe and User table
+324540d  Alexander Gyatso               2021-10-27 Added relation between Recipe and User table
+d41f515  Fredrik Bendiksen              2021-10-27 Pull request #3: Styled the home page, navigation bar and footer
+6529243  Fredrik Bendiksen              2021-10-25 Styled the home page, navigation bar and footer
+f954527  Alexander Gyatso               2021-10-21 Pull request #2: Recipe model
+b8ecf44  Alexander Gyatso               2021-10-20 Added recipe model with auto generated add/edit/remove functions
+e5ba19f  Fredrik Bendiksen              2021-10-20 Pull request #1: User Foundation
+ebbe534  Fredrik Bendiksen              2021-10-20 Enabled Users, created ApplicationUser and autogenerated code for user management.
+0396324  Fredrik Bendiksen              2021-10-18 Removed Migrations
+8ba6fce  Fredrik Bendiksen              2021-10-18 Created Project
+d6f905c  Fredrik Bendiksen              2021-10-18 Added .gitignore
