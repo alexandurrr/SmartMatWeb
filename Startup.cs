@@ -41,22 +41,22 @@ namespace smartmat
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    IConfigurationSection googleAuthnSection =
-                        Configuration.GetSection("Authentication:Google");
-                    options.ClientId = googleAuthnSection["ClientId"];
-                    options.ClientSecret = googleAuthnSection["ClientSecret"];
-                })
-                .AddFacebook(options =>
-                {
-                    IConfigurationSection facebookAuthnSection =
-                        Configuration.GetSection("Authentication:Facebook");
-                    options.AppId = facebookAuthnSection["AppId"];
-                    options.AppSecret = facebookAuthnSection["AppSecret"];
-                    options.AccessDeniedPath = "/AccessDeniedPathInfo";
-                });
+            //services.AddAuthentication()
+            //    .AddGoogle(options =>
+            //    {
+            //        IConfigurationSection googleAuthnSection =
+            //            Configuration.GetSection("Authentication:Google");
+            //        options.ClientId = googleAuthnSection["ClientId"];
+            //        options.ClientSecret = googleAuthnSection["ClientSecret"];
+            //    })
+            //    .AddFacebook(options =>
+            //    {
+            //        IConfigurationSection facebookAuthnSection =
+            //            Configuration.GetSection("Authentication:Facebook");
+            //        options.AppId = facebookAuthnSection["AppId"];
+            //        options.AppSecret = facebookAuthnSection["AppSecret"];
+            //        options.AccessDeniedPath = "/AccessDeniedPathInfo";
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
